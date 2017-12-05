@@ -1,0 +1,66 @@
+body {
+  position: relative;
+  width: 960px;
+}
+
+svg {
+  font: 10px sans-serif;
+  shape-rendering: crispEdges;
+}
+
+rect {
+  fill: #ddd;
+}
+
+.axis path {
+  display: none;
+}
+
+.axis line {
+  stroke-opacity: 0.3;
+  shape-rendering: crispEdges;
+}
+
+.view {
+  fill: url(#gradient);
+  /* fill: #a6cee3; */
+  stroke: #000;
+}
+
+.pcaLine {
+  /* fill: url(#gradient); */
+  fill: red;
+  opacity: 0.5;
+}
+.restartButton {
+  position: absolute;
+  top: 500px;
+  right: 20px;
+}
+
+.percentageValue {
+  position: absolute;
+  top: 500px;
+  left: 0px;
+  font-size: 0.8em;
+}
+
+.featureCount {
+  position: absolute;
+  top: 500px;
+  left: 70px;
+  font-size: 0.8em;
+}
+
+.featureSigma {
+  position: absolute;
+  top: 500px;
+  left: 120px;
+  font-size: 0.8em;
+}
+
+.percentage {
+  position: absolute;
+  top: 500px;
+  left: 170px;
+}
