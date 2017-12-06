@@ -44,7 +44,7 @@ function readTextFile(event) {
     // The result is a [m][n] matrix
     d3.select("#statusText").text("Ready to visualize");
     // Assumes original data on the [-127.87, 127.13] domain
-    paint(contents, [-127.87, 127.13], 10);
+    paint(contents, [-127.87, 127.13]);
     return;
     var sDiagonal = [], sum = 0;
 
@@ -70,35 +70,49 @@ function readTextFile(event) {
   }
 }
 
-function paint(data, domain, num)
+function paint(data, domain)
 {
   // Every data line is an square image
   // Each pixel will be displayed in grayscale as in
   // RGB(colorScale(data[i][j]), colorScale(data[i][j]), colorScale(data[i][j])
 
-  var colorScale = d3.scaleLinear().domain(domain).range([0,255]);
-  var imgSize = Math.sqrt(data[0].length);
-  var img = d3.select("#img");
-  var rectSize = 2;
+  const colorScale = d3.scaleLinear().domain(domain).range([0,255]);
+  const imgSize = Math.sqrt(data[0].length);
+  const img = d3.select("#img");
+  const viewBox = img.attr("viewBox").split(" ");
+  const width = +viewBox[2], height = +viewBox[3]; 
+  var rectSize = 3;
+  var xOffset, yOffset;
+  var columns, lines, numFaces;
+
+  columns = Math.floor(width/(imgSize*rectSize));
+  rectSize = width/(columns*imgSize);
+  lines = Math.floor(height/(imgSize*rectSize));
+  numFaces = columns * lines;
 
   img.style("display", "inline");
   // At this point we are displaying just one image,
   // for testing purposes
-  img.selectAll("rect")
-     .data(data[0])
-     .enter()
-     .append("rect")
-     .attr("x", function(d, i){return (Math.floor(i/imgSize))*rectSize;})
-     .attr("y", function(d, i){return (i % imgSize)*rectSize;})
-     .attr("width", rectSize)
-     .attr("height", rectSize)
-     .style("stroke-width", 0)
-     .style("fill",
-        function(d, i){
-          var grayScale = Math.floor(colorScale(d));
-          var color =  "rgb("+grayScale+","+grayScale+","+grayScale+")";
-          return color;
-        });
+  for (let i = 0; i<numFaces; i++) {
+    xOffset = (i%columns)*imgSize*rectSize;
+    yOffset = Math.floor(i/columns)*imgSize*rectSize;
+    img.selectAll("faces")
+       .data(data[i])
+       .enter()
+       .append("rect")
+       .attr("class", "faces img"+i)
+       .attr("x", function(d, i){return xOffset+(Math.floor(i/imgSize))*rectSize;})
+       .attr("y", function(d, i){return yOffset+(i % imgSize)*rectSize;})
+       .attr("width", rectSize)
+       .attr("height", rectSize)
+       .style("stroke-width", 0)
+       .style("fill",
+          function(d, i){
+            var grayScale = Math.floor(colorScale(d));
+            var color =  "rgb("+grayScale+","+grayScale+","+grayScale+")";
+            return color;
+          });
+  }
 
   return;
 }
