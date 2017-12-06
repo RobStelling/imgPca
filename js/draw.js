@@ -2,9 +2,10 @@ var zoomK = 1, xVal, yVal, allData;
 function draw(domainX, domainY, data) {
     //console.log(domainX, domainY)
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+    // ViewBox "0 0 width height"
+    var dim = d3.select("#graph").attr("viewBox").split(" ");
+    var width = +dim[2],            // Uses the full width
+        height = +dim[3]+(+dim[1])-50;        // but gives 50 lines 
     const pcaStrokeWidth = 0.25;
 
     var x = d3.scaleLinear()
@@ -30,7 +31,7 @@ function draw(domainX, domainY, data) {
         .y(function(d) { return y(d.pca); })
         .y1(function(d) { return y(0); });
 
-    var svg = d3.select("svg");
+    var svg = d3.select("#graph");
 
     var zoom = d3.zoom()
         .scaleExtent([1, 80])
@@ -119,7 +120,7 @@ function draw(domainX, domainY, data) {
     }
 
     function hookToolTip() {
-        d3.select("svg")
+        d3.select("#graph")
           .on("mouseover", function (){
             //console.log("entrou", d3.event, zoomK);
           })

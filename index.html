@@ -9,22 +9,20 @@
     <title>PCA Explorer</title>
   </head>
   <body>
-    <input name="pcaFile" id="pcaFile" type="file" class="inputButtons">
-    <!--
-    <button onclick="readTextFile()" class="inputButtons">Submit</button>
-     -->
-    <svg id="mapa" viewBox="0 0 900 500" width="100%" height="100%">  <defs>
-    <linearGradient id="gradient" x1="0%" x2="100%">
-      <stop  offset="0.0%" stop-color="#ffffff"></stop>
-      <!--
-      <stop  offset="20.0%" stop-color="#2b8cbe"></stop>
-      <stop  offset="40.0%" stop-color="#74a9cf"></stop>
-      <stop  offset="60.0%" stop-color="#a6bddb"></stop>
-      <stop  offset="80.0%" stop-color="#d0d1e6"></stop>
-      <stop  offset="100.0%" stop-color="#f1eef6"></stop> -->
-      <stop  offset="100.0%" stop-color="#045a8d"></stop>
-    </linearGradient>
-  </defs></svg>
+    <div>
+      <text style="display:none" id="statusText"></text>
+      <label for="file">Select image file</label>
+      <input name="pcaFile" id="pcaFile" type="file" class="inputButtons">
+    </div>
+    <svg id="img" viewBox="0 0 900 500" width="100%" height="100%" style="display:none"></svg>
+    <svg id="graph" viewBox="0 0 900 500" width="100%" height="100%" style="display:none">
+      <defs>
+        <linearGradient id="gradient" x1="0%" x2="100%">
+          <stop  offset="0.0%" stop-color="#ffffff"></stop>
+          <stop  offset="100.0%" stop-color="#045a8d"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
     <button class="restartButton hidden" style="display:none">Restart</button>
     <input class="percentage hidden" type="range" style="display:none" min="95" max="100" step="0.001" value="98.500">
     <text class="percentageValue hidden" style="display: none"></text>
