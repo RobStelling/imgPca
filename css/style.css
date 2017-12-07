@@ -34,33 +34,33 @@ rect {
 }
 .restartButton {
   position: absolute;
-  top: 500px;
+  top: 50px;
   right: 20px;
 }
 
 .percentageValue {
   position: absolute;
-  top: 500px;
+  top: 50px;
   left: 0px;
   font-size: 0.8em;
 }
 
 .featureCount {
   position: absolute;
-  top: 500px;
+  top: 50px;
   left: 70px;
   font-size: 0.8em;
 }
 
 .featureSigma {
   position: absolute;
-  top: 500px;
+  top: 50px;
   left: 120px;
   font-size: 0.8em;
 }
 
 .percentage {
   position: absolute;
-  top: 500px;
+  top: 50px;
   left: 170px;
 }

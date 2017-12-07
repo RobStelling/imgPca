@@ -1,7 +1,8 @@
-var zoomK = 1, xVal, yVal, allData;
+var zoomK = 1;
 
 function cPaint(faces, canvasID, columns, lines) {
       // Following this idea: https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/
+      // and this http://bl.ocks.org/biovisualize/5400576
     const nImages = columns*lines;
     const imgSize = Math.sqrt(faces[0].length);
     const width = columns*imgSize;
@@ -116,7 +117,7 @@ function draw(domainX, domainY, data) {
     //console.log(domainX, domainY)
 
     // ViewBox "0 0 width height"
-    var dim = d3.select("#graph").attr("viewBox").split(" ");
+    var dim = d3.select("#graph").style("display", "inline").attr("viewBox").split(" ");
     var width = +dim[2],            // Uses the full width
         height = +dim[3]+(+dim[1])-50;        // but gives 50 lines 
     const pcaStrokeWidth = 0.25;
@@ -186,11 +187,7 @@ function draw(domainX, domainY, data) {
         .attr("class", "axis axis--y")
         .call(yAxis);
 
-    allData = data;
-
-    xVal = x;
-    yVal = y;
-
+    d3.select("#st3").text("PCA Analysis")
     change();
 
     d3.select(".restartButton")
