@@ -1,4 +1,117 @@
 var zoomK = 1, xVal, yVal, allData;
+
+function cPaint(faces, canvasID, columns, lines) {
+      // Following this idea: https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/
+    const nImages = columns*lines;
+    const imgSize = Math.sqrt(faces[0].length);
+    const width = columns*imgSize;
+    const height = lines*imgSize;
+    const colorScale = d3.scaleLinear().range([0,255]);
+
+    var min = Infinity, max = -Infinity;
+    for (let i=0; i<nImages; i++) {
+      min = Math.min(min, minV(faces[i]));
+      max = Math.max(max, maxV(faces[i]));
+    }
+
+    colorScale.domain([min, max]);
+
+    var dataset = d3.range(width).map(function(d, i){return d3.range(width).map(function(d, i){return ~~(Math.random()*255);});});
+
+    var canvas = d3.select(canvasID)
+    //    .append('canvas')
+        //.style("position", "absolute")
+        .style("width", width + 'px')
+        .style("height", height + 'px')
+        //.transition().duration(1500)
+        .attr("width", width)
+        .attr("height", height)
+        .node();
+
+    var ctx = canvas.getContext('2d');
+    var imageData = ctx.getImageData(0, 0, width, height);
+
+    var buf = new ArrayBuffer(imageData.data.length);
+    var buf8 = new Uint8ClampedArray(buf);
+    var data = new Uint32Array(buf);
+
+    for (var y = 0; y < height; ++y) {
+        for (var x = 0; x < width; ++x) {
+          var xFaces = Math.floor(y/32)*columns+Math.floor(x/32)%32,
+              yFaces = (x%32)*32+y%32;
+          var value = colorScale(faces[xFaces][yFaces]);
+          //var value = dataset[y][x];
+          //console.log(x, y, value);
+          data[y * width + x] =
+              (255   << 24) |    // alpha
+              (value << 16) |    // blue
+              (value <<  8) |    // green
+              (value);            // red
+        }
+    }
+
+    imageData.data.set(buf8);
+
+    ctx.putImageData(imageData, 0, 0);
+}
+
+
+function paint(data, startLine)
+{
+  // Every data line is an square image
+  // Each pixel will be displayed in grayscale as in
+  // RGB(colorScale(data[i][j]), colorScale(data[i][j]), colorScale(data[i][j])
+
+  const colorScale = d3.scaleLinear().range([0,255]);
+  const imgSize = Math.sqrt(data[0].length);
+  const img = d3.select("#img");
+  const viewBox = img.attr("viewBox").split(" ");
+  const width = +viewBox[2], height = +viewBox[3]; 
+  var rectSize = 1;
+  var xOffset, yOffset;
+  var columns, lines, numFaces;
+  var text = d3.select("#statusText").text();
+  var yStart;
+
+  columns = Math.floor(width/(imgSize*rectSize));
+  rectSize = width/(columns*imgSize);
+  lines = Math.floor(height/(imgSize*rectSize));
+  numFaces = columns*lines;
+  yStart = startLine*imgSize*rectSize;
+
+  img.style("display", "inline");
+  d3.select("#statusText").text(text+" First "+(lines*columns)+" images...");
+
+
+  // At this point we are displaying just one image,
+  // for testing purposes
+  for (let i = 0; i<numFaces; i++) {
+    min = minV(data[i]);
+    max = maxV(data[i]);
+    colorScale.domain([min,max]);
+    xOffset = (i%columns)*imgSize*rectSize;
+    yOffset = Math.floor(i/columns)*imgSize*rectSize;
+    img.selectAll("faces")
+       .data(data[i])
+       .enter()
+       .append("rect")
+       .attr("class", "faces img"+i)
+       .attr("x", function(d, i){return xOffset+(Math.floor(i/imgSize))*rectSize;})
+       .attr("y", function(d, i){return yStart+yOffset+(i % imgSize)*rectSize;})
+       .attr("width", rectSize)
+       .attr("height", rectSize)
+       .style("stroke-width", 0)
+       .style("fill",
+          function(d, i){
+            var grayScale = Math.floor(colorScale(d));
+            var color =  "rgb("+grayScale+","+grayScale+","+grayScale+")";
+            return color;
+          });
+  }
+
+  return;
+}
+
 function draw(domainX, domainY, data) {
     //console.log(domainX, domainY)
 

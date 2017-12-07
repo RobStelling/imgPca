@@ -10,12 +10,18 @@
   </head>
   <body>
     <div>
-      <text style="display:none" id="statusText"></text>
       <label for="file">Select image file</label>
-      <input name="pcaFile" id="pcaFile" type="file" class="inputButtons">
+      <input name="facesData" id="facesFile" type="file" class="inputButtons">
     </div>
-    <svg id="img" viewBox="0 0 900 400" width="100%" height="100%" style="display:none"></svg>
-    <svg id="graph" viewBox="0 0 900 500" width="100%" height="100%" style="display:none">
+    <div>
+      <text style="display:none" id="st1"></text>
+    </div>
+    <canvas id="fOriginal" width="0" height="0"></canvas>
+    <div>
+      <text style="display:none" id="st2"></text>
+    </div>
+    <canvas id="fNormalized" width="0" height="0"></canvas>
+    <svg id="graph" viewBox="0 0 640 256" width="100%" height="100%" style="display:none">
       <defs>
         <linearGradient id="gradient" x1="0%" x2="100%">
           <stop  offset="0.0%" stop-color="#ffffff"></stop>
@@ -33,7 +39,7 @@
     <script src="./js/getData.js"></script>
   </body>
   <script>
-    document.getElementById("pcaFile")
+    document.getElementById("facesFile")
             .addEventListener("change", readTextFile, false);
   </script>
 </html>

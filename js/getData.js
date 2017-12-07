@@ -7,16 +7,21 @@ function readTextFile(event) {
 
   reader.onload = ready;
 
-  d3.select("#statusText").style("display", "inline").text("Reading file...");
+  d3.select("#st1").style("display", "inline").text("Reading file...");
   reader.readAsText(file);
 
   d3.select(".inputButtons").style("display", "none");
   d3.select("label").style("display", "none");
-  //d3.selectAll(".hidden").style("display", "inline");
-  //d3.selectAll(".hidden").classed("hidden", false);
-  //d3.select(".inputButtons").classed("hidden", true);
+  d3.selectAll(".hidden").style("display", "inline");
+  d3.selectAll(".hidden").classed("hidden", false);
+  d3.select(".inputButtons").classed("hidden", true);
 
-
+  d3.select(".restartButton").transition().duration(1000).style("top", "900px");
+  d3.select(".percentage").transition().duration(1000).style("top", "900px");
+  d3.select(".percentageValue").transition().duration(1000).style("top", "900px");
+  d3.select(".featureCount").transition().duration(1000).style("top", "900px");
+  d3.select(".featureSigma").transition().duration(1000).style("top", "900px");
+  
   function ready(event) {
 
     // This version assumes input from Octave
@@ -24,8 +29,7 @@ function readTextFile(event) {
     // and end with 3 blank lines
     // Every line starts with a space and numbers are 
     // separated by spaces
-
-    d3.select("#statusText").text("Converting data...")
+    d3.select("#st1").text("Reading file...done. Converting data...");
     // First splits all lines
     var contents = event.target.result.split("\n");
     for (let i = 0; i<contents.length; i++)
@@ -42,9 +46,16 @@ function readTextFile(event) {
         contents[i][j] = +contents[i][j];
     }
     // The result is a [m][n] matrix
-    d3.select("#statusText").text("Ready to visualize");
+    d3.select("#st1").text("Original data");
     // Assumes original data on the [-127.87, 127.13] domain
-    paint(contents, [-127.87, 127.13]);
+    //paint(contents, 0);
+    cPaint(contents, "#fOriginal", 20, 4);
+    d3.select("#st2").style("display", "inline").text("Normalizing data..");
+    results = normalize(contents);
+    contents = results.data;
+    d3.select("#st2").text("Normalized data");
+    //paint(contents, 0);
+    cPaint(contents, "#fNormalized", 20, 4);
     return;
     var sDiagonal = [], sum = 0;
 
@@ -70,49 +81,88 @@ function readTextFile(event) {
   }
 }
 
-function paint(data, domain)
+function normalize(data)
 {
-  // Every data line is an square image
-  // Each pixel will be displayed in grayscale as in
-  // RGB(colorScale(data[i][j]), colorScale(data[i][j]), colorScale(data[i][j])
+  var sigma;
+  data = diffMV(data, avgM(data));
+  data = divideMV(data, sigma = stdM(data));
 
-  const colorScale = d3.scaleLinear().domain(domain).range([0,255]);
-  const imgSize = Math.sqrt(data[0].length);
-  const img = d3.select("#img");
-  const viewBox = img.attr("viewBox").split(" ");
-  const width = +viewBox[2], height = +viewBox[3]; 
-  var rectSize = 3;
-  var xOffset, yOffset;
-  var columns, lines, numFaces;
+  return({data:data, sigma:sigma});
+}
 
-  columns = Math.floor(width/(imgSize*rectSize));
-  rectSize = width/(columns*imgSize);
-  lines = Math.floor(height/(imgSize*rectSize));
-  numFaces = columns * lines;
+function avgM(matrix)
+{
+  var mu = [];
+  const lines = matrix.length;
+  const columns = matrix[0].length;
 
-  img.style("display", "inline");
-  // At this point we are displaying just one image,
-  // for testing purposes
-  for (let i = 0; i<numFaces; i++) {
-    xOffset = (i%columns)*imgSize*rectSize;
-    yOffset = Math.floor(i/columns)*imgSize*rectSize;
-    img.selectAll("faces")
-       .data(data[i])
-       .enter()
-       .append("rect")
-       .attr("class", "faces img"+i)
-       .attr("x", function(d, i){return xOffset+(Math.floor(i/imgSize))*rectSize;})
-       .attr("y", function(d, i){return yOffset+(i % imgSize)*rectSize;})
-       .attr("width", rectSize)
-       .attr("height", rectSize)
-       .style("stroke-width", 0)
-       .style("fill",
-          function(d, i){
-            var grayScale = Math.floor(colorScale(d));
-            var color =  "rgb("+grayScale+","+grayScale+","+grayScale+")";
-            return color;
-          });
+  for(let j = 0; j<columns; j++) {
+    mu.push(0)
+    for(let i = 0; i<lines; i++)
+      mu[j] += matrix[i][j];
   }
 
-  return;
+  for(let j = 0; j<columns; j++)
+    mu[j] = mu[j]/lines;
+
+  return mu;
+}
+
+function diffMV(matrix, vector)
+{
+  const lines = matrix.length;
+  const columns = vector.length;
+
+  for(let i = 0; i<lines; i++) {
+    for(let j = 0; j<columns; j++)
+      matrix[i][j] -= vector[j];
+  }
+  return matrix;
+}
+
+function divideMV(matrix, vector)
+{
+  const lines = matrix.length;
+  const columns = vector.length;
+
+  for(let i = 0; i<lines; i++) {
+    for(let j = 0; j<columns; j++)
+      matrix[i][j] /= vector[j];
+  }
+  return matrix;
+}
+
+function stdM(matrix)
+{
+  var mu = avgM(matrix);
+  var std = [];
+  const lines = matrix.length;
+  const columns = matrix[0].length;
+
+  for(let j = 0; j<columns; j++) {
+    std.push(0);
+    for(let i = 0; i<lines; i++)
+      std[j] += Math.pow(matrix[i][j] - mu[j], 2);
+  }
+
+  for(let j = 0; j<columns; j++)
+    std[j] = Math.sqrt(std[j]/(lines-1));
+
+  return(std);
+}
+
+function minV(vector)
+{
+  var min = Infinity;
+  for(let i=0;i<vector.length;i++)
+    min = Math.min(min, vector[i]);
+  return min;
+}
+
+function maxV(vector)
+{
+  var max = -Infinity;
+  for(let i=0;i<vector.length;i++)
+    max = Math.max(max, vector[i]);
+  return max;
 }
