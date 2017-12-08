@@ -1,29 +1,31 @@
-//var zoomK = 1;
-function cPaint(faces, canvasID, columns, lines) {
+/*
+ * Paints a sample of data images on a canvas
+ * Input:
+ *  data - MxN data matrix
+ *  canvasId - DOM ID of the canvas where the data will be displayed
+ *  columns - Number of columns
+ *  lines - Number of lines
+ */
+function cPaint(data, canvasID, columns, lines) {
       // Following this idea: https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/
       // and this http://bl.ocks.org/biovisualize/5400576
     const nImages = columns*lines;
-    const imgSize = Math.sqrt(faces[0].length);
+    const imgSize = Math.sqrt(data[0].length);
     const width = columns*imgSize;
     const height = lines*imgSize;
     const colorScale = d3.scaleLinear().range([0,255]);
 
     var min = Infinity, max = -Infinity;
     for (let i=0; i<nImages; i++) {
-      min = Math.min(min, minV(faces[i]));
-      max = Math.max(max, maxV(faces[i]));
+      min = Math.min(min, minV(data[i]));
+      max = Math.max(max, maxV(data[i]));
     }
 
     colorScale.domain([min, max]);
 
-    var dataset = d3.range(width).map(function(d, i){return d3.range(width).map(function(d, i){return ~~(Math.random()*255);});});
-
     var canvas = d3.select(canvasID)
-    //    .append('canvas')
-        //.style("position", "absolute")
         .style("width", width + 'px')
         .style("height", height + 'px')
-        //.transition().duration(1500)
         .attr("width", width)
         .attr("height", height)
         .node();
@@ -33,20 +35,18 @@ function cPaint(faces, canvasID, columns, lines) {
 
     var buf = new ArrayBuffer(imageData.data.length);
     var buf8 = new Uint8ClampedArray(buf);
-    var data = new Uint32Array(buf);
+    var map = new Uint32Array(buf);
 
     for (var y = 0; y < height; ++y) {
         for (var x = 0; x < width; ++x) {
-          var xFaces = Math.floor(y/32)*columns+Math.floor(x/32)%32,
-              yFaces = (x%32)*32+y%32;
-          var value = colorScale(faces[xFaces][yFaces]);
-          //var value = dataset[y][x];
-          //console.log(x, y, value);
-          data[y * width + x] =
+          var xData = Math.floor(y/32)*columns+Math.floor(x/32)%32,
+              yData = (x%32)*32+y%32;
+          var value = colorScale(data[xData][yData]);
+          map[y * width + x] =
               (255   << 24) |    // alpha
               (value << 16) |    // blue
               (value <<  8) |    // green
-              (value);            // red
+              (value);           // red
         }
     }
 
@@ -54,10 +54,12 @@ function cPaint(faces, canvasID, columns, lines) {
 
     ctx.putImageData(imageData, 0, 0);
 }
-
-
-function paint(data, startLine)
-{
+/*
+ * Original paint function using SVG
+ * ALERT: Deprecated
+ * 
+ */
+function paint(data, startLine) {
   // Every data line is an square image
   // Each pixel will be displayed in grayscale as in
   // RGB(colorScale(data[i][j]), colorScale(data[i][j]), colorScale(data[i][j])
@@ -108,17 +110,22 @@ function paint(data, startLine)
             return color;
           });
   }
-
   return;
 }
-
+/*
+ * Draws the interactive PCA graph
+ * Todo:
+ *  - Add tooltip and a locating bar
+ *  - Add restore and save buttons
+ */
 function draw(domainX, domainY, data) {
-    //console.log(domainX, domainY)
+    // Zoom behaviour based on
+    // https://bl.ocks.org/mbostock/db6b4335bf1662b413e7968910104f0f
 
-    // ViewBox "0 0 width height"
     var dim = d3.select("#graph").style("display", "inline").attr("viewBox").split(" ");
-    var width = +dim[2],            // Uses the full width
-        height = +dim[3]+(+dim[1])-50;        // but gives 50 lines 
+    var width = +dim[2],                      // Uses the full width but
+        height = +dim[3]+(+dim[1])-50;        // doesn't use the last 50 lines 
+
     const pcaStrokeWidth = 0.25;
 
     var x = d3.scaleLinear()
@@ -157,15 +164,6 @@ function draw(domainX, domainY, data) {
         .attr("y", 0.5)
         .attr("width", width - 1)
         .attr("height", height - 1);
-    /*
-    var bar = svg.append("line")
-        .attr("x1", x(10))
-        .attr("x2", x(10))
-        .attr("y1", y(10))
-        .attr("y2", y(0))
-        .style("stroke-width", "5px")
-        .style("stroke", "red");
-     */
 
     var pcaLine = svg.append("path")
           .datum(data)

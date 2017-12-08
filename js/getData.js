@@ -15,38 +15,52 @@ function readTextFile(event) {
   d3.selectAll(".hidden").classed("hidden", false);
   d3.select(".inputButtons").classed("hidden", true);
 
-  d3.select(".restartButton").transition().duration(1000).style("top", "820px");
-  d3.select(".percentage").transition().duration(1000).style("top", "820px");
-  d3.select(".percentageValue").transition().duration(1000).style("top", "820px");
-  d3.select(".featureCount").transition().duration(1000).style("top", "820px");
-  d3.select(".featureSigma").transition().duration(1000).style("top", "820px");
+  d3.selectAll(".movedown").transition().duration(1000).style("top", "820px");
 }
+//
 var contents;
-
+/*
+ * Callback for the file reader
+ * We daisychained requestAnimationFrame with
+ * ready->drawOriginal->drawNormalized->doPca
+ * This could have been just one function with
+ * entries depending on a state but the code
+ * would be a bit more convoluted
+ */
 function ready(event) {
   d3.select("#st1").text("Reading file...done.");
   contents = event.target.result;
+  // Starts a chain of requestAnimationFrame to
+  // make sure updates will show up on the browser
   window.requestAnimationFrame(drawOriginal);
 }
-
+/*
+ * Draws original images
+ */
 function drawOriginal() {
   d3.select("#st1").html("<center>Original data</center>");
   contents = text2Matrix(contents); // The result is a [m][n] matrix
   cPaint(contents, "#fOriginal", 20, 4);
   window.requestAnimationFrame(drawNormalized);
 }
-  
+/*
+ * Draws normalized data
+ */
 function drawNormalized() {
   d3.select("#st2").style("display", "inline").text("Normalizing data..");
   var results = normalize(contents);
   contents = results.data;
   d3.select("#st2").html("<center>Normalized data</center>");
   cPaint(contents, "#fNormalized", 20, 4);
-  d3.select("#st3").style("display", "inline").text("Starting PCA. This might take a while...");
+  d3.select("#st3").style("display", "inline").text("Deploying PCA. This will take a while...");
   window.requestAnimationFrame(doPca);
 }
 
 var svd;
+/*
+ * Calculates PCA, displays eigenvectors and PCA results
+ * Uses numeric Library to transpose U matrix
+ */
 function doPca() {
   svd = calcSvd(contents);
   const svdSLength = svd.S.length;
@@ -66,14 +80,16 @@ function doPca() {
   }
 
   // Fits projection to SVG size
-  const domainX = [-1, sDiagonal.length+2],
-        domainY = [-1, sDiagonal[0].pca*1.01];
+  const domainX = [-1, sDiagonal.length+1],
+        domainY = [-1, sDiagonal[0].pca];
 
   draw(domainX, domainY, sDiagonal);
 }
-
+/*
+ * Converts text to matrix
+ */
 function text2Matrix(data) {
-  // This version assumes input from Octave
+  // ALERT: This version assumes input from Octave
   // Files start with 5 comment lines
   // and end with 3 blank lines
   // Every line starts with a space and numbers are 
@@ -86,7 +102,7 @@ function text2Matrix(data) {
     matrix[i] = matrix[i].split(" ");
 
   // Throws away the first column of every line
-  // and converts every data point to numeric
+  // and converts every data point to numbers
   for (let i = 0; i<matrix.length; i++) {
     matrix[i] = matrix[i].slice(1);
     for(let j = 0; j<matrix[i].length; j++)
@@ -94,15 +110,23 @@ function text2Matrix(data) {
   }
   return matrix;
 }
-
+/*
+ * Normalize a matrix
+ * Assumes lines as data points, columns as features
+ * Input: MxN matrix
+ * Output: MxN matrix, N sigma
+ */
 function normalize(matrix) {
   var sigma;
   matrix = diffMV(matrix, avgM(matrix));
   matrix = divideMV(matrix, sigma = stdM(matrix));
-
   return({data:matrix, sigma:sigma});
 }
-
+/*
+ * Calculates the vector average of a data matrix
+ * Input: MxN matrix
+ * Output: N average
+ */
 function avgM(matrix) {
   var mu = [];
   const lines = matrix.length;
@@ -119,7 +143,11 @@ function avgM(matrix) {
 
   return mu;
 }
-
+/*
+ * Calculates the differenct between a matrix and vector
+ * Input: MxN matrix, N vector
+ * Output: MxN matrix
+ */
 function diffMV(matrix, vector) {
   const lines = matrix.length;
   const columns = vector.length;
@@ -130,7 +158,11 @@ function diffMV(matrix, vector) {
   }
   return matrix;
 }
-
+/*
+ * Divides a matrix by a vector
+ * Input: MxN matrix, N vector
+ * Output: MxN matrix
+ */
 function divideMV(matrix, vector) {
   const lines = matrix.length;
   const columns = vector.length;
@@ -141,7 +173,11 @@ function divideMV(matrix, vector) {
   }
   return matrix;
 }
-
+/*
+ * Calculates the standard deviation of the sample
+ * Input: MxN matrix
+ * Output: N vector
+ */
 function stdM(matrix) {
   var mu = avgM(matrix);
   var std = [];
@@ -159,7 +195,11 @@ function stdM(matrix) {
 
   return(std);
 }
-
+/*
+ * Returns the minimal value of a vector
+ * Input: N vector
+ * Output: scalar
+ */
 function minV(vector) {
   var min = Infinity;
   const length = vector.length;
@@ -167,7 +207,11 @@ function minV(vector) {
     min = Math.min(min, vector[i]);
   return min;
 }
-
+/*
+ * Returns the maximal value of a vector
+ * Input: N vector
+ * Output: scalar
+ */
 function maxV(vector) {
   var max = -Infinity;
   const length = vector.length;
@@ -175,7 +219,13 @@ function maxV(vector) {
     max = Math.max(max, vector[i]);
   return max;
 }
-
+/*
+ * Returns the svd decomposition of the
+ * covariant matrix generated by the original data
+ * Input: MxN matrix
+ * Output: S vector (N), U matrix NxN, V matrix NxN
+ * Uses the numeric library - Todo: Try/consider other options
+ */
 function calcSvd(matrix) {
   const m = matrix.length;
   const matrixT = numeric.transpose(matrix);
