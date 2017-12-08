@@ -189,6 +189,7 @@ function draw(domainX, domainY, data) {
 
     d3.select(".restartButton")
         .on("click", restart);
+
     d3.select(".percentage")
         .on("change", change);
 

@@ -84,6 +84,9 @@ function doPca() {
         domainY = [-1, sDiagonal[0].pca];
 
   draw(domainX, domainY, sDiagonal);
+
+  d3.select(".viewButton")
+    .on("click", viewImage);
 }
 /*
  * Converts text to matrix
@@ -232,4 +235,41 @@ function calcSvd(matrix) {
   var Cv = numeric.dot(matrixT, matrix);
   Cv = numeric.mul(Cv, 1/m);
   return numeric.svd(Cv);
+}
+/*
+ * Projects new data based on # of features
+ * selected
+ * Z = X*U(:,1:K);
+ * Ex: X = 5000x1024, U = 1024x1204; Z=5000xK
+ */
+function projectData(data, dCount, U, fCount) {
+  return numeric.dot(data.slice(0, dCount), numeric.transpose(numeric.transpose(U).slice(0, fCount)));
+}
+/*
+function X_rec = recoverData(Z, U)
+K = size(Z, 2);
+%RECOVERDATA Recovers an approximation of the original data when using the 
+%projected data
+%   X_rec = RECOVERDATA(Z, U) recovers an approximation the 
+%   original data that has been reduced to K dimensions. It returns the
+%   approximate reconstruction in X_rec.
+%
+X_rec = Z*U(:,1:K)';
+end
+ */
+function recover(Z, U) {
+  var data;
+  var K = Z[0].length; // size(Z, 2);
+  return numeric.dot(Z, numeric.transpose(U).slice(0, K));
+}
+/*
+ * Called when "View" button is pressed
+ * Displays the first 80 images projected to the new space
+ * and then recovered back to the original space
+ */
+function viewImage() {
+  var features = +d3.select(".featureCount").text();
+  d3.select("#st1").html("<center>Recovered images with "+features+" features</center>");
+  // Projects the first 80 images with #features features and recovers the original display
+  cPaint(recover(projectData(contents, 80, svd.U, features), svd.U), "#fOriginal", 20, 4);
 }
