@@ -1,4 +1,8 @@
 // Reads PCA Data
+
+var contents;         // Data contents - Original data after normalization
+var svd;              // Svd decomposition of Covariance Matrix
+
 function readTextFile(event) {
   var file = event.target.files[0];
   if (!file)
@@ -17,8 +21,7 @@ function readTextFile(event) {
 
   d3.selectAll(".movedown").transition().duration(1000).style("top", "820px");
 }
-//
-var contents;
+
 /*
  * Callback for the file reader
  * We daisychained requestAnimationFrame with
@@ -55,8 +58,6 @@ function drawNormalized() {
   d3.select("#st3").style("display", "inline").text("Deploying PCA. This will take a while...");
   window.requestAnimationFrame(doPca);
 }
-
-var svd;
 /*
  * Calculates PCA, displays eigenvectors and PCA results
  * Uses numeric Library to transpose U matrix
