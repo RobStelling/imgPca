@@ -237,30 +237,18 @@ function calcSvd(matrix) {
   return numeric.svd(Cv);
 }
 /*
- * Projects new data based on # of features
- * selected
- * Z = X*U(:,1:K);
+ * Projects data to the new space based on # of features selected
  * Ex: X = 5000x1024, U = 1024x1204; Z=5000xK
  */
 function projectData(data, dCount, U, fCount) {
   return numeric.dot(data.slice(0, dCount), numeric.transpose(numeric.transpose(U).slice(0, fCount)));
 }
 /*
-function X_rec = recoverData(Z, U)
-K = size(Z, 2);
-%RECOVERDATA Recovers an approximation of the original data when using the 
-%projected data
-%   X_rec = RECOVERDATA(Z, U) recovers an approximation the 
-%   original data that has been reduced to K dimensions. It returns the
-%   approximate reconstruction in X_rec.
-%
-X_rec = Z*U(:,1:K)';
-end
+ * Recovers the "original" data from the Z (data) and U matrices
  */
 function recover(Z, U) {
-  var data;
-  var K = Z[0].length; // size(Z, 2);
-  return numeric.dot(Z, numeric.transpose(U).slice(0, K));
+  var features = Z[0].length;
+  return numeric.dot(Z, numeric.transpose(U).slice(0, features));
 }
 /*
  * Called when "View" button is pressed
