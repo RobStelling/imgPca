@@ -49,7 +49,7 @@ function drawNormalized() {
 var svd;
 function doPca() {
   svd = calcSvd(contents);
-  const svdSLenght = svd.S.length;
+  const svdSLength = svd.S.length;
   d3.select("#st4").style("display", "inline").html("<center>Main eigenvectors</center>");
   cPaint(numeric.transpose(svd.U), "#eigenVectors", 9, 8);
   var sDiagonal = [], sum = 0;
