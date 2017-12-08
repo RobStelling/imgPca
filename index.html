@@ -13,25 +13,41 @@
       <label for="file">Select image file</label>
       <input name="facesData" id="facesFile" type="file" class="inputButtons">
     </div>
-    <div>
-      <text style="display:none" id="st1"></text>
-    </div>
-    <canvas id="fOriginal" width="0" height="0"></canvas>
-    <div>
-      <text style="display:none" id="st2"></text>
-    </div>
-    <canvas id="fNormalized" width="0" height="0"></canvas>
-    <div>
-      <text style="display:none" id="st3"></text>
-    </div>
-    <svg id="graph" viewBox="0 0 900 500" width="100%" height="100%" style="display:none">
-      <defs>
-        <linearGradient id="gradient" x1="0%" x2="100%">
-          <stop  offset="0.0%" stop-color="#ffffff"></stop>
-          <stop  offset="100.0%" stop-color="#045a8d"></stop>
-        </linearGradient>
-      </defs>
-    </svg>
+    <table>
+      <tr>
+        <td>
+          <div>
+            <text style="display:none" id="st1"></text>
+          </div>
+          <canvas id="fOriginal" width="0" height="0"></canvas>
+        </td>
+        <td rowspan="2">
+          <div>
+            <text style="display:none" id="st4"></text>
+          </div>
+          <canvas id="eigenVectors" width="0" height="0"></canvas>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>
+            <text style="display:none" id="st2"></text>
+          </div>
+          <canvas id="fNormalized" width="0" height="0"></canvas>
+        </td>
+      </tr>
+    </table>
+        <div>
+          <text style="display:none" id="st3"></text>
+        </div>
+        <svg id="graph" viewBox="0 0 900 500" width="100%" height="100%" style="display:none">
+          <defs>
+            <linearGradient id="gradient" x1="0%" x2="100%">
+              <stop  offset="0.0%" stop-color="#ffffff"></stop>
+              <stop  offset="100.0%" stop-color="#045a8d"></stop>
+            </linearGradient>
+          </defs>
+        </svg>        
     <button class="restartButton hidden" style="display:none">Restart</button>
     <input class="percentage hidden" type="range" style="display:none" min="95" max="100" step="0.001" value="98.500">
     <text class="percentageValue hidden" style="display: none">0%</text>
@@ -43,7 +59,9 @@
     <script src="./js/getData.js"></script>
   </body>
   <script>
-    document.getElementById("facesFile")
-            .addEventListener("change", readTextFile, false);
+    //d3.select("#facesFiles").on("change", readTextFile);
+    
+    var inputFile = document.getElementById("facesFile");
+    inputFile.onchange = readTextFile;
   </script>
 </html>

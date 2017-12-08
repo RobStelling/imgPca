@@ -6,7 +6,6 @@ function readTextFile(event) {
   var reader = new FileReader();
 
   reader.onload = ready;
-
   d3.select("#st1").style("display", "inline").text("Reading file...");
   reader.readAsText(file);
 
@@ -22,27 +21,42 @@ function readTextFile(event) {
   d3.select(".featureCount").transition().duration(1000).style("top", "820px");
   d3.select(".featureSigma").transition().duration(1000).style("top", "820px");
 }
+var contents;
 
 function ready(event) {
-  d3.select("#st1").text("Reading file...done. Converting data...");
-  // First splits all lines
-  var contents = text2Matrix(event.target.result);
-  // The result is a [m][n] matrix
-  d3.select("#st1").text("Original data");
+  d3.select("#st1").text("Reading file...done.");
+  contents = event.target.result;
+  window.requestAnimationFrame(drawOriginal);
+}
+
+function drawOriginal() {
+  d3.select("#st1").html("<center>Original data</center>");
+  contents = text2Matrix(contents); // The result is a [m][n] matrix
   cPaint(contents, "#fOriginal", 20, 4);
+  window.requestAnimationFrame(drawNormalized);
+}
+  
+function drawNormalized() {
   d3.select("#st2").style("display", "inline").text("Normalizing data..");
-  results = normalize(contents);
+  var results = normalize(contents);
   contents = results.data;
-  d3.select("#st2").text("Normalized data");
+  d3.select("#st2").html("<center>Normalized data</center>");
   cPaint(contents, "#fNormalized", 20, 4);
-  d3.select("#st3").style("display", "inline").text("Calculating PCA. This might take a while..");
-  var svd = calcSvd(contents);
-  var svdS = svd.S;
+  d3.select("#st3").style("display", "inline").text("Starting PCA. This might take a while...");
+  window.requestAnimationFrame(doPca);
+}
+
+var svd;
+function doPca() {
+  svd = calcSvd(contents);
+  const svdSLenght = svd.S.length;
+  d3.select("#st4").style("display", "inline").html("<center>Main eigenvectors</center>");
+  cPaint(numeric.transpose(svd.U), "#eigenVectors", 9, 8);
   var sDiagonal = [], sum = 0;
 
-  for(let i = 0; i<svdS.length; i++) {
-    sDiagonal.push({pca:svdS[i], x: i+1});
-    sum += svdS[i];
+  for(let i = 0; i<svdSLength; i++) {
+    sDiagonal.push({pca:svd.S[i], x: i+1});
+    sum += svd.S[i];
   }
 
   for(let i = 0, cumulative = 0; i<sDiagonal.length; i++) {
@@ -51,15 +65,11 @@ function ready(event) {
     sDiagonal[i].cumulative = cumulative;
   }
 
-  //console.log(sDiagonal);
   // Fits projection to SVG size
-  //console.log(sDiagonal[0], sDiagonal[sDiagonal.length-1], sDiagonal.length);
   const domainX = [-1, sDiagonal.length+2],
         domainY = [-1, sDiagonal[0].pca*1.01];
 
-  //console.log(sDiagonal);
   draw(domainX, domainY, sDiagonal);
-
 }
 
 function text2Matrix(data) {
@@ -68,30 +78,29 @@ function text2Matrix(data) {
   // and end with 3 blank lines
   // Every line starts with a space and numbers are 
   // separated by spaces
-  var contents = data.split("\n");
+  var matrix = data.split("\n");
   // Throw away the first 5 and the last 3 lines
-  contents = contents.slice(5,-3);
-  for (let i = 0; i<contents.length; i++)
-    contents[i] = contents[i].split(" ");
+  matrix = matrix.slice(5,-3);
 
-
+  for (let i = 0; i<matrix.length; i++)
+    matrix[i] = matrix[i].split(" ");
 
   // Throws away the first column of every line
-  // and converts every data point to integer
-  for (let i = 0; i<contents.length; i++) {
-    contents[i] = contents[i].slice(1);
-    for(let j = 0; j<contents[i].length; j++)
-      contents[i][j] = +contents[i][j];
+  // and converts every data point to numeric
+  for (let i = 0; i<matrix.length; i++) {
+    matrix[i] = matrix[i].slice(1);
+    for(let j = 0; j<matrix[i].length; j++)
+      matrix[i][j] = +matrix[i][j];
   }
-  return contents;
+  return matrix;
 }
 
-function normalize(data) {
+function normalize(matrix) {
   var sigma;
-  data = diffMV(data, avgM(data));
-  data = divideMV(data, sigma = stdM(data));
+  matrix = diffMV(matrix, avgM(matrix));
+  matrix = divideMV(matrix, sigma = stdM(matrix));
 
-  return({data:data, sigma:sigma});
+  return({data:matrix, sigma:sigma});
 }
 
 function avgM(matrix) {
@@ -153,14 +162,16 @@ function stdM(matrix) {
 
 function minV(vector) {
   var min = Infinity;
-  for(let i=0;i<vector.length;i++)
+  const length = vector.length;
+  for(let i=0;i<length;i++)
     min = Math.min(min, vector[i]);
   return min;
 }
 
 function maxV(vector) {
   var max = -Infinity;
-  for(let i=0;i<vector.length;i++)
+  const length = vector.length;
+  for(let i=0;i<length;i++)
     max = Math.max(max, vector[i]);
   return max;
 }

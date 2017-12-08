@@ -1,5 +1,4 @@
-var zoomK = 1;
-
+//var zoomK = 1;
 function cPaint(faces, canvasID, columns, lines) {
       // Following this idea: https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/
       // and this http://bl.ocks.org/biovisualize/5400576
@@ -205,7 +204,7 @@ function draw(domainX, domainY, data) {
       d3.selectAll("rect").style("stroke-width", 1/Math.sqrt(d3.event.transform.k));
       gX.call(xAxis.scale(d3.event.transform.rescaleX(x)));
       gY.call(yAxis.scale(d3.event.transform.rescaleY(y)));
-      zoomK = d3.event.transform.k;
+      //zoomK = d3.event.transform.k;
     }
 
     function restart() {
