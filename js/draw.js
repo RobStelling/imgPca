@@ -187,11 +187,11 @@ function draw(domainX, domainY, data) {
     d3.select("#st3").text("PCA Analysis")
     change();
 
-    d3.select(".restartButton")
-        .on("click", restart);
+    d3.select(".restoreButton")
+        .on("click", restore);
 
     d3.select(".percentage")
-        .on("change", change);
+        .on("input", change);
 
     hookToolTip();
 
@@ -206,7 +206,7 @@ function draw(domainX, domainY, data) {
       //zoomK = d3.event.transform.k;
     }
 
-    function restart() {
+    function restore() {
       svg.transition()
           .duration(750)
           .call(zoom.transform, d3.zoomIdentity);

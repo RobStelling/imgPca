@@ -33,7 +33,7 @@ rect {
   opacity: 0.5;
 }
 
-.restartButton {
+.restoreButton {
   position: absolute;
   top: 50px;
   right: 20px;
