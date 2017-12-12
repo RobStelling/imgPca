@@ -29,6 +29,7 @@ function readTextFile(event) {
  * This could have been just one function with
  * entries depending on a state but the code
  * would be a bit more convoluted
+ * ToDo: Try promises
  */
 function ready(event) {
   d3.select("#st1").text("Reading file...done.");
@@ -255,6 +256,10 @@ function recover(Z, U) {
  * Called when "View" button is pressed
  * Displays the first 80 images projected to the new space
  * and then recovered back to the original space
+ * canView forces a 2s delay between calls. This is used
+ * to prevent a flood of calls when the range bar slides
+ * but is not really necessary when the value is selected
+ * with a click
  */
 var canView = true;
 function viewImage() {
@@ -264,6 +269,6 @@ function viewImage() {
   setTimeout(function(){canView = true;}, 2000);
   var features = +d3.select(".featureCount").text();
   d3.select("#st1").html("<center>Recovered images with "+features+" features</center>");
-  // Projects the first 80 images with #features features and recovers the original display
+  // Projects the first 80 images with #features and recovers the data to the original data space
   cPaint(recover(projectData(contents, 80, svd.U, features), svd.U), "#fOriginal", 20, 4);
 }

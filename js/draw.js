@@ -55,64 +55,6 @@ function cPaint(data, canvasID, columns, lines) {
     ctx.putImageData(imageData, 0, 0);
 }
 /*
- * Original paint function using SVG
- * ALERT: Deprecated
- * 
- */
-function paint(data, startLine) {
-  // Every data line is an square image
-  // Each pixel will be displayed in grayscale as in
-  // RGB(colorScale(data[i][j]), colorScale(data[i][j]), colorScale(data[i][j])
-
-  const colorScale = d3.scaleLinear().range([0,255]);
-  const imgSize = Math.sqrt(data[0].length);
-  const img = d3.select("#img");
-  const viewBox = img.attr("viewBox").split(" ");
-  const width = +viewBox[2], height = +viewBox[3]; 
-  var rectSize = 1;
-  var xOffset, yOffset;
-  var columns, lines, numFaces;
-  var text = d3.select("#statusText").text();
-  var yStart;
-
-  columns = Math.floor(width/(imgSize*rectSize));
-  rectSize = width/(columns*imgSize);
-  lines = Math.floor(height/(imgSize*rectSize));
-  numFaces = columns*lines;
-  yStart = startLine*imgSize*rectSize;
-
-  img.style("display", "inline");
-  d3.select("#statusText").text(text+" First "+(lines*columns)+" images...");
-
-
-  // At this point we are displaying just one image,
-  // for testing purposes
-  for (let i = 0; i<numFaces; i++) {
-    min = minV(data[i]);
-    max = maxV(data[i]);
-    colorScale.domain([min,max]);
-    xOffset = (i%columns)*imgSize*rectSize;
-    yOffset = Math.floor(i/columns)*imgSize*rectSize;
-    img.selectAll("faces")
-       .data(data[i])
-       .enter()
-       .append("rect")
-       .attr("class", "faces img"+i)
-       .attr("x", function(d, i){return xOffset+(Math.floor(i/imgSize))*rectSize;})
-       .attr("y", function(d, i){return yStart+yOffset+(i % imgSize)*rectSize;})
-       .attr("width", rectSize)
-       .attr("height", rectSize)
-       .style("stroke-width", 0)
-       .style("fill",
-          function(d, i){
-            var grayScale = Math.floor(colorScale(d));
-            var color =  "rgb("+grayScale+","+grayScale+","+grayScale+")";
-            return color;
-          });
-  }
-  return;
-}
-/*
  * Draws the interactive PCA graph
  * Todo:
  *  - Add tooltip and a locating bar
@@ -184,7 +126,8 @@ function draw(domainX, domainY, data) {
         .attr("class", "axis axis--y")
         .call(yAxis);
 
-    d3.select("#st3").text("PCA Analysis")
+    d3.select("#st3").text("PCA Analysis");
+
     change();
 
     d3.select(".restoreButton")
@@ -204,7 +147,6 @@ function draw(domainX, domainY, data) {
       d3.selectAll("rect").style("stroke-width", 1/Math.sqrt(d3.event.transform.k));
       gX.call(xAxis.scale(d3.event.transform.rescaleX(x)));
       gY.call(yAxis.scale(d3.event.transform.rescaleY(y)));
-      //zoomK = d3.event.transform.k;
     }
 
     function restore() {
