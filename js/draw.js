@@ -191,7 +191,8 @@ function draw(domainX, domainY, data) {
         .on("click", restore);
 
     d3.select(".percentage")
-        .on("input", change);
+        .on("input", change)
+        .on("change", viewImage);
 
     hookToolTip();
 

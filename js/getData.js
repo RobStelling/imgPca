@@ -256,7 +256,12 @@ function recover(Z, U) {
  * Displays the first 80 images projected to the new space
  * and then recovered back to the original space
  */
+var canView = true;
 function viewImage() {
+  if (!canView)
+    return;
+  canView = false;
+  setTimeout(function(){canView = true;}, 2000);
   var features = +d3.select(".featureCount").text();
   d3.select("#st1").html("<center>Recovered images with "+features+" features</center>");
   // Projects the first 80 images with #features features and recovers the original display
