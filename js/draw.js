@@ -110,7 +110,6 @@ function draw(domainX, domainY, data) {
     var pcaLine = svg.append("path")
           .datum(data)
           //.attr("fill", "black")
-          //.style("opacity", 0.5)
           .attr("stroke", "#1f78b4")
           .attr("stroke-linejoin", "round")
           .attr("stroke-linecap", "round")
@@ -136,6 +135,9 @@ function draw(domainX, domainY, data) {
     d3.select(".percentage")
         .on("input", change)
         .on("change", viewImage);
+
+    d3.select(".saveButton")
+        .on("click", save);
 
     hookToolTip();
 
@@ -168,6 +170,10 @@ function draw(domainX, domainY, data) {
         }
         d3.select(".featureCount").text(fcount);
         d3.select(".featureSigma").text(data[fcount-1].pca.toLocaleString("en", {minimumFractionDigits: 4, maximumFractionDigits: 4}))        
+    }
+
+    function save() {
+      return;
     }
 
     function hookToolTip() {

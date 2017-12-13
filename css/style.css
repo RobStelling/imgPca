@@ -23,12 +23,10 @@ rect {
 
 .view {
   fill: url(#gradient);
-  /* fill: #a6cee3; */
   stroke: #000;
 }
 
 .pcaLine {
-  /* fill: url(#gradient); */
   fill: red;
   opacity: 0.5;
 }

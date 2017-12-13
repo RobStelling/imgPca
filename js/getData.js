@@ -21,7 +21,6 @@ function readTextFile(event) {
 
   d3.selectAll(".movedown").transition().duration(1000).style("top", "820px");
 }
-
 /*
  * Callback for the file reader
  * We daisychained requestAnimationFrame with
@@ -266,7 +265,7 @@ function viewImage() {
   if (!canView)
     return;
   canView = false;
-  setTimeout(function(){canView = true;}, 2000);
+  setTimeout(function(){canView = true;}, 1500);
   var features = +d3.select(".featureCount").text();
   d3.select("#st1").html("<center>Recovered images with "+features+" features</center>");
   // Projects the first 80 images with #features and recovers the data to the original data space
