@@ -1,7 +1,13 @@
 // Reads PCA Data
 
-var contents;         // Data contents - Original data after normalization
-var svd;              // Svd decomposition of Covariance Matrix
+var contents;             // Data contents - Original data after normalization
+var svd;                  // Svd decomposition of Covariance Matrix
+const maxWidth = +(d3.select("#graph").style("display", "inline").attr("viewBox").split(" ")[2])+50;
+const maxImgSpace = 0.70; // Images will ocupy no more than 75% of the SVG width
+var imgSpace,             // Width available for images
+    eigenSpace,           // Width available for eigenvectors -> maxWidth - imgSpace
+    dataWidth;            // Width for the square images
+
 
 function readTextFile(event) {
   var file = event.target.files[0];
@@ -41,9 +47,14 @@ function ready(event) {
  * Draws original images
  */
 function drawOriginal() {
+
   d3.select("#st1").html("<center>Original data</center>");
   contents = text2Matrix(contents); // The result is a [m][n] matrix
-  cPaint(contents, "#fOriginal", 20, 4);
+  dataWidth = Math.sqrt(contents[0].length);
+  const columns = Math.floor((maxWidth*maxImgSpace)/dataWidth);
+  imgSpace = columns * dataWidth;
+  eigenSpace = maxWidth - imgSpace - 1;
+  cPaint(contents, "#fOriginal", columns, 4);
   window.requestAnimationFrame(drawNormalized);
 }
 /*
@@ -54,7 +65,7 @@ function drawNormalized() {
   var results = normalize(contents);
   contents = results.data;
   d3.select("#st2").html("<center>Normalized data</center>");
-  cPaint(contents, "#fNormalized", 20, 4);
+  cPaint(contents, "#fNormalized", Math.floor(imgSpace/dataWidth), 4);
   d3.select("#st3").style("display", "inline").text("Deploying PCA. This will take a while...");
   window.requestAnimationFrame(doPca);
 }
@@ -66,7 +77,7 @@ function doPca() {
   svd = calcSvd(contents);
   const svdSLength = svd.S.length;
   d3.select("#st4").style("display", "inline").html("<center>Main eigenvectors</center>");
-  cPaint(numeric.transpose(svd.U), "#eigenVectors", 9, 8);
+  cPaint(numeric.transpose(svd.U), "#eigenVectors", Math.floor(eigenSpace/dataWidth), 8);
   var sDiagonal = [], sum = 0;
 
   for(let i = 0; i<svdSLength; i++) {
@@ -269,5 +280,5 @@ function viewImage() {
   var features = +d3.select(".featureCount").text();
   d3.select("#st1").html("<center>Recovered images with "+features+" features</center>");
   // Projects the first 80 images with #features and recovers the data to the original data space
-  cPaint(recover(projectData(contents, 80, svd.U, features), svd.U), "#fOriginal", 20, 4);
+  cPaint(recover(projectData(contents, 80, svd.U, features), svd.U), "#fOriginal", Math.floor(imgSpace/dataWidth), 4);
 }
