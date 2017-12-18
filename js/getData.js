@@ -1,5 +1,7 @@
 // Reads PCA Data
 
+var getData = {};              // Global getData object
+/*
 var contents;             // Data contents - Original data after normalization
 var svd;                  // Svd decomposition of Covariance Matrix
 const maxWidth = +(d3.select("#graph").style("display", "inline").attr("viewBox").split(" ")[2])+50;
@@ -7,6 +9,9 @@ const maxImgSpace = 0.70; // Images will ocupy no more than 75% of the SVG width
 var imgSpace,             // Width available for images
     eigenSpace,           // Width available for eigenvectors -> maxWidth - imgSpace
     dataWidth;            // Width for the square images
+ */
+ getData.maxWidth = +(d3.select("#graph").style("display", "inline").attr("viewBox").split(" ")[2])+50;
+ getData.maxImgSpace = 0.70;
 
 
 function readTextFile(event) {
@@ -38,7 +43,7 @@ function readTextFile(event) {
  */
 function ready(event) {
   d3.select("#st1").text("Reading file...done.");
-  contents = event.target.result;
+  getData.contents = event.target.result;
   // Starts a chain of requestAnimationFrame to
   // make sure updates will show up on the browser
   window.requestAnimationFrame(drawOriginal);
@@ -49,12 +54,12 @@ function ready(event) {
 function drawOriginal() {
 
   d3.select("#st1").html("<center>Original data</center>");
-  contents = text2Matrix(contents); // The result is a [m][n] matrix
-  dataWidth = Math.sqrt(contents[0].length);
-  const columns = Math.floor((maxWidth*maxImgSpace)/dataWidth);
-  imgSpace = columns * dataWidth;
-  eigenSpace = maxWidth - imgSpace - 1;
-  cPaint(contents, "#fOriginal", columns, 4);
+  getData.contents = text2Matrix(getData.contents); // The result is a [m][n] matrix
+  getData.dataWidth = Math.sqrt(getData.contents[0].length);
+  const columns = Math.floor((getData.maxWidth*getData.maxImgSpace)/getData.dataWidth);
+  getData.imgSpace = columns * getData.dataWidth;
+  getData.eigenSpace = getData.maxWidth - getData.imgSpace - 1;
+  cPaint(getData.contents, "#fOriginal", columns, 4);
   window.requestAnimationFrame(drawNormalized);
 }
 /*
@@ -62,10 +67,10 @@ function drawOriginal() {
  */
 function drawNormalized() {
   d3.select("#st2").style("display", "inline").text("Normalizing data..");
-  var results = normalize(contents);
-  contents = results.data;
+  var results = normalize(getData.contents);
+  getData.contents = results.data;
   d3.select("#st2").html("<center>Normalized data</center>");
-  cPaint(contents, "#fNormalized", Math.floor(imgSpace/dataWidth), 4);
+  cPaint(getData.contents, "#fNormalized", Math.floor(getData.imgSpace/getData.dataWidth), 4);
   d3.select("#st3").style("display", "inline").text("Deploying PCA. This will take a while...");
   window.requestAnimationFrame(doPca);
 }
@@ -74,15 +79,15 @@ function drawNormalized() {
  * Uses numeric Library to transpose U matrix
  */
 function doPca() {
-  svd = calcSvd(contents);
-  const svdSLength = svd.S.length;
+  getData.svd = calcSvd(getData.contents);
+  const svdSLength = getData.svd.S.length;
   d3.select("#st4").style("display", "inline").html("<center>Main eigenvectors</center>");
-  cPaint(numeric.transpose(svd.U), "#eigenVectors", Math.floor(eigenSpace/dataWidth), 8);
+  cPaint(numeric.transpose(getData.svd.U), "#eigenVectors", Math.floor(getData.eigenSpace/getData.dataWidth), 8);
   var sDiagonal = [], sum = 0;
 
   for(let i = 0; i<svdSLength; i++) {
-    sDiagonal.push({pca:svd.S[i], x: i+1});
-    sum += svd.S[i];
+    sDiagonal.push({pca:getData.svd.S[i], x: i+1});
+    sum += getData.svd.S[i];
   }
 
   for(let i = 0, cumulative = 0; i<sDiagonal.length; i++) {
@@ -280,5 +285,5 @@ function viewImage() {
   var features = +d3.select(".featureCount").text();
   d3.select("#st1").html("<center>Recovered images with "+features+" features</center>");
   // Projects the first 80 images with #features and recovers the data to the original data space
-  cPaint(recover(projectData(contents, 80, svd.U, features), svd.U), "#fOriginal", Math.floor(imgSpace/dataWidth), 4);
+  cPaint(recover(projectData(getData.contents, 80, getData.svd.U, features), getData.svd.U), "#fOriginal", Math.floor(getData.imgSpace/getData.dataWidth), 4);
 }
