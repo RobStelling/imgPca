@@ -1,19 +1,22 @@
 // Reads PCA Data
 
-var getData = {};              // Global getData object
+var getData = {};                 // Global getData object
 /*
-var contents;             // Data contents - Original data after normalization
-var svd;                  // Svd decomposition of Covariance Matrix
-const maxWidth = +(d3.select("#graph").style("display", "inline").attr("viewBox").split(" ")[2])+50;
-const maxImgSpace = 0.70; // Images will ocupy no more than 75% of the SVG width
-var imgSpace,             // Width available for images
-    eigenSpace,           // Width available for eigenvectors -> maxWidth - imgSpace
-    dataWidth;            // Width for the square images
+ * getData.contents:              // Data contents - Original data after normalization
+ * getData.svd:                   // Svd decomposition of Covariance Matrix
+ * getData.maxWidth:              // Maximum width for the image + eigenvector canvases
+ * getData.maxImgSpace:           // Images will ocupy no more than that much of maxWidth
+ * getData.imgSpace:              // Real width of the image canvas (#columns * dataWidth)
+ * getData.eigenSpace:            // Width available for eigenvectors (maxWidth - imgSpace)
+ * getData.dataWidth:             // Width of the square images (sqrt(images.length))
+ * getData.canView:               // Tells if viewImage can be called at this moment
  */
+ getData.contents = "";
  getData.maxWidth = +(d3.select("#graph").style("display", "inline").attr("viewBox").split(" ")[2])+50;
  getData.maxImgSpace = 0.70;
+ getData.canView = true;
 
-
+// Called when a file is selected
 function readTextFile(event) {
   var file = event.target.files[0];
   if (!file)
@@ -268,20 +271,17 @@ function recover(Z, U) {
   return numeric.dot(Z, numeric.transpose(U).slice(0, features));
 }
 /*
- * Called when "View" button is pressed
+ * Called when the range slider changes
  * Displays the first 80 images projected to the new space
  * and then recovered back to the original space
- * canView forces a 2s delay between calls. This is used
+ * canView forces a delay between calls. This is used
  * to prevent a flood of calls when the range bar slides
- * but is not really necessary when the value is selected
- * with a click
  */
-var canView = true;
 function viewImage() {
-  if (!canView)
+  if (!getData.canView)
     return;
-  canView = false;
-  setTimeout(function(){canView = true;}, 1500);
+  getData.canView = false;
+  setTimeout(function(){getData.canView = true;}, 1500);
   var features = +d3.select(".featureCount").text();
   d3.select("#st1").html("<center>Recovered images with "+features+" features</center>");
   // Projects the first 80 images with #features and recovers the data to the original data space

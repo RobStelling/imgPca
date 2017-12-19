@@ -27,7 +27,8 @@ rect {
 }
 
 .pcaLine {
-  fill: red;
+  fill: #ca0020;
+  /*stroke: #1f78b4;*/
   opacity: 0.5;
 }
 

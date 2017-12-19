@@ -109,8 +109,6 @@ function draw(domainX, domainY, data) {
 
     var pcaLine = svg.append("path")
           .datum(data)
-          //.attr("fill", "black")
-          .attr("stroke", "#1f78b4")
           .attr("stroke-linejoin", "round")
           .attr("stroke-linecap", "round")
           .attr("stroke-width", pcaStrokeWidth)
@@ -179,7 +177,7 @@ function draw(domainX, domainY, data) {
     function hookToolTip() {
         d3.select("#graph")
           .on("mouseover", function (){
-            //console.log("entrou", d3.event, zoomK);
+            //console.log("entrou", d3.event);
           })
           .on("mousemove", function() {
             //console.log(d3.event);
