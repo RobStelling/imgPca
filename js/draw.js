@@ -7,6 +7,7 @@
  *  lines - Number of lines
  */
 function cPaint(data, canvasID, columns, lines) {
+      // Write directly into the canvas
       // Following this idea: https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/
       // and this http://bl.ocks.org/biovisualize/5400576
     const nImages = columns*lines;
@@ -39,8 +40,8 @@ function cPaint(data, canvasID, columns, lines) {
 
     for (var y = 0; y < height; ++y) {
         for (var x = 0; x < width; ++x) {
-          var xData = Math.floor(y/32)*columns+Math.floor(x/32)%32,
-              yData = (x%32)*32+y%32;
+          var xData = Math.floor(y/imgSize)*columns+Math.floor(x/imgSize)%imgSize,
+              yData = (x%imgSize)*imgSize+y%imgSize;
           var value = colorScale(data[xData][yData]);
           map[y * width + x] =
               (255   << 24) |    // alpha
