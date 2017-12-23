@@ -253,10 +253,25 @@ function maxV(vector) {
  * Uses the numeric library - Todo: Try/consider other options
  */
 function calcSvd(matrix) {
-  const m = matrix.length;
-  const matrixT = numeric.transpose(matrix);
-  var Cv = numeric.dot(matrixT, matrix);
-  Cv = numeric.mul(Cv, 1/m);
+  const m = matrix.length,
+        n = matrix[0].length;
+  // Computes the covariance matrix on the GPU
+  // Cv = matrixT * matrix / m
+  // m = # samples
+  // Need to replace 5000 to m on the code below
+  const coVM = getData.gpu.createKernel(function(a, m) {
+    var sum = 0;
+    for (var i = 0; i < 5000; i++) {
+      sum += a[i][this.thread.x] * a[i][this.thread.y];
+    }
+    return sum/m;
+  })
+    .setOutput([n, n])
+    .setOutputToTexture(false);
+  //const matrixT = numeric.transpose(matrix);
+  //var Cv = numeric.dot(matrixT, matrix);
+  //Cv = numeric.mul(Cv, 1/m);
+  var Cv = coVM(matrix, m);
   return GPUsvd(Cv);
 }
 /*
