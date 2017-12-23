@@ -63,7 +63,7 @@ function drawOriginal() {
   getData.dataWidth = Math.sqrt(getData.contents[0].length);
   const columns = Math.floor((getData.maxWidth*getData.maxImgSpace)/getData.dataWidth);
   getData.imgSpace = columns * getData.dataWidth;
-  getData.eigenSpace = getData.maxWidth - getData.imgSpace - 1;
+  getData.eigenSpace = getData.maxWidth - getData.imgSpace - (getData.maxWidth - getData.imgSpace)%getData.dataWidth;
   cPaint(getData.contents, "#fOriginal", columns, 4);
   getData.numImg = columns * 4;
   window.requestAnimationFrame(drawNormalized);
@@ -413,8 +413,11 @@ function GPUsvd(A) {
   }
   
   // accumulation of right hand gtransformations
-  for (i=n-1; i != -1; i+= -1)
-  { 
+  for (var ii = 0; ii<n; ii++) {
+    i = n-ii-1;
+
+//  for (i=n-1; i != -1; i+= -1)
+//  { 
     if (g != 0.0)
     {
       h= g*u[i][i+1]
@@ -440,8 +443,10 @@ function GPUsvd(A) {
   }
   
   // accumulation of left hand transformations
-  for (i=n-1; i != -1; i+= -1)
-  { 
+  for (var ii = 0; ii<n; ii++) {
+    i = n-ii-1;
+  //for (i=n-1; i != -1; i+= -1)
+  //{ 
     l= i+1
     g= q[i]
     for (j=l; j < n; j++) 
@@ -465,8 +470,10 @@ function GPUsvd(A) {
   
   // diagonalization of the bidiagonal form
   prec= prec*x
-  for (k=n-1; k != -1; k+= -1)
-  {
+  for (var kk = 0; kk<n; kk++) {
+    k = n-kk-1;
+  //for (k=n-1; k != -1; k+= -1)
+ // {
     for (var iteration=0; iteration < itmax; iteration++)
     { // test f splitting
       var test_convergence = false
@@ -598,6 +605,5 @@ function GPUsvd(A) {
     }
    }  
   }
-  
   return {U:u,S:q,V:v}
 };
