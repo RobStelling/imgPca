@@ -256,7 +256,7 @@ function calcSvd(matrix) {
   const m = matrix.length,
         n = matrix[0].length;
   // Computes the covariance matrix on the GPU
-  // Cv = matrixT * matrix / m
+  // Cv = (matrixT * matrix) / m
   // m = # samples
   const coVM = getData.gpu.createKernel(function(a) {
     var sum = 0;
@@ -349,7 +349,17 @@ function GPUsvd(A) {
   }
 
   //Householder's reduction to bidiagonal form
-
+  // Local:
+  // f, g, h, x, y, z, s
+  // e N (initialized with 0s)?
+  // Input:
+  // u MxN
+  // tolerance
+  //
+  // Output:
+  // e N
+  // u MxN
+  // x
   var f= 0.0;
   var g= 0.0;
   var h= 0.0;
@@ -357,9 +367,7 @@ function GPUsvd(A) {
   var y= 0.0;
   var z= 0.0;
   var s= 0.0;
-  
-  for (i=0; i < n; i++)
-  { 
+  for (i=0; i < n; i++) { 
     e[i]= g;
     s= 0.0;
     l= i+1;
@@ -411,20 +419,39 @@ function GPUsvd(A) {
     if (y>x) 
       x=y
   }
-  
+
   // accumulation of right hand gtransformations
+  // Local:
+  // v NxN = 0s, i, ii, j, k, h, s
+  // Input:
+  // n, g, u, l
+  // Output:
+  // v NxN
+  // Computes the covariance matrix on the GPU
+  // Cv = (matrixT * matrix) / m
+  // m = # samples
+  const arhgt = getData.gpu.createKernel(function(n, g, u, l) {
+    /*
+    var sum = 0;
+    for (var i = 0; i < this.constants.limit; i++) {
+      sum += a[i][this.thread.x] * a[i][this.thread.y];
+    }
+    return sum/this.constants.limit;
+    */
+  }, {
+  constants: { limit: n }
+  }).setOutput([n, n])
+    .setOutputToTexture(false);
+
   for (var ii = 0; ii<n; ii++) {
     i = n-ii-1;
-
 //  for (i=n-1; i != -1; i+= -1)
 //  { 
-    if (g != 0.0)
-    {
+    if (g != 0.0) {
       h= g*u[i][i+1]
       for (j=l; j < n; j++) 
         v[j][i]=u[i][j]/h
-      for (j=l; j < n; j++)
-      { 
+      for (j=l; j < n; j++) { 
         s=0.0
         for (k=l; k < n; k++) 
           s += u[i][k]*v[k][j]
@@ -432,8 +459,7 @@ function GPUsvd(A) {
           v[k][j]+=(s*v[k][i])
       } 
     }
-    for (j=l; j < n; j++)
-    {
+    for (j=l; j < n; j++) {
       v[i][j] = 0;
       v[j][i] = 0;
     }
