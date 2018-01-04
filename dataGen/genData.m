@@ -17,6 +17,3 @@ function ndata = genData(nLines, classNumber)
 	  ndata(k,:) = reshape(rot90(reshape(gs_data(k,:), 32, 32), -1), 1, []);
 	endfor
 endfunction
-
-printf('%d\n', argin);
-printf('%s\n', argv());
