@@ -137,14 +137,14 @@ function text2Matrix(data) {
   var matrix = data.split("\n");
 
   // Deletes comments and splits the data contents, assume space between data points
-  // Throws away the first column of every line (split.slice(1) sequence) and converts
-  // strings to numbers
+  // and converts strings to numbers
 
   for (let i = 0; i<matrix.length; i++) {
-    while (matrix[i] != undefined && matrix[i][0] == "#")
+    // Deletes all blank and comment lines
+    while (matrix[i] != undefined && (matrix[i].length == 0 || matrix[i][0] == "#"))
       matrix.splice(i, 1);
     if (i < matrix.length) {
-      matrix[i] = matrix[i].split(" ").slice(1);
+      matrix[i] = matrix[i].split(" ");
       for (let j = 0; j<matrix[i].length; j++)
         matrix[i][j] = +matrix[i][j];
     }
