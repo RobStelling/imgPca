@@ -115,29 +115,39 @@ function doPca() {
  * Converts text to matrix
  */
 function text2Matrix(data) {
-  // ALERT: This version assumes input from Octave
-  // Files start with 5 comment lines
-  // and end with 3 blank lines
-  // Every line starts with a space and numbers are 
-  // separated by spaces
+  // IMPORTANT: This code assumes that the data may have
+  // comments (lines starting with #), columns (features)
+  // are separated by spaces and samples are separated by \n
+  // As in the example below with
+  //   5 comments at start,
+  //   3 data lines with 4 features each
+  //   1 comment at the end
+/*
+# Created by Octave 4.2.1, Thu Jan 04 10:31:44 2018 -02 <stelling@Felix-Sonnenfeld.local>
+# name: n_data4k_rot
+# type: uint8 matrix
+# ndims: 2
+# 4000 1024
+10 247 20 73
+255 42 242 246
+142 241 127 21
+# Another comment
+*/
+
   var matrix = data.split("\n");
-  // Throw away the first 5 and the last 3 lines
-  //matrix = matrix.slice(5,-3);
+
   // Deletes comments and splits the data contents, assume space between data points
+  // Throws away the first column of every line (split.slice(1) sequence) and converts
+  // strings to numbers
 
   for (let i = 0; i<matrix.length; i++) {
     while (matrix[i] != undefined && matrix[i][0] == "#")
       matrix.splice(i, 1);
-    if (i < matrix.length)
-      matrix[i] = matrix[i].split(" ");
-  }
-
-  // Throws away the first column of every line
-  // and converts every data point to numbers
-  for (let i = 0; i<matrix.length; i++) {
-    matrix[i] = matrix[i].slice(1);
-    for(let j = 0; j<matrix[i].length; j++)
-      matrix[i][j] = +matrix[i][j];
+    if (i < matrix.length) {
+      matrix[i] = matrix[i].split(" ").slice(1);
+      for (let j = 0; j<matrix[i].length; j++)
+        matrix[i][j] = +matrix[i][j];
+    }
   }
   return matrix;
 }
