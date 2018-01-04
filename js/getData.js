@@ -122,10 +122,15 @@ function text2Matrix(data) {
   // separated by spaces
   var matrix = data.split("\n");
   // Throw away the first 5 and the last 3 lines
-  matrix = matrix.slice(5,-3);
+  //matrix = matrix.slice(5,-3);
+  // Deletes comments and splits the data contents, assume space between data points
 
-  for (let i = 0; i<matrix.length; i++)
-    matrix[i] = matrix[i].split(" ");
+  for (let i = 0; i<matrix.length; i++) {
+    while (matrix[i] != undefined && matrix[i][0] == "#")
+      matrix.splice(i, 1);
+    if (i < matrix.length)
+      matrix[i] = matrix[i].split(" ");
+  }
 
   // Throws away the first column of every line
   // and converts every data point to numbers
@@ -424,25 +429,42 @@ function GPUsvd(A) {
   // Local:
   // v NxN = 0s, i, ii, j, k, h, s
   // Input:
-  // n, g, u, l
+  // n, g, u NxN, l
   // Output:
   // v NxN
-  // Computes the covariance matrix on the GPU
-  // Cv = (matrixT * matrix) / m
-  // m = # samples
-  const arhgt = getData.gpu.createKernel(function(n, g, u, l) {
-    /*
-    var sum = 0;
-    for (var i = 0; i < this.constants.limit; i++) {
-      sum += a[i][this.thread.x] * a[i][this.thread.y];
+  const arhgtransform = getData.gpu.createKernel(function(u) {
+    var v = Array(this.constants.n);
+    var g = this.constants.g, h, j, s, k, ii, i;
+    for (i = 0; i<v.length;i++)
+      v = Array(this.constants.n);
+    v[this.thread.x][this.thread.y] = 0;
+    for (ii = 0; ii < this.constants.n; ii++) {
+      i = this.constants.limit - ii - 1;
+      if (g != 0.0) {
+        h  = g * u[i][i+i];
+        for (j = this.constants.l; j< this.constants.n; j++) {
+          s = 0.0;
+          for (k = this.constants.l; k < this.constants.n; k++)
+            s += u[i][k]*v[k][j];
+          for (k=this.constants.l; k < this.constants.n; k++)
+            v[k][j] += (s*v[k][i]);
+        }
+      }
+      for (j=this.constants.l; j < this.constants.limit; j++) {
+        v[i][j] = 0;
+        v[j][i] = 0;
+      }
+      v[i][i] = 1;
+      g = e[i];
+      l = i;
     }
-    return sum/this.constants.limit;
-    */
+    return v;
   }, {
-  constants: { limit: n }
+  constants: { n: n, g : g, l : l }
   }).setOutput([n, n])
     .setOutputToTexture(false);
 
+  /*v = arhgtransform(u); */
   for (var ii = 0; ii<n; ii++) {
     i = n-ii-1;
 //  for (i=n-1; i != -1; i+= -1)
@@ -467,7 +489,6 @@ function GPUsvd(A) {
     g= e[i]
     l= i
   }
-  
   // accumulation of left hand transformations
   for (var ii = 0; ii<n; ii++) {
     i = n-ii-1;
