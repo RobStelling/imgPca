@@ -1,5 +1,5 @@
 % Reads nLines of the desired class from CIFAR-10 batch files and returns the corresponding
-% line-first grayscale images (using eights), line-first data.
+% line-first grayscale images (using weights), line-first data.
 % Assumes CIFAR-10 filenames are "data_batch_{n}.mat"
 function ndata = genData(nLines, classNumber)
     i = 0; j = 1;

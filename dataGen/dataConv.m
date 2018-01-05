@@ -1,5 +1,5 @@
 % Reads nLines of the desired class from CIFAR-10 batch files and returns the corresponding
-% line-first grayscale images, using luminance wheigts (0.3, 0.59, 0.11), line-first data
+% line-first grayscale images
 % Assumes filenames are 'data_batch_n.mat'
 
 % Basic parameter checking
