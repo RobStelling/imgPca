@@ -1,7 +1,7 @@
 # imgPca
 imgPca is a JavaScript application to allow the visualization of Principal Component Analysis on images.
 
-![imgPca Screenshot](https://github.com/RobStelling/imgPca/raw/master/imgPca.png)
+![imgPca Screenshot](../../raw/master/imgPca.png)
 # What are the visuals of imgPca ?
 
 imgPca splits the screen in two parts, the top part is used to visualize the normalized images, the converted images with the desired alpha and the eigenvectors.
