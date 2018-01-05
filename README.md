@@ -1,5 +1,8 @@
 # imgPca
-imgPca is a JavaScript application to allow the visualization of Principal Component Analysis on images.
+imgPca is a JavaScript application to allow the visualization of Principal Component Analysis on images. Developed for the Data Visualization program at PPGI/UFRJ.
+Universidade Federal do Rio de Janeiro
+Mestrado PPGI - 3rd Term 2017
+Visualização de Dados (Data Visualization) 2017/3-MAI718
 
 ![imgPca Screenshot](../../raw/master/imgPca.png)
 # What are the visuals of imgPca ?
