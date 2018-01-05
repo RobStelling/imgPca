@@ -9,8 +9,8 @@ endif
 arg_list = argv();
 nLines = str2double(arg_list{1});
 classNumber = str2double(arg_list{2});
-if (isnan(nLines) || nLines == nLines < 0 || nLines > 10000)
-    error('Lines must be between 1 and 10000');
+if (isnan(nLines) || nLines == nLines < 0 || nLines > 5000)
+    error('Lines must be between 1 and 5000');
 endif
 if (isnan(classNumber) || classNumber < 0 || classNumber > 9)
     error('Class must be between 0 and 9');
