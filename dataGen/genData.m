@@ -8,7 +8,11 @@ function ndata = genData(nLines, classNumber)
     % Loads data from batch files until reaches the desired # of lines
     while (i < nLines)
     	load ([baseName num2str(j) '.mat']);
-        classData = cat(1, classData, data(labels==classNumber, :));
+        if (classNumber >= 0 && classNumber < 10)
+            classData = cat(1, classData, data(labels==classNumber, :));
+        else
+            classData = cat(1, classData, data);
+	endif
         i = size(classData, 1);
         j++;
     endwhile

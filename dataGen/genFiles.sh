@@ -1,8 +1,8 @@
 #!/bin/csh
 # This batch must be run on CIFAR-10 folder where all data batch
-# files are located
+# files are located.
 # Assumes dataConv.m and genData.m are on the same folder
-# and octave is on the PATH
+# and octave is on the PATH.
 
 # Basic parameter check
 if ($#argv != 1) then
