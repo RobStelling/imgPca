@@ -16,7 +16,6 @@ if (!($test) || ($test == 0)) then
 	exit -2
 endif
 
-# Generate data for all classes (0-9)
-set i = 0
+# Generate a file with #_of_lines from all classes (0-9)
 echo "Generating file..."
 octave dataConv.m $1 -1 > "cif_${1}.dat"

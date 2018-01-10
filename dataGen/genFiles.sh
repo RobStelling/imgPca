@@ -17,6 +17,7 @@ if (!($test) || ($test == 0)) then
 endif
 
 # Generate data for all classes (0-9)
+# One file per class
 set i = 0
 echo "Generating files..."
 while ($i < 10)
