@@ -172,6 +172,22 @@ function draw(domainX, domainY, data) {
     }
 
     function save() {
+      // Hides the save button
+      d3.select(".saveButton").style("display", "none");
+      // Stringfies and create a blob for the SVD object
+      var svdData = JSON.stringify(getData.svd);
+      var svdBlob = new Blob([svdData], { type: "text/plain;charset=utf-8" });
+      // Creates an URL for the object
+      var svdUrl = URL.createObjectURL(svdBlob);
+      // Creates a temporary donwload link and deletes it after the download
+      var downloadLink = document.createElement("a");
+      downloadLink.href = svdUrl;
+      downloadLink.download = "imgPca.json";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      // Deletes the download link
+      document.body.removeChild(downloadLink);
+      // Hides the save button
       return;
     }
 
