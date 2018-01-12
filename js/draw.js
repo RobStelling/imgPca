@@ -187,7 +187,6 @@ function draw(domainX, domainY, data) {
       downloadLink.click();
       // Deletes the download link
       document.body.removeChild(downloadLink);
-      // Hides the save button
       return;
     }
 
