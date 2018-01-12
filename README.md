@@ -3,7 +3,7 @@ imgPca is a JavaScript application to allow the visualization of Principal Compo
 <pre>
 Roberto Stelling
 Universidade Federal do Rio de Janeiro
-PPGI Master's Degree - 3rd Term 2017
+PPGI Master's Program - 3rd Term 2017
 Visualização de Dados (Data Visualization) 2017/3-MAI718
 </pre>
 ![imgPca Screenshot](../../raw/master/imgPca.png)
