@@ -6,6 +6,13 @@
  *  columns - Number of columns
  *  lines - Number of lines
  */
+var drawData = {};            // Global draw object
+/*
+ * drawData.savedFile:              File already saved or not
+ * drawData.downloadlink:           Link fo the downloadable SVD blob
+ */
+drawData.savedFile = false;
+
 function cPaint(data, canvasID, columns, lines) {
       // Write directly into the canvas
       // Following this idea: https://hacks.mozilla.org/2011/12/faster-canvas-pixel-manipulation-with-typed-arrays/
@@ -172,21 +179,22 @@ function draw(domainX, domainY, data) {
     }
 
     function save() {
-      // Hides the save button
-      d3.select(".saveButton").style("display", "none");
-      // Stringfies and create a blob for the SVD object
-      var svdData = JSON.stringify(getData.svd);
-      var svdBlob = new Blob([svdData], { type: "text/plain;charset=utf-8" });
-      // Creates an URL for the object
-      var svdUrl = URL.createObjectURL(svdBlob);
-      // Creates a temporary donwload link and deletes it after the download
-      var downloadLink = document.createElement("a");
-      downloadLink.href = svdUrl;
-      downloadLink.download = "imgPca.json";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
+      if (!drawData.savedFile) {
+        // Stringfies and create a blob for the SVD object
+        var svdData = JSON.stringify(getData.svd);
+        var svdBlob = new Blob([svdData], { type: "text/plain;charset=utf-8" });
+        // Creates an URL for the object
+        var svdUrl = URL.createObjectURL(svdBlob);
+        // Creates a temporary donwload link and deletes it after the download
+        drawData.downloadLink = document.createElement("a");
+        drawData.downloadLink.href = svdUrl;
+        drawData.downloadLink.download = "imgPca.json";
+        document.body.appendChild(drawData.downloadLink);
+        drawData.savedFile = true;
+      }
+      drawData.downloadLink.click();
       // Deletes the download link
-      document.body.removeChild(downloadLink);
+      // document.body.removeChild(downloadLink);
       return;
     }
 

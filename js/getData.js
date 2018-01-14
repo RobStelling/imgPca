@@ -11,6 +11,7 @@ var getData = {};                 // Global getData object
  * getData.dataWidth:             // Width of the square images (sqrt(images.length))
  * getData.canView:               // Tells if viewImage can be called at this moment
  * getData.numImg:                // Number of images on the original/projected canvas
+ * getData.gpu:                   // GPU space for computations
  */
  getData.contents = "";
  getData.maxWidth = +(d3.select("#graph").style("display", "inline").attr("viewBox").split(" ")[2])+50;
