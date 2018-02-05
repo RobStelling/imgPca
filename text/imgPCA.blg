@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: imgPCA.aux
+The style file: iclr2018_conference.bst
+Database file #1: imgPCA.bib
+You've used 4 entries,
+            2773 wiz_defined-function locations,
+            620 strings with 5410 characters,
+and the built_in function-call counts, 1657 in all, are:
+= -- 146
+> -- 60
+< -- 5
++ -- 22
+- -- 18
+* -- 115
+:= -- 254
+add.period$ -- 13
+call.type$ -- 4
+change.case$ -- 17
+chr.to.int$ -- 4
+cite$ -- 8
+duplicate$ -- 94
+empty$ -- 159
+format.name$ -- 22
+if$ -- 354
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 5
+newline$ -- 28
+num.names$ -- 16
+pop$ -- 40
+preamble$ -- 1
+purify$ -- 14
+quote$ -- 0
+skip$ -- 66
+stack$ -- 0
+substring$ -- 58
+swap$ -- 14
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 39
+warning$ -- 0
+while$ -- 17
+width$ -- 0
+write$ -- 60
