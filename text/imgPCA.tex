@@ -3,6 +3,7 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{natbib}
+\usepackage{amsfonts}
 
 \title{A data visualization for PCA Analysis / \\ DataViz Final project}
 
@@ -49,9 +50,12 @@ PCA can be thought of as the problem of fitting an n-dimensional ellipsoid to th
 To find the axis of the ellipsoid we must first centralize, or normalize, the data set, compute the covariance matrix of the data and finally compute the eigenvalues and eigenvectors of the covariance matrix.\par
 To achieve that we compute the singular value decomposition of the covariance matrix.
 \subsection{Singular Value Decomposition}
-If \textit{C} is the covariance matrix of our data set then: \[C = US V^T\] where \textit{S} is a diagonal matrix with positivel real entries and \textit{U} and \textit{V} columns are orthonormal\footnote{both orthogonal and normalized}.\par
-Suppose that we have $m$ data points of $n$ dimensions (EG: 2000 images with 1024 pixels, m = 2000, n = 1024) then \[D_{m\times n} \to C_{n\times n}=cov(D) \]
-For the singular value decomposition of the covariance matrix we have: \[C_{n\times n} = U_{n\times n}S_{n\times n}V_{n\times n}^T\] where S is a diagonal matrix.
+Let $D_{m\times n}$ be a data set with $m$ data points $\in \mathbb{R}^n$ where $m > n$. We define $\widehat{D}$ as the normalized data set, \[\widehat{D} = \frac{D-\overline{D}}{s}\] Let $\Sigma_{n\times n} = cov(\widehat{D})$ be the covariance matrix of $\widehat{D}$ \[\Sigma = \frac{1}{m}\widehat{D}^T\widehat{D}\] Then the singular value decomposition of $\Sigma$ is defined as: \[\Sigma = US V^T\] where:
+\begin{itemize}
+\item $U$ is an $n\times n$ unitary matrix\footnote{If $U$ is unitary then $U^*U=UU^*=I$}
+\item $S$ is an $n\times n$ diagonal matrix with non-negative numbers on the diagonal
+\item $V$ is an $n\times n$ unitary matrix and $V^T$ is $V$ transposed.
+\end{itemize}
 
 \section{How to select the number of components to retain}
 The problem of selecting how many components to retain is not new, \citet{zwick1986comparison}, present the results of a Monte Carlo evaluation of five methods that have been proposed for determining how many factors or components to retain: Horn's parallel analysis, Velicer's minimum average partial [MAP], Cattell's scree test, Bartlett's chi-square test, and Kaiser's eigenvalue greater than 1.0 rule. 
