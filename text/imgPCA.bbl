@@ -1,4 +1,4 @@
-\begin{thebibliography}{4}
+\begin{thebibliography}{5}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -29,5 +29,11 @@ Karl Pearson.
 \newblock Principal components analysis.
 \newblock \emph{The London, Edinburgh, and Dublin Philosophical Magazine and
   Journal of Science}, 6\penalty0 (2):\penalty0 559, 1901.
+
+\bibitem[Zwick \& Velicer(1986)Zwick and Velicer]{zwick1986comparison}
+William~R Zwick and Wayne~F Velicer.
+\newblock Comparison of five rules for determining the number of components to
+  retain.
+\newblock \emph{Psychological bulletin}, 99\penalty0 (3):\penalty0 432, 1986.
 
 \end{thebibliography}

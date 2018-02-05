@@ -1,7 +1,11 @@
 \BOOKMARK [1][-]{section.1}{Problem description}{}% 1
-\BOOKMARK [1][-]{section.2}{Brief history of PCA}{}% 2
-\BOOKMARK [1][-]{section.3}{Citations, figures, tables, references}{}% 3
-\BOOKMARK [2][-]{subsection.3.1}{Citations within the text}{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{Footnotes}{section.3}% 5
-\BOOKMARK [2][-]{subsection.3.3}{Figures}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.4}{Tables}{section.3}% 7
+\BOOKMARK [1][-]{section.2}{Brief introduction to PCA}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Objective}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Intuition}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Singular Value Decomposition}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{How to select the number of components to retain}{}% 6
+\BOOKMARK [1][-]{section.4}{Citations, figures, tables, references}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Citations within the text}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{Footnotes}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.3}{Figures}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.4}{Tables}{section.4}% 11
