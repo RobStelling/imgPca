@@ -6,14 +6,14 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 
-\title{A data visualization for PCA Analysis / \\ DataViz Final project}
+\title{A data visualization for PCA Analysis / \\ MAI718 3/2017 Final project}
 
 % Authors must not appear in the submitted version. They should be hidden
 % as long as the \iclrfinalcopy macro remains commented out below.
 % Non-anonymous submissions will be rejected without review.
 
 \author{Roberto Stelling \thanks{ PPGI/UFRJ Graduate Student, \href{http://stelling.cc}{http://stelling.cc}.} \\
-PPGI\\
+PPGI - 117.335.792\\
 Universidade Federal do Rio de Janeiro\\
 Rio de Janeiro, RJ 21941-916, Brazil \\
 \texttt{roberto@stelling.cc}
@@ -33,13 +33,14 @@ Rio de Janeiro, RJ 21941-916, Brazil \\
 \iclrfinalcopy % Uncomment for camera-ready version, but NOT for submission.
 \begin{document}
 \maketitle
+\pagestyle{plain}
 
 \begin{abstract}
 Traditionally PCA Analysis for features reduction in images is performed without a systematic visual aid approach. This paper describes the implementation of a PCA Analysis tool in JavaScript that uses data visualization techniques aiming to improve the analysis process.
 \end{abstract}
 
 \section{Problem description}
-There are many reasons to reduce a data set, some modern examples are: noise reduction, outlier removal, lossy image compression or even as a preliminary step in various types of data exploration and data analysis.\par
+There are many reasons to reduce a data set, some examples are: noise reduction, outlier removal, lossy image compression or even as a preliminary step in various types of data exploration and data analysis.\par
 Principal component analysis (PCA) is well suited as a lossy image compression solution, as you can apply PCA on a set of points of a data set and reduce its dimensionality with a certain, desirably controllable, loss of precision. Of course, one want to loose as little precision as possible while compressing as much as possible. There is a clear trade off between compression and precision. With images, the main difficulty resides in this very trade off: how many dimensions can the algorithm throw away and still retain the desired level of image quality or sharpness? Is there a general rule where you can certainly decide how many dimensions will be cut off the original data set? Of course, the type and amount of data available for compression, the data set, has a big influence on the final point where the cut will be, but can the analyst decide simply on the number of dimensions or amount of variance that will be thrown away and be sure that the results will be satisfactory? We propose that using a visual helping tool during the decision process can have a positive impact on the cut off selection.
 
 \section{Brief introduction to PCA}
@@ -70,9 +71,21 @@ $S$ is a diagonal matrix such as:
   \end{bmatrix}
 \]
 $s_{1}$ to $s_{r}$ are the principal components scores and $s_{1} >= s_{2} >= ... >= s_{r-1} >= s_{r}$.\par
-$U$ is the eigenvector matrix, with eigenvectors ordered by the component scores.
+$U$ is the eigenvector matrix, with eigenvectors ordered by the component scores, their eigenvalues.
+\subsection{Reducing dimensions}
+Given the original data set, $D_{m\times n}$ and $U_{m\times r}$ obtained from equation (\ref{eq1}), we can build a new reduced data set $P_{m\times k}$ with the first $k<r$ eigenvectors. This new data set is computed as:
+\begin{equation}
+P_{m\times k} = D_{m\times n} U_{n\times k}
+\end{equation}
+where $U_{n\times k}$, or $U_k$, is the eigenvector matrix truncated to the first $k$ eigenvectors.
+\subsection{Restoring data}
+To restore the original data from $P$ we compute \[PU_{k}^T = DU_{k}U_{k}^T = DI_{n} = D\]
+
 \section{PCA for image compression}
-Let $D_{m\times n}$ be a data set with $m$ data points $\in \mathbb{R}^n$ where $m >= n$. We define ${D}_{m\times n}^*$ as the normalized data set, \[D^* = \frac{D-\overline{D}}{s}\] Let $\Sigma_{n\times n} = cov(D^*)$ be the covariance matrix of $D^*$ \[\Sigma = \frac{1}{m}D^{*T}D^*\] Then, according to equation (\ref{eq1}), the singular value decomposition of $\Sigma$ is: \[\Sigma = US V^T\] where:
+A computer image is usually thought of as a two dimensional matrix, with $m$ lines and $n$ columns representing the horizontal e vertical pixels of the image. A simpler, albeit equally meaningful, representation is a single vector with $m\times n$ cells for the whole image. The content of each cell, in either representation, depend on the selected image mode. For example: RGB, RGB grayscale, CMYK, etc. For the purposes of the following argument and the presented implementation, we assume that each cell is an integer between 0 and 255, representing the grayscale RGB value of the pixel.\par
+Lets assume that $D$ is a data set with $m$ images where each image has $n$ pixels. The method will work even if $m<n$ but a larger $m$ will result in better compression gains and finer eigenvector tuning.\par
+So $D_{m\times n}$ is a data set with $m$ data points $\in \mathbb{R}^n$ where $m >= n$. Then we define ${D}_{m\times n}^*$ as the normalized data set, \[D^* = \frac{D-\overline{D}}{s}\] 
+where $\overline{D}$ is the mean of $D$ and $s$ is the sample standard deviation. Let $\Sigma_{n\times n} = cov(D^*)$ be the covariance matrix of $D^*$ \[\Sigma = \frac{1}{m}D^{*T}D^*\] Then, according to equation (\ref{eq1}), the singular value decomposition of $\Sigma$ is: \[\Sigma = US V^T\] where:
 \begin{itemize}
 \item $U$ is an $n\times n$ unitary matrix\footnote{If $U$ is unitary then $U^*U=UU^*=I$}
 \item $S$ is an $n\times n$ diagonal matrix with non-negative numbers on the diagonal
@@ -81,8 +94,10 @@ Let $D_{m\times n}$ be a data set with $m$ data points $\in \mathbb{R}^n$ where 
 
 \section{How to select the number of components to retain}
 The problem of selecting how many components to retain is not new, \citet{zwick1986comparison}, present the results of a Monte Carlo evaluation of five methods that have been proposed for determining how many factors or components to retain: Horn's parallel analysis, Velicer's minimum average partial [MAP], Cattell's scree test, Bartlett's chi-square test, and Kaiser's eigenvalue greater than 1.0 rule. 
-The determination of the number of components or factors to retain is likely to be the most important decision a researcher will make \citep{zwick1986comparison}.
+The determination of the number of components or factors to retain is likely to be the most important decision a researcher will make \citet{zwick1986comparison}.
 
+\section{Implementation}
+The code for the implementation and supporting documents can be found at \cite{Stelling:aa}.
 
 \section{Citations, figures, tables, references}
 \label{others}
