@@ -3,44 +3,44 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: imgPCA.aux
 The style file: iclr2018_conference.bst
 Database file #1: imgPCA.bib
-You've used 5 entries,
+You've used 6 entries,
             2773 wiz_defined-function locations,
-            627 strings with 5607 characters,
-and the built_in function-call counts, 2064 in all, are:
-= -- 182
-> -- 81
-< -- 6
-+ -- 29
-- -- 24
-* -- 148
-:= -- 317
-add.period$ -- 16
-call.type$ -- 5
-change.case$ -- 22
-chr.to.int$ -- 5
-cite$ -- 10
-duplicate$ -- 114
-empty$ -- 195
-format.name$ -- 31
-if$ -- 440
+            633 strings with 5693 characters,
+and the built_in function-call counts, 2651 in all, are:
+= -- 243
+> -- 102
+< -- 8
++ -- 36
+- -- 30
+* -- 185
+:= -- 395
+add.period$ -- 20
+call.type$ -- 6
+change.case$ -- 27
+chr.to.int$ -- 6
+cite$ -- 12
+duplicate$ -- 147
+empty$ -- 248
+format.name$ -- 40
+if$ -- 578
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 6
-newline$ -- 33
-num.names$ -- 20
-pop$ -- 47
+missing$ -- 7
+newline$ -- 38
+num.names$ -- 24
+pop$ -- 59
 preamble$ -- 1
-purify$ -- 18
+purify$ -- 22
 quote$ -- 0
-skip$ -- 82
+skip$ -- 109
 stack$ -- 0
-substring$ -- 69
-swap$ -- 15
-text.length$ -- 2
+substring$ -- 103
+swap$ -- 25
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 50
+type$ -- 61
 warning$ -- 0
-while$ -- 21
+while$ -- 27
 width$ -- 0
-write$ -- 73
+write$ -- 87

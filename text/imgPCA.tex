@@ -4,6 +4,7 @@
 \usepackage{url}
 \usepackage{natbib}
 \usepackage{amsfonts}
+\usepackage{amsmath}
 
 \title{A data visualization for PCA Analysis / \\ DataViz Final project}
 
@@ -45,12 +46,33 @@ Principal component analysis (PCA) is well suited as a lossy image compression s
 \subsection{Objective}
 According to \citet{jolliffe1986principal}, the central idea of principal component analysis (PCA) is to reduce the dimensionality of a data set in which there are a large number of interrelated variables, while retaining as much as possible of the variation present in the data set.\par
 This reduction is achieved by transforming the data set to a new set of variables, the principal components, which are not correlated, and which are ordered so that the first few retain most of the variation present in all the original variables.\par Principal component analysis was first described by \citet{pearson1901principal} and later developed independently by \citet{hotelling1933analysis} \citep{jolliffe1986principal}.\par
+\citet{craw1992face} describe a method for face recognition using principal component analisys, showing that PCA can be used as an effective tool in image analysis.
 \subsection{Intuition}
-PCA can be thought of as the problem of fitting an n-dimensional ellipsoid to the data, where each axis of the ellipsoid represents a principal component. The larger the axis of a component, the larger the variance for that component.
-To find the axis of the ellipsoid we must first centralize, or normalize, the data set, compute the covariance matrix of the data and finally compute the eigenvalues and eigenvectors of the covariance matrix.\par
-To achieve that we compute the singular value decomposition of the covariance matrix.
+PCA can be thought of as the problem of fitting an $n$-dimensional ellipsoid to the $m$-dimensional data, where $n<=m$ and each axis of the ellipsoid represents a principal component. The larger the axis of a component, the larger the variance for that component. So, the objective of PCA is to build a transformation of $m$-dimensional space to $n$-dimensional space while preserving most of the the $m$-dimensional space variance. To find that transformation and the components, we compute the singular value decomposition of the data. The singular value decomposition will provide a computationally efficient method of finding the principal components and the scaled versions of the principal component scores.
 \subsection{Singular Value Decomposition}
-Let $D_{m\times n}$ be a data set with $m$ data points $\in \mathbb{R}^n$ where $m > n$. We define $\widehat{D}$ as the normalized data set, \[\widehat{D} = \frac{D-\overline{D}}{s}\] Let $\Sigma_{n\times n} = cov(\widehat{D})$ be the covariance matrix of $\widehat{D}$ \[\Sigma = \frac{1}{m}\widehat{D}^T\widehat{D}\] Then the singular value decomposition of $\Sigma$ is defined as: \[\Sigma = US V^T\] where:
+Given an arbitrary $D_{m\times n}$ matrix, then $D$ can be written as 
+\begin{equation} \label{eq1}
+D=USV^T
+\end{equation}
+where
+\begin{enumerate}
+\item[(i)] $U_{m\times r}$, $V_{n\times r}$ each of which with orthonormal\footnote{both orthogonal and normalized} columns so that $U^TU=I_{r}$, $V^TV=I_{r}$;
+\item[(ii)] $S_{r\times r}$ is a diagonal matrix;
+\item[(iii)] $r$ is the rank\footnote{corresponds to the maximal number of linearly independent columns of D} of $D$.
+\end{enumerate}
+$S$ is a diagonal matrix such as:
+\[
+  S =
+  \begin{bmatrix}
+    s_{1} & & \\
+    & \ddots & \\
+    & & s_{r}
+  \end{bmatrix}
+\]
+$s_{1}$ to $s_{r}$ are the principal components scores and $s_{1} >= s_{2} >= ... >= s_{r-1} >= s_{r}$.\par
+$U$ is the eigenvector matrix, with eigenvectors ordered by the component scores.
+\section{PCA for image compression}
+Let $D_{m\times n}$ be a data set with $m$ data points $\in \mathbb{R}^n$ where $m >= n$. We define $\widehat{D}_{m\times n}$ as the normalized data set, \[\widehat{D} = \frac{D-\overline{D}}{s}\] Let $\Sigma_{n\times n} = cov(\widehat{D})$ be the covariance matrix of $\widehat{D}$ \[\Sigma = \frac{1}{m}\widehat{D}^T\widehat{D}\] Then the singular value decomposition of $\Sigma$ is, according to equation (\ref{eq1}): \[\Sigma = US V^T\] where:
 \begin{itemize}
 \item $U$ is an $n\times n$ unitary matrix\footnote{If $U$ is unitary then $U^*U=UU^*=I$}
 \item $S$ is an $n\times n$ diagonal matrix with non-negative numbers on the diagonal
