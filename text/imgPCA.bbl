@@ -10,10 +10,6 @@ Ian Craw and Peter Cameron.
 \newblock Face recognition by computer.
 \newblock In \emph{BMVC92}, pp.\  498--507. Springer, 1992.
 
-\bibitem[GitHub()]{Stelling:aa}
-GitHub.
-\newblock https://github.com/robstelling/imgpca.
-
 \bibitem[Goodfellow et~al.(2016)Goodfellow, Bengio, and
   Courville]{Goodfellow:2016aa}
 Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
@@ -26,6 +22,10 @@ Harold Hotelling.
   components.
 \newblock \emph{Journal of educational psychology}, 24\penalty0 (6):\penalty0
   417, 1933.
+
+\bibitem[ImgPCA-GitHub()]{Stelling:aa}
+ImgPCA-GitHub.
+\newblock https://github.com/robstelling/imgpca.
 
 \bibitem[Jolliffe(1986)]{jolliffe1986principal}
 Ian~T Jolliffe.
