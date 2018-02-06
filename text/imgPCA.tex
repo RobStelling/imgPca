@@ -72,7 +72,7 @@ $S$ is a diagonal matrix such as:
 $s_{1}$ to $s_{r}$ are the principal components scores and $s_{1} >= s_{2} >= ... >= s_{r-1} >= s_{r}$.\par
 $U$ is the eigenvector matrix, with eigenvectors ordered by the component scores.
 \section{PCA for image compression}
-Let $D_{m\times n}$ be a data set with $m$ data points $\in \mathbb{R}^n$ where $m >= n$. We define $\widehat{D}_{m\times n}$ as the normalized data set, \[\widehat{D} = \frac{D-\overline{D}}{s}\] Let $\Sigma_{n\times n} = cov(\widehat{D})$ be the covariance matrix of $\widehat{D}$ \[\Sigma = \frac{1}{m}\widehat{D}^T\widehat{D}\] Then the singular value decomposition of $\Sigma$ is, according to equation (\ref{eq1}): \[\Sigma = US V^T\] where:
+Let $D_{m\times n}$ be a data set with $m$ data points $\in \mathbb{R}^n$ where $m >= n$. We define ${D}_{m\times n}^*$ as the normalized data set, \[D^* = \frac{D-\overline{D}}{s}\] Let $\Sigma_{n\times n} = cov(D^*)$ be the covariance matrix of $D^*$ \[\Sigma = \frac{1}{m}D^{*T}D^*\] Then, according to equation (\ref{eq1}), the singular value decomposition of $\Sigma$ is: \[\Sigma = US V^T\] where:
 \begin{itemize}
 \item $U$ is an $n\times n$ unitary matrix\footnote{If $U$ is unitary then $U^*U=UU^*=I$}
 \item $S$ is an $n\times n$ diagonal matrix with non-negative numbers on the diagonal
