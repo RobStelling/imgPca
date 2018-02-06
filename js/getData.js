@@ -88,8 +88,8 @@ function drawNormalized() {
 function doPca() {
   getData.svd = calcSvd(getData.contents);
   const svdSLength = getData.svd.S.length;
-  d3.select("#st4").style("display", "inline").html("<center>Main eigenvectors</center>");
-  cPaint(numeric.transpose(getData.svd.U), "#eigenVectors", Math.floor(getData.eigenSpace/getData.dataWidth), 8);
+  d3.select("#st4").style("display", "inline").html("<center>Main eigenimages</center>");
+  cPaint(numeric.transpose(getData.svd.U), "#eigenImages", Math.floor(getData.eigenSpace/getData.dataWidth), 8);
   var sDiagonal = [], sum = 0;
 
   for(let i = 0; i<svdSLength; i++) {
