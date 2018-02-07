@@ -1,7 +1,10 @@
-% Reads nLines of the desired class from CIFAR-10 batch files and returns the corresponding
-% line-first grayscale images (using weights), line-first data.
+% Collects nLines from CIFAR-10 files belonging do classNumber and returns
+% the corresponding line-first grayscale images (using weights).
+% If 0 < classNumber < 10 then collects data from that class otherwise
+% collects data from all classes.
 % Assumes CIFAR-10 filenames are "data_batch_{n}.mat"
-function ndata = genData(nLines, classNumber)
+
+function ndata = cifar2Gray(nLines, classNumber)
     i = 0; j = 1;
     baseName = 'data_batch_';
     classData = [[]];
@@ -9,8 +12,10 @@ function ndata = genData(nLines, classNumber)
     while (i < nLines)
     	load ([baseName num2str(j) '.mat']);
         if (classNumber >= 0 && classNumber < 10)
+            % gets only the desired class
             classData = cat(1, classData, data(labels==classNumber, :));
         else
+            % gets all classes
             classData = cat(1, classData, data);
 	endif
         i = size(classData, 1);

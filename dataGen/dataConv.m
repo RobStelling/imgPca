@@ -1,17 +1,25 @@
-% Reads nLines of the desired class from CIFAR-10 batch files and returns the corresponding
-% line-first grayscale images
+% Reads nLines of the desired class from CIFAR-10 batch files and writes
+% the corresponding line-first grayscale file images
 % Assumes filenames are 'data_batch_n.mat'
+% Call:
+% octave dataConv.m nLines classNumber
+% Generate a file with nLines of classNumber (where classNumber is one CIFAR-10 class)
+% if classNumber == -1 then the file will mix all classes
+% Calls cifar2Gray, that actually reads the CIFAR files and converts the data from CIFAR-10 format to our format
 
 % Basic parameter checking
 if (nargin != 2)
     error('Wrong # of parameters');
 endif
+
 arg_list = argv();
 nLines = str2double(arg_list{1});
 classNumber = str2double(arg_list{2});
+
 if (isnan(classNumber) || classNumber < -1 || classNumber > 9)
     error('Class must be between -1 and 9');
 endif
+
 if (classNumber >= 0)
     if (isnan(nLines) || nLines == nLines < 0 || nLines > 5000)
         error('Lines must be between 1 and 5000 for categories 0-9');
@@ -24,8 +32,8 @@ else
     classMsg = "all classes";
 endif
 
-% Collects data using genData.m
-data=genData(nLines, classNumber);
+% Collects data using cifar2Gray.m
+data=cifar2Gray(nLines, classNumber);
 % m is nLines but n is not assumed (although it should be 1024 from grayscale CIFAR-10 data)
 [m,n] = size(data);
 
@@ -43,6 +51,7 @@ msg =  [ ...
 
 % The lines below are slower than Octave save functions but gives
 % more control than basic output, performance is not an issue
+% as this will be run in batch as a pre-processing stage
 % Data lines should not have leading nor trailing spaces
 
 % Prints the header (with comments #)
