@@ -1,8 +1,11 @@
 #!/bin/csh
 # This batch must be run on CIFAR-10 folder where all data batch
 # files are located.
-# Assumes dataConv.m and genData.m are on the same folder
+# Assumes dataConv.m and cifar2Gray.m are on the same folder
 # and octave is on the PATH.
+#
+# Generates one file with $1 lines
+# output file is: cif_{#lines}.dat
 
 # Basic parameter check
 if ($#argv != 1) then
