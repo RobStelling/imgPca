@@ -1,4 +1,4 @@
-\begin{thebibliography}{7}
+\begin{thebibliography}{8}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -38,6 +38,12 @@ Karl Pearson.
 \newblock Principal components analysis.
 \newblock \emph{The London, Edinburgh, and Dublin Philosophical Magazine and
   Journal of Science}, 6\penalty0 (2):\penalty0 559, 1901.
+
+\bibitem[Preisendorfer \& Mobley(1988)Preisendorfer and
+  Mobley]{preisendorfer1988principal}
+Rudolph~W. Preisendorfer and Curtis~D. Mobley.
+\newblock Principal component analysis in meteorology and oceanography.
+\newblock \emph{Elsevier Sci. Publ.}, 17:\penalty0 425, 1988.
 
 \bibitem[Zwick \& Velicer(1986)Zwick and Velicer]{zwick1986comparison}
 William~R Zwick and Wayne~F Velicer.
