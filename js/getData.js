@@ -86,12 +86,16 @@ function drawNormalized() {
  * Uses numeric Library to transpose U matrix
  */
 function doPca() {
+  d3.select("#st4").style("display", "inline").html("<center>Main eigenimages</center>");
+
   getData.svd = calcSvd(getData.contents);
   const svdSLength = getData.svd.S.length;
-  d3.select("#st4").style("display", "inline").html("<center>Main eigenimages</center>");
+
+  // Displays the eigenimages -> U'
   cPaint(numeric.transpose(getData.svd.U), "#eigenImages", Math.floor(getData.eigenSpace/getData.dataWidth), 8);
   var sDiagonal = [], sum = 0;
 
+  // Build sDiagonal, with the accumulated eigenvalues
   for(let i = 0; i<svdSLength; i++) {
     sDiagonal.push({pca:getData.svd.S[i], x: i+1});
     sum += getData.svd.S[i];
@@ -107,10 +111,8 @@ function doPca() {
   const domainX = [-1, sDiagonal.length+1],
         domainY = [-1, sDiagonal[0].pca];
 
+  // Draws the S(eigenvalue) curve
   draw(domainX, domainY, sDiagonal);
-
-  d3.select(".viewButton")
-    .on("click", viewImage);
 }
 /*
  * Converts text to matrix
@@ -123,7 +125,8 @@ function text2Matrix(data) {
   //   5 comments at start,
   //   3 data lines with 4 features each
   //   1 comment at the end
-/*
+/* Example:
+
 # Created by Octave 4.2.1, Thu Jan 04 10:31:44 2018 -02 <stelling@Felix-Sonnenfeld.local>
 # name: n_data4k_rot
 # type: uint8 matrix
@@ -133,6 +136,7 @@ function text2Matrix(data) {
 255 42 242 246
 142 241 127 21
 # Another comment
+
 */
 
   var matrix = data.split("\n");
