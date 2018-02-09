@@ -41,7 +41,7 @@ Traditionally PCA Analysis for dimension reduction in images is performed withou
 
 \section{Problem description}
 There are many reasons to reduce a data set, some examples are: noise reduction, outlier removal, lossy image compression or even as a preliminary step in various types of data exploration and data analysis.\par
-Principal component analysis (PCA) can be used as a lossy image compression solution, as you can use PCA on a set of images of a data set and reduce its dimensionality with a certain, desirably controllable, loss of precision. Of course, one want to loose as little precision as possible while compressing as much as possible.With images, the main difficulty resides in the trade off between compression and precision: how many dimensions can be thrown away making sure that the resulting images still retain the desired level of quality or sharpness? Is there a general rule where you can certainly decide how many dimensions will be cut off the original data set? Of course, the type and amount of data available for compression, the data set, has a big influence on the precise point where the cut will happen, but can the analyst decide simply on the number of dimensions or amount of variance that will be thrown away and be sure that the results will be satisfactory? We propose that using a visual helping tool during the decision process can have a positive impact on the cut off selection.
+Principal component analysis (PCA) can be used as a lossy image compression solution, as you can apply PCA on a set of images of a data set and reduce its dimensionality with a certain, desirably controllable, loss of precision. Of course, one want to loose as little precision as possible while compressing as much as possible.With images, the main difficulty resides in the trade off between compression and precision: how many dimensions can be thrown away making sure that the resulting images still retain the desired level of quality or sharpness? Is there a general rule where you can certainly decide how many dimensions will be cut off the original data set? Of course, the type and amount of data available for compression, the data set, has a big influence on the precise point where the cut will happen, but can the analyst decide simply on the number of dimensions or amount of variance that will be thrown away and be sure that the results will be satisfactory? We propose that using a visual helping tool during the decision process can have a positive impact on the cut off selection.
 
 \section{Brief introduction to PCA}
 \subsection{Objective}
@@ -60,7 +60,7 @@ D_{m\times n}=U_{m\times r}S_{r\times r}V_{r\times n}^T
 \end{equation}
 where
 \begin{enumerate}
-\item[(i)] $U$ and $V$ are built with orthonormal\footnote{both orthogonal and normalized} columns so that $U^TU=I_{r}$, $V^TV=I_{r}$;
+\item[(i)] $U$ and $V$, each of which with orthonormal\footnote{both orthogonal and normalized} columns so that $U^TU=I_{r}$, $V^TV=I_{r}$;
 \item[(ii)] $S$ is a diagonal matrix;
 \item[(iii)] $r$ is the rank\footnote{corresponds to the maximal number of linearly independent columns of D} of $D$.
 \end{enumerate}
@@ -82,17 +82,17 @@ To apply PCA we will use equation (\ref{eq1}) from the singular value decomposit
 \end{equation}
 Where
 \begin{itemize}
-\item $U$ is unitary\footnote{If $U$ is unitary then $U^{T}U=UU^{T}=I$} and holds $\Sigma$ eigenvectors
+\item $U$ is unitary\footnote{then $UU^T = U^{T}U = I_n$} and holds $\Sigma$ eigenvectors
 \item $S$ is a diagonal matrix with $s_1 ... s_n$ as the descending ordered eigenvalues.
 \end{itemize}
 As $U$ is unitary then we can transform the original $D$ data set into $P$
 \[ P_{m\times n} = D_{m\times n}U_{n\times n} \] and restore it back with:
-\[P U^T = DUU^T = DI = D\]
+\[P U^T = DUU^T = DI_{n} = D\]
 $P$ is a transformation of $D$ that retains all the information of the original data set.
 
 \section{PCA for image compression}
-A computer image is usually thought of as a two dimensional matrix, with $m$ lines and $n$ columns representing the horizontal and vertical pixels of the image. A simpler, albeit equally meaningful, representation is a single vector with $m\times n$ cells for the whole image. The content of each cell, in either representation, depends on the selected image mode. For example: RGB, RGB grayscale, CMYK, etc. For the purposes of the following argument and the solution implementation, we assume that each cell is an integer between 0 and 255, representing the grayscale RGB value of the corresponding pixel.\par
-Lets assume that $D$ is a data set with $m$ images where each image has $n$ pixels. The method will work even if $m<n$ but it is recommended that $m >= n$, as that will result in better compression gains and finer eigenvector tuning.\par
+A computer image is usually thought of as a two dimensional matrix, with $m$ lines and $n$ columns representing the horizontal and vertical pixels of the image. A simpler, albeit equally meaningful, representation is a single vector with $m\times n$ cells for the whole image. The content of each cell, in either representation, depends on the selected image mode. For example: RGB, RGB grayscale, CMYK, etc. For the purposes of the following argument and the solution implementation, we assume that each cell is an integer between 0 and 255, representing the grayscale RGB value of the corresponding pixel. We will also assume that our data set has $m$ samples of $n$ pixels; if $h$ is the number of horizontal pixels and $v$ is the number of vertical pixels, then $n=h\times v$.\par
+Lets assume that $D$ is a data set with $m$ images where each image has $n$ pixels. Computationally the method can work even if $m<n$ but it is recommended that $m >= n$, as that will result in better compression gains and finer eigenvector tuning.\par
 Given that $D_{m\times n}$ is a data set with $m$ data points $\in \mathbb{R}^n$ where $m >= n$. Then we define ${D}_{m\times n}^*$ as the normalized data set, \[D^* = \frac{D-\overline{D}}{s}\] 
 where $\overline{D}$ is the mean of $D$ and $s$ is the sample standard deviation of D. Let $\Sigma_{n\times n}$ be the covariance matrix of $D^{*}_{m\times n}$ \[\Sigma = \frac{1}{m}D^{*T}D^*\] Then, according to (\ref{eq1}) and (\ref{eq2}), the singular value decomposition of $\Sigma$ is: 
 \begin{equation}\label{eq3}
@@ -112,13 +112,13 @@ P_{m\times k} = D_{m\times n} U_{n\times k}
 \end{equation}
 where $U_{n\times k}$, or $U_k$, is the eigenvector matrix truncated to the first $k$ eigenvectors. The information contained on the truncated $(n-k)$ columns is lost in this transformation.
 \subsection{Restoring data}
-The transformation in (\ref{eq4}) is lossy, meaning that the information on the truncated $n-k$ columns is lost during the transformation, then it is possible to restore $P$ back to $D$ space but the result will not be exactly $D$ but rather an approximation of $D$. The whole rationale of using PCA for image compression is that the last $n-k$ eigenvectors will hold as little variance as possible and the recovered images will be an acceptable approximation of the original images.
-To transform $P$ back into $D$ space we compute \[P_{m\times k}U_{n\times k}^T = D_{m\times n}U_{n\times k}U_{k\times n}^T \approx D_{m\times n}\]
+The transformation in (\ref{eq4}) is lossy, meaning that the information on the truncated $n-k$ columns is utterly lost during the transformation. Although it is possible to restore $P$ back to $D$ dimensions, the result will not be exactly $D$ but rather an approximation of $D$. The whole rationale of using PCA for image compression is that the last $n-k$ eigenvectors will hold as little variance as possible and the recovered images will be an acceptable approximation of the original images.
+To transform $P$ back into $D$ space we compute \[P_{m\times k}U_{k\times n}^T = D_{m\times n}U_{n\times k}U_{k\times n}^T \approx D_{m\times n}\]
 \section{How to select the number of components to retain}
 The problem of selecting how many components to retain is not new, \citet{zwick1986comparison}, present the results of a Monte Carlo evaluation of five methods that have been proposed for determining how many factors or components to retain: Horn's parallel analysis, Velicer's minimum average partial [MAP], Cattell's scree test, Bartlett's chi-square test, and Kaiser's eigenvalue greater than 1.0 rule. 
-The determination of the number of components or factors to retain is likely to be the most important decision a researcher will make \citet{zwick1986comparison}.\par
+The determination of the number of components or factors to retain is likely to be the most important decision a researcher will make \citep{zwick1986comparison}.\par
 
-\section{Implementation}
+\section{Materials and methods}
 The code for the implementation and supporting documents can be found at \citet{Stelling:aa}.
 
 \section{Citations, figures, tables, references}
@@ -140,13 +140,6 @@ The corresponding references are to be listed in alphabetical order of
 authors, in the \textsc{References} section. As to the format of the
 references themselves, any style is acceptable as long as it is used
 consistently.
-
-\subsection{Footnotes}
-
-Indicate footnotes with a number\footnote{Sample of the first footnote} in the
-text. Place the footnotes at the bottom of the page on which they appear.
-Precede the footnote with a horizontal rule of 2~inches
-(12~picas).\footnote{Sample of the second footnote}
 
 \subsection{Figures}
 
@@ -200,9 +193,9 @@ Soma             &Cell body (contains cell nucleus) \\
 
 
 \subsubsection*{Acknowledgments}
+I'd wish to thank the whole of the MAI718/2017-3 class for their invaluable input during preliminary presentations of the current work. Your ideas, discussions and critiques where instrumental in improving the foundations of this work. 
 
-Use unnumbered third level headings for the acknowledgments. All
-acknowledgments, including those to funding agencies, go at the end of the paper.
+I'd specially like to thank PPGI/UFRJ for letting me use their computer laboratory for the duration of the term. Without that access I wouldn't have the means to work on this project with the intensity it required.
 
 \bibliography{imgPCA}
 \bibliographystyle{iclr2018_conference}
