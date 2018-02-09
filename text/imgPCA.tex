@@ -46,7 +46,7 @@ Principal component analysis (PCA) can be used as a lossy image compression solu
 \section{Brief introduction to PCA}
 \subsection{Objective}
 According to \citet{jolliffe1986principal}, the central idea of principal component analysis (PCA) is to reduce the dimensionality of a data set in which there are a large number of interrelated variables, while retaining as much as possible of the variation present in the data set.\par
-This reduction is achieved by transforming the data set to a new set of variables, the principal components, which are not correlated, and which are ordered so that the first few retain most of the variation present in all the original variables.\par
+This reduction is achieved by transforming the data set into a new set of variables, the principal components, which are not correlated, and which are ordered so that the first few retain most of the variation present in all the original variables.\par
 \subsection{Brief History of PCA}
 Principal component analysis was first described by \citet{pearson1901principal} and later developed independently by \citet{hotelling1933analysis} \citep{jolliffe1986principal}.\par
 \citet{preisendorfer1988principal} state that in 1873, the Italian geometer Beltrami, formulated a modern form of the resolution of a general square matrix into its singular value decomposition (SVD), the decomposition that stands at the base of PCA.\par
@@ -82,10 +82,10 @@ To apply PCA we will use equation (\ref{eq1}) from the singular value decomposit
 \end{equation}
 Where
 \begin{itemize}
-\item $U$ is unitary\footnote{then $UU^T = U^{T}U = I_n$} and holds $\Sigma$ eigenvectors
+\item $U$ is orthonormal and holds $\Sigma$ eigenvectors
 \item $S$ is a diagonal matrix with $s_1 ... s_n$ as the descending ordered eigenvalues.
 \end{itemize}
-As $U$ is unitary then we can transform the original $D$ data set into $P$
+As $U$ is orthonormal then we can transform the original $D$ data set into $P$
 \[ P_{m\times n} = D_{m\times n}U_{n\times n} \] and restore it back with:
 \[P U^T = DUU^T = DI_{n} = D\]
 $P$ is a transformation of $D$ that retains all the information of the original data set.
@@ -100,7 +100,7 @@ where $\overline{D}$ is the mean of $D$ and $s$ is the sample standard deviation
 \end{equation}
 where:
 \begin{itemize}
-\item $U$ is an $n\times n$ unitary matrix
+\item $U$ is an $n\times n$ orthonormal matrix
 \item $S$ is an $n\times n$ diagonal matrix with non-negative numbers on the diagonal
 \item $V$ is an $n\times n$ unitary matrix and $V^T$ is $V$ transposed.
 \end{itemize}
@@ -115,10 +115,20 @@ where $U_{n\times k}$, or $U_k$, is the eigenvector matrix truncated to the firs
 The transformation in (\ref{eq4}) is lossy, meaning that the information on the truncated $n-k$ columns is utterly lost during the transformation. Although it is possible to restore $P$ back to $D$ dimensions, the result will not be exactly $D$ but rather an approximation of $D$. The whole rationale of using PCA for image compression is that the last $n-k$ eigenvectors will hold as little variance as possible and the recovered images will be an acceptable approximation of the original images.
 To transform $P$ back into $D$ space we compute \[P_{m\times k}U_{k\times n}^T = D_{m\times n}U_{n\times k}U_{k\times n}^T \approx D_{m\times n}\]
 \section{How to select the number of components to retain}
-The problem of selecting how many components to retain is not new, \citet{zwick1986comparison}, present the results of a Monte Carlo evaluation of five methods that have been proposed for determining how many factors or components to retain: Horn's parallel analysis, Velicer's minimum average partial [MAP], Cattell's scree test, Bartlett's chi-square test, and Kaiser's eigenvalue greater than 1.0 rule. 
+The problem of selecting how many components to retain is not new, \citet{zwick1986comparison}, present the results of a Monte Carlo evaluation of five methods that have been proposed for determining how many factors or components to retain: Horn's parallel analysis, Velicer's minimum average partial, Cattell's scree test, Bartlett's chi-square test, and Kaiser's eigenvalue greater than 1.0 rule. 
 The determination of the number of components or factors to retain is likely to be the most important decision a researcher will make \citep{zwick1986comparison}.\par
 
-\section{Materials and methods}
+We propose that a graphical supporting tool, similar to Cattell's scree test, with on the fly representations of a subset of the compressed images, and a subset of the eigenimages, can be instrumental in the decision of how many dimensions must be retained. We suggest that the use of eigenimages can increase the analyst understanding of the variation and trends of main eigenvectors of the data set.\par
+The number of dimensions to retain will eventually be a decision based on the supporting graphs and the recovered images. We include a couple of numeric measures on the cut off point:
+\begin{itemize}
+\item Accumulated variation retained.
+\item Number of components retained.
+\item Component score on the cut off point, the cut off point eigenvalue.
+\end{itemize}
+If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater than one}, based on our experience with the proposed tool with $32\times 32$ grayscale images, then we would suggest a $\frac{1}{10}$ Kaiser'r Rule: eigenvalues greater than $0.1$. Trials with a few data sets suggest that eigenvalues $> 0.1$ is a reasonable trade off between compression and sharpness.
+\section{Examples}
+For the next few examples we used a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}), rotated the images 90 degrees and produced input files for our tool.
+\section{Materials and methods}\label{materials}
 The code for the implementation and supporting documents can be found at \citet{Stelling:aa}.
 
 \section{Citations, figures, tables, references}

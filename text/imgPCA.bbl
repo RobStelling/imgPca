@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{9}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -32,6 +32,12 @@ Ian~T Jolliffe.
 \newblock Principal component analysis and factor analysis.
 \newblock In \emph{Principal component analysis}, pp.\  115--128. Springer,
   1986.
+
+\bibitem[Krizhevsky \& Hinton(2009)Krizhevsky and
+  Hinton]{krizhevsky2009learning}
+Alex Krizhevsky and Geoffrey Hinton.
+\newblock Learning multiple layers of features from tiny images.
+\newblock 2009.
 
 \bibitem[Pearson(1901)]{pearson1901principal}
 Karl Pearson.
