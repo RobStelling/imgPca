@@ -41,7 +41,7 @@ Traditionally PCA Analysis for dimension reduction in images is performed withou
 
 \section{Problem description}
 There are many reasons to reduce a data set, some examples are: noise reduction, outlier removal, lossy image compression or even as a preliminary step in various types of data exploration and data analysis.\par
-Principal component analysis (PCA) can be applied as a lossy image compression solution, as you can use PCA on a set of images of a data set and reduce its dimensionality with a certain, desirably controllable, loss of precision. Of course, one want to loose as little precision as possible while compressing as much as possible. There is a clear trade off between compression and precision. With images, the main difficulty resides in this very trade off: how many dimensions can be thrown away making sure that the resulting images still retain the desired level of quality or sharpness? Is there a general rule where you can certainly decide how many dimensions will be cut off the original data set? Of course, the type and amount of data available for compression, the data set, has a big influence on the precise point where the cut will happen, but can the analyst decide simply on the number of dimensions or amount of variance that will be thrown away and be sure that the results will be satisfactory? We propose that using a visual helping tool during the decision process can have a positive impact on the cut off selection.
+Principal component analysis (PCA) can be used as a lossy image compression solution, as you can use PCA on a set of images of a data set and reduce its dimensionality with a certain, desirably controllable, loss of precision. Of course, one want to loose as little precision as possible while compressing as much as possible.With images, the main difficulty resides in the trade off between compression and precision: how many dimensions can be thrown away making sure that the resulting images still retain the desired level of quality or sharpness? Is there a general rule where you can certainly decide how many dimensions will be cut off the original data set? Of course, the type and amount of data available for compression, the data set, has a big influence on the precise point where the cut will happen, but can the analyst decide simply on the number of dimensions or amount of variance that will be thrown away and be sure that the results will be satisfactory? We propose that using a visual helping tool during the decision process can have a positive impact on the cut off selection.
 
 \section{Brief introduction to PCA}
 \subsection{Objective}
@@ -56,7 +56,7 @@ PCA can be thought of as the problem of fitting an $n$-dimensional ellipsoid to 
 \subsection{Singular Value Decomposition}
 Given an arbitrary $D_{m\times n}$ matrix, then $D$ can be written as
 \begin{equation} \label{eq1}
-D_{m\times n}=U_{m\times r}S_{r\times r}V_{n\times r}^T
+D_{m\times n}=U_{m\times r}S_{r\times r}V_{r\times n}^T
 \end{equation}
 where
 \begin{enumerate}
@@ -112,8 +112,8 @@ P_{m\times k} = D_{m\times n} U_{n\times k}
 \end{equation}
 where $U_{n\times k}$, or $U_k$, is the eigenvector matrix truncated to the first $k$ eigenvectors. The information contained on the truncated $(n-k)$ columns is lost in this transformation.
 \subsection{Restoring data}
-The transformation in (\ref{eq4}) is lossy, meaning that the information on the truncated columns is lost during the transformation, then it is possible to restore $P$ back to $D$ space but the result will not be exactly $D$ but rather an approximation of $D$. The whole rationale of using PCA for image compression is that the last $n-k$ eigenvectors will hold as little variance as possible and the recovered images will be an acceptable approximation of the original images.
-To transform $P$ back into $D$ space we compute \[P_{m\times k}U_{n\times k}^T = D_{m\times n}U_{n\times k}U_{n\times k}^T \approx D_{m\times n}\]
+The transformation in (\ref{eq4}) is lossy, meaning that the information on the truncated $n-k$ columns is lost during the transformation, then it is possible to restore $P$ back to $D$ space but the result will not be exactly $D$ but rather an approximation of $D$. The whole rationale of using PCA for image compression is that the last $n-k$ eigenvectors will hold as little variance as possible and the recovered images will be an acceptable approximation of the original images.
+To transform $P$ back into $D$ space we compute \[P_{m\times k}U_{n\times k}^T = D_{m\times n}U_{n\times k}U_{k\times n}^T \approx D_{m\times n}\]
 \section{How to select the number of components to retain}
 The problem of selecting how many components to retain is not new, \citet{zwick1986comparison}, present the results of a Monte Carlo evaluation of five methods that have been proposed for determining how many factors or components to retain: Horn's parallel analysis, Velicer's minimum average partial [MAP], Cattell's scree test, Bartlett's chi-square test, and Kaiser's eigenvalue greater than 1.0 rule. 
 The determination of the number of components or factors to retain is likely to be the most important decision a researcher will make \citet{zwick1986comparison}.\par
