@@ -5,8 +5,10 @@
 \usepackage{natbib}
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{ {images/} }	
 
-\title{A data visualization for PCA Analysis \\ MAI718 3/2017 Final project}
+\title{ImgPCA \\ A data visualization for PCA Analysis \\ MAI718 3/2017 Final project}
 
 % Authors must not appear in the submitted version. They should be hidden
 % as long as the \iclrfinalcopy macro remains commented out below.
@@ -125,9 +127,35 @@ The number of dimensions to retain will eventually be a decision based on the su
 \item Number of components retained.
 \item Component score on the cut off point, the cut off point eigenvalue.
 \end{itemize}
-If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater than one}, based on our experience with the proposed tool with $32\times 32$ grayscale images, then we would suggest a $\frac{1}{10}$ Kaiser'r Rule: eigenvalues greater than $0.1$. Trials with a few data sets suggest that eigenvalues $> 0.1$ is a reasonable trade off between compression and sharpness.
+If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater than one}, based on our experience with the proposed tool with $32\times 32$ grayscale images, then we would suggest a $\frac{1}{10}$ Kaiser's Rule: eigenvalues greater than $0.1$. Trials with a few data sets suggest that a "\emph{Tenth Kaiser's Rule}" with eigenvalues $> 0.1$ is a reasonable trade off between compression and sharpness.
+
+%\begin{figure}[h]
+%\begin{center}
+%%\framebox[4.0in]{$\;$}
+%\fbox{\rule[-.5cm]{0cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
+%\end{center}
+%\caption{Sample figure caption.}
+%\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{imgPca.png}
+\end{center}
+\caption{ImgPCA screenshot.}
+\end{figure}
 \section{Examples}
-For the next few examples we used a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}), rotated the images 90 degrees and produced input files for our tool.
+For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}), rotated the images 90 degrees to produced input files for our tool.\par
+
+For the first example will use 1024 images from all CIFAR-10 classes, in the order they appear on the original file.\par
+
+\begin{figure}[h]
+\begin{center}
+%\framebox[4.0in]{$\;$}
+\includegraphics{CIFAR10All1024Original.png}
+\end{center}
+\caption{Sample of CIFAR-10 grayscale images, all classes.}
+\end{figure}
+
 \section{Materials and methods}\label{materials}
 The code for the implementation and supporting documents can be found at \citet{Stelling:aa}.
 
@@ -151,29 +179,6 @@ authors, in the \textsc{References} section. As to the format of the
 references themselves, any style is acceptable as long as it is used
 consistently.
 
-\subsection{Figures}
-
-All artwork must be neat, clean, and legible. Lines should be dark
-enough for purposes of reproduction; art work should not be
-hand-drawn. The figure number and caption always appear after the
-figure. Place one line space before the figure caption, and one line
-space after the figure. The figure caption is lower case (except for
-first word and proper nouns); figures are numbered consecutively.
-
-Make sure the figure caption does not get separated from the figure.
-Leave sufficient space to avoid splitting the figure and figure caption.
-
-You may use color figures.
-However, it is best for the
-figure captions and the paper body to make sense if the paper is printed
-either in black/white or in color.
-\begin{figure}[h]
-\begin{center}
-%\framebox[4.0in]{$\;$}
-\fbox{\rule[-.5cm]{0cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
-\end{center}
-\caption{Sample figure caption.}
-\end{figure}
 
 \subsection{Tables}
 
