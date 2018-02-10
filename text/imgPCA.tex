@@ -117,10 +117,10 @@ where $U_{n\times k}$, or $U_k$, is the eigenvector matrix truncated to the firs
 The transformation in (\ref{eq4}) is lossy, meaning that the information on the truncated $n-k$ columns is utterly lost during the transformation. Although it is possible to restore $P$ back to $D$ dimensions, the result will not be exactly $D$ but rather an approximation of $D$. The whole rationale of using PCA for image compression is that the last $n-k$ eigenvectors will hold as little variance as possible and the recovered images will be an acceptable approximation of the original images.
 To transform $P$ back into $D$ space we compute \[P_{m\times k}U_{k\times n}^T = D_{m\times n}U_{n\times k}U_{k\times n}^T \approx D_{m\times n}\]
 \section{How to select the number of components to retain}
-The problem of selecting how many components to retain is not new, \citet{zwick1986comparison}, present the results of a Monte Carlo evaluation of five methods that have been proposed for determining how many factors or components to retain: Horn's parallel analysis, Velicer's minimum average partial, Cattell's scree test, Bartlett's chi-square test, and Kaiser's eigenvalue greater than 1.0 rule. 
+The problem of selecting how many components to retain is not new, \citet{zwick1986comparison}, present the results of a Monte Carlo evaluation of five methods that have been proposed for determining how many factors or components to retain: Horn's parallel analysis, Velicer's minimum average partial, Cattell's scree test, Bartlett's chi-square test, and Kaiser's eigenvalue greater than $1.0$ rule. 
 The determination of the number of components or factors to retain is likely to be the most important decision a researcher will make \citep{zwick1986comparison}.\par
 
-We propose that a graphical supporting tool, similar to Cattell's scree test, with on the fly representations of a subset of the compressed images, and a subset of the eigenimages, can be instrumental in the decision of how many dimensions must be retained. We suggest that the use of eigenimages can increase the analyst understanding of the variation and trends of main eigenvectors of the data set.\par
+We propose that a graphical supporting tool, with a graph similar to Cattell's scree plot but showing $\log_{10} eigenvalues$ instead of $eigenvalues$, with on the fly representations of a subset of the compressed images, and a subset of the eigenimages, can be instrumental in the decision of how many dimensions must be retained. We suggest that the use of eigenimages can increase the analyst understanding of the variation and trends of main eigenvectors of the data set.\par
 The number of dimensions to retain will eventually be a decision based on the supporting graphs and the recovered images. We include a couple of numeric measures on the cut off point:
 \begin{itemize}
 \item Accumulated variation retained.
@@ -141,12 +141,13 @@ If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater t
 \begin{center}
 \includegraphics[width=\textwidth]{imgPca.png}
 \end{center}
-\caption{ImgPCA screenshot.}
+\caption{ImgPCA screenshot with a typical $eigenvalues \times \#of components$ curve.}
 \end{figure}
+Note that the Kaiser's Rule cut occurs exactly where the graph crosses $0$ ($\log_{10} eigenvalue = 0$) and that our "\emph{Tenth Kaiser's Rule}" occurs when $\log_{10} eigenvalue = -0.1$.
 \section{Examples}
-For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}), rotated the images 90 degrees to produce input files for our tool.\par
+For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}), rotated the images $90$ degrees to produce the input files for our usage.\par
 
-For the first example will use 1024 images from all CIFAR-10 classes, in the order they appear on the original file.\par
+For the first example will use $1024$ images with $1024$ ($32\times 32$) pixels from all CIFAR-10 classes, in the order they appear on the original file.\par
 
 \begin{figure}[h]
 \begin{center}
@@ -156,7 +157,7 @@ For the first example will use 1024 images from all CIFAR-10 classes, in the ord
 \caption{Sample of CIFAR-10 grayscale images, all classes.}
 \end{figure}
 
-\section{Materials and methods}\label{materials}
+\section{Materials and Methods}\label{materials}
 The code for the implementation and supporting documents can be found at \citet{Stelling:aa}.
 
 \section{Citations, figures, tables, references}
