@@ -141,9 +141,9 @@ If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater t
 \begin{center}
 \includegraphics[width=\textwidth]{imgPca.png}
 \end{center}
-\caption{ImgPCA screenshot with a typical $eigenvalues \times \#of components$ curve.}
+\caption{ImgPCA screenshot with a signature $eigenvalues \times \#of components$ curve.}
 \end{figure}
-Note that the Kaiser's Rule cut occurs exactly where the graph crosses $0$ ($\log_{10} eigenvalue = 0$) and that our "\emph{Tenth Kaiser's Rule}" occurs when $\log_{10} eigenvalue = -0.1$.
+Note that the Kaiser's Rule cut occurs exactly where the graph crosses $0$ ($\log_{10} eigenvalue = 0$) and that our "\emph{Tenth Kaiser's Rule}" occurs when $\log_{10} eigenvalue = -1$.
 \section{Examples}
 For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}), rotated the images $90$ degrees to produce the input files for our usage.\par
 
