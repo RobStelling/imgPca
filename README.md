@@ -13,3 +13,5 @@ imgPca splits the screen in two parts, the top part is used to visualize the nor
 
 The lower part is used to visually interact with the S vector and select the appropriate alpha values.
 Images are recovered on the fly on the top of the screen whenever a new number of features is selected.
+
+The plot shows *number of eigenvectors* **X** *Log10(eigenvalues)*.
