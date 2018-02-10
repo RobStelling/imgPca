@@ -98,7 +98,7 @@ function draw(domainX, domainY, data) {
 
     var pcaCurve = d3.area()
         .x(function(d) { return x(d.x); })
-        .y(function(d) { return y(d.pca); })
+        .y(function(d) { return y(d.log); })
         .y1(function(d) { return y(0); });
 
     var svg = d3.select("#graph");

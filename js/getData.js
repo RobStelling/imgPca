@@ -97,7 +97,7 @@ function doPca() {
 
   // Build sDiagonal, with the accumulated eigenvalues
   for(let i = 0; i<svdSLength; i++) {
-    sDiagonal.push({pca:getData.svd.S[i], x: i+1});
+    sDiagonal.push({pca:getData.svd.S[i], log: Math.log10(getData.svd.S[i]), x: i+1});
     sum += getData.svd.S[i];
   }
 
@@ -109,7 +109,7 @@ function doPca() {
 
   // Fits projection to SVG size
   const domainX = [-1, sDiagonal.length+1],
-        domainY = [-1, sDiagonal[0].pca];
+        domainY = [sDiagonal[sDiagonal.length-1].log, sDiagonal[0].log];
 
   // Draws the S(eigenvalue) curve
   draw(domainX, domainY, sDiagonal);
