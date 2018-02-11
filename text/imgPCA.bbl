@@ -1,4 +1,4 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{10}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -50,6 +50,11 @@ Karl Pearson.
 Rudolph~W. Preisendorfer and Curtis~D. Mobley.
 \newblock Principal component analysis in meteorology and oceanography.
 \newblock \emph{Elsevier Sci. Publ.}, 17:\penalty0 425, 1988.
+
+\bibitem[Sirovich \& Kirby(1987)Sirovich and Kirby]{sirovich1987low}
+Lawrence Sirovich and Michael Kirby.
+\newblock Low-dimensional procedure for the characterization of human faces.
+\newblock \emph{Josa a}, 4\penalty0 (3):\penalty0 519--524, 1987.
 
 \bibitem[Zwick \& Velicer(1986)Zwick and Velicer]{zwick1986comparison}
 William~R Zwick and Wayne~F Velicer.

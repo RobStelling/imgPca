@@ -4,48 +4,48 @@ The top-level auxiliary file: imgPCA.aux
 The style file: iclr2018_conference.bst
 Database file #1: imgPCA.bib
 Warning--entry type for "Stelling:aa" isn't style-file defined
---line 44 of file imgPCA.bib
+--line 57 of file imgPCA.bib
 Warning--empty year in Stelling:aa
 Warning--empty journal in krizhevsky2009learning
-You've used 9 entries,
+You've used 10 entries,
             2773 wiz_defined-function locations,
-            649 strings with 6047 characters,
-and the built_in function-call counts, 3697 in all, are:
-= -- 332
-> -- 154
-< -- 11
-+ -- 54
-- -- 45
-* -- 252
-:= -- 556
-add.period$ -- 28
-call.type$ -- 9
-change.case$ -- 41
-chr.to.int$ -- 9
-cite$ -- 20
-duplicate$ -- 201
-empty$ -- 345
-format.name$ -- 62
-if$ -- 798
+            656 strings with 6208 characters,
+and the built_in function-call counts, 4153 in all, are:
+= -- 376
+> -- 175
+< -- 12
++ -- 61
+- -- 51
+* -- 290
+:= -- 624
+add.period$ -- 31
+call.type$ -- 10
+change.case$ -- 46
+chr.to.int$ -- 10
+cite$ -- 22
+duplicate$ -- 221
+empty$ -- 385
+format.name$ -- 71
+if$ -- 894
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 9
-newline$ -- 52
-num.names$ -- 36
-pop$ -- 91
+missing$ -- 10
+newline$ -- 57
+num.names$ -- 40
+pop$ -- 98
 preamble$ -- 1
-purify$ -- 33
+purify$ -- 37
 quote$ -- 0
-skip$ -- 155
+skip$ -- 171
 stack$ -- 0
-substring$ -- 118
-swap$ -- 27
+substring$ -- 145
+swap$ -- 28
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 94
+type$ -- 105
 warning$ -- 2
-while$ -- 37
+while$ -- 42
 width$ -- 0
-write$ -- 120
+write$ -- 133
 (There were 3 warnings)

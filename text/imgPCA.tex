@@ -6,6 +6,7 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \graphicspath{ {images/} }	
 
 \title{ImgPCA \\ A data visualization tool for PCA Analysis \\ MAI718 3/2017 Final project}
@@ -127,7 +128,7 @@ The number of dimensions to retain will eventually be a decision based on the su
 \item Number of components retained.
 \item Component score on the cut off point, the cut off point eigenvalue.
 \end{itemize}
-If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater than one}, based on our experience with the proposed tool with $32\times 32$ grayscale images, then we would suggest a $\frac{1}{10}$ Kaiser's Rule: eigenvalues greater than $0.1$. Trials with a few data sets suggest that a "\emph{Tenth Kaiser's Rule}" with eigenvalues $> 0.1$ is a reasonable trade off between compression and sharpness.
+If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater than one}, based on our experience with the proposed tool with $32\times 32$ grayscale images, then we would suggest a $\frac{1}{10}$ Kaiser's Rule: eigenvalues greater than $0.1$. Trials with a few data sets suggest that a "\emph{One Tenth Kaiser's Rule}" with eigenvalues $> 0.1$ is a reasonable trade off between compression and sharpness.
 
 %\begin{figure}[h]
 %\begin{center}
@@ -143,21 +144,71 @@ If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater t
 \end{center}
 \caption{ImgPCA screenshot with a signature $eigenvalues \times \#of components$ curve.}
 \end{figure}
-Note that the Kaiser's Rule cut occurs exactly where the graph crosses $0$ ($\log_{10} eigenvalue = 0$) and that our "\emph{Tenth Kaiser's Rule}" occurs when $\log_{10} eigenvalue = -1$.
+Note that the Kaiser's Rule cut occurs exactly where the graph crosses $0$ ($\log_{10} eigenvalue = 0$) and that our "\emph{One Tenth Kaiser's Rule}" occurs when $\log_{10} eigenvalue = -1$.
 \section{Examples}
 For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}), rotated the images $90$ degrees to produce the input files for our usage.\par
 
 \begin{figure}[h]
-\begin{center}
-%\framebox[4.0in]{$\;$}
-\includegraphics{CIFAR10All1024RecoveredNormalized.png}
-\end{center}
-\caption{Sample of CIFAR-10 grayscale images, all classes.}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{CIFAR10All1024RecoveredNormalized}
+  \caption{$302$ components}
+  \label{fig:cifarall302}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{CIFAR10All1024RecoveredNormalized84}
+  \caption{$84$ components}
+  \label{fig:cifarall84}
+\end{subfigure}
+\caption{CIFAR-10 images recovered using "\emph{One Tenth}" (\ref{fig:cifarall302}) and regular Kaiser's rule (\ref{fig:cifarall84}).}
 \label{fig:sampleCifar10}
 \end{figure}
 
-For the first example will use $1024$ images with $1024$ ($32\times 32$) pixels from all CIFAR-10 classes, in the order they appear on the original file. Figure \ref{fig:sampleCifar10} displays the same set of images, recovered with $302$ components, based on the "\emph{Tenth Kaiser's Rule}", and the original normalized images. There are a few artifacts on the recovered images but the results seems to be visually satisfactory.\par
-If we increase the number of images on the data set, adding additional $1024$ images for a total of $2048$ the 
+For the first example we will exam $1024$ images with $1024$ ($32\times 32$) pixels from all CIFAR-10 classes, in the order they appear on the original file. Figure \ref{fig:sampleCifar10} displays the same set of images, recovered with $302$ and $84$ components. The $302$ components represent $98.786\%$ of variance, with the smallest component score being $0.1011$, following our "\emph{One Tenth Kaiser's Rule}". There are a few artifacts on the recovered images but the results seems to be visually satisfactory.\par
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{CIFAR10All1024Eigenimages}
+  \caption{From $1024$ images}
+  \label{fig:eigenImagesAll1024}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{CIFAR10All15000Eigenimages}
+  \caption{From $15000$ images}
+  \label{fig:eigenImagesAll15000}
+\end{subfigure}
+\caption{Eigenimages generated from $1024$ and $15000$ images of all CIFAR-10 classes.}
+\label{fig:eigenImagesAll}
+\end{figure}
+
+If we increase the number of images on the data set, from $1024$ to $15000$ images then we notice a few changes on ImgPCA graphics display, the most notable visual difference is the definition and ordering of the eigenimages.\par
+Figure \ref{fig:eigenImagesAll} shows the first $72$ eigenimages generated from data sets of size $1024$ (Figure \ref{fig:eigenImagesAll1024}) and $15000$ (Figure \ref{fig:eigenImagesAll15000}) images of all CIFAR-10 classes. The eigenimages reveal some characteristics of the images on the dataset: centrality of subject, dark central subject on a clear image, clear central subject on a dark image, left to right symmetry, bottom to top symmetry among others. It is not surprising that the ordering of the eigenimages changes when we increase or decrease the number of images of our test sample but the improvement of eigenimage definition and sharpness when the size of the data set increases is striking.
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{CIFAR10C05000Eigenimages}
+  \caption{Class 0 - Planes}
+  \label{fig:eigenImagesC0}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{CIFAR10C35000Eigenimages}
+  \caption{Class 3 - Cats}
+  \label{fig:eigenImagesC3}
+\end{subfigure}
+\caption{Eigenimages generated from $5000$ images of two different classes.}
+\label{fig:eigenImagesC0C3}
+\end{figure}
+
+This CIFAR-10 subset includes images from all $10$ categories (numbered from $0$ to $9$) and has as much variance as possible given the chosen subject of the data set. On Figure \ref{fig:eigenImagesC0C3} we can see the eigenimages generated from 5000 images of CIFAR-10 class 0 (\ref{fig:eigenImagesC0}) and CIFAR-10 class 3 (\ref{fig:eigenImagesC3}).\par Not only the eigenimages are different but one can almost see vestigial planes on \ref{fig:eigenImagesC0} and vestigial cats on \ref{fig:eigenImagesC3}.
+This effect, applied to faces, or eigenfaces, was observed and developed by \citet{sirovich1987low}.
 
 \section{Materials and Methods}\label{materials}
 The code for the implementation and supporting documents can be found at \citet{Stelling:aa}.
@@ -193,7 +244,7 @@ Place one line space before the table title, one line space after the table
 title, and one line space after the table. The table title must be lower case
 (except for first word and proper nouns); tables are numbered consecutively.
 
-\begin{table}[t]
+\begin{table}[h]
 \caption{Sample table title}
 \label{sample-table}
 \begin{center}

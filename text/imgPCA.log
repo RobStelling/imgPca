@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.1.31)  10 FEB 2018 21:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.1.31)  11 FEB 2018 13:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -281,24 +281,47 @@ Package graphics Info: Driver file: pdftex.def on input line 99.
 \Gin@req@height=\dimen116
 \Gin@req@width=\dimen117
 )
+(/usr/local/texlive/2017/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/05/22 v1.1-161 Sub-captions (AR)
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen118
+\captionmargin@=\dimen119
+\captionwidth=\dimen120
+\caption@tempdima=\dimen121
+\caption@indent=\dimen122
+\caption@parindent=\dimen123
+\caption@hangindent=\dimen124
+)
+\c@ContinuedFloat=\count110
+Package caption Info: hyperref package is loaded.
+)
+\c@subfigure=\count111
+\c@subtable=\count112
+)
 (./imgPCA.aux)
 \openout1 = `imgPCA.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 36.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 37.
  (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
@@ -306,16 +329,16 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
-\scratchdimen=\dimen118
+\scratchcounter=\count113
+\scratchdimen=\dimen125
 \scratchbox=\box29
-\nofMPsegments=\count111
-\nofMParguments=\count112
+\nofMPsegments=\count114
+\nofMParguments=\count115
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count113
-\MPscratchDim=\dimen119
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
+\MPscratchCnt=\count116
+\MPscratchDim=\dimen126
+\MPnumerator=\count117
+\makeMPintoPDFobject=\count118
 \everyMPtoPDFconversion=\toks22
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -334,7 +357,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 36.
+Package hyperref Info: Link coloring OFF on input line 37.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -342,47 +365,49 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count116
+\c@section@level=\count119
 )
-LaTeX Info: Redefining \ref on input line 36.
-LaTeX Info: Redefining \pageref on input line 36.
-LaTeX Info: Redefining \nameref on input line 36.
+LaTeX Info: Redefining \ref on input line 37.
+LaTeX Info: Redefining \pageref on input line 37.
+LaTeX Info: Redefining \nameref on input line 37.
 
 (./imgPCA.out) (./imgPCA.out)
 \@outlinefile=\write3
 \openout3 = `imgPCA.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 38.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for U+msa on input line 39.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 38.
+LaTeX Font Info:    Try loading font information for U+msb on input line 39.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 38.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 38.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 39.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [1
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 87.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 88.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 87.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 88.
  [2] [3]
 <images/imgPca.png, id=130, 967.615pt x 848.16875pt>
 File: images/imgPca.png Graphic file (type png)
 <use images/imgPca.png>
-Package pdftex.def Info: images/imgPca.png  used on input line 142.
+Package pdftex.def Info: images/imgPca.png  used on input line 143.
 (pdftex.def)             Requested size: 397.48499pt x 348.42442pt.
 
 [4 <./images/imgPca.png>]
@@ -391,46 +416,82 @@ Package pdftex.def Info: images/imgPca.png  used on input line 142.
 File: images/CIFAR10All1024RecoveredNormalized.png Graphic file (type png)
 <use images/CIFAR10All1024RecoveredNormalized.png>
 Package pdftex.def Info: images/CIFAR10All1024RecoveredNormalized.png  used on 
-input line 153.
-(pdftex.def)             Requested size: 257.9631pt x 307.14674pt.
- [5 <./images/CIFAR10All1024RecoveredNormalized.png>]
-(./imgPCA.bbl [6])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 221.
- [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 221.
+input line 155.
+(pdftex.def)             Requested size: 178.86702pt x 212.97713pt.
+<images/CIFAR10All1024RecoveredNormalized84.png, id=144, 257.96375pt x 303.1325
+pt>
+File: images/CIFAR10All1024RecoveredNormalized84.png Graphic file (type png)
+<use images/CIFAR10All1024RecoveredNormalized84.png>
+Package pdftex.def Info: images/CIFAR10All1024RecoveredNormalized84.png  used o
+n input line 161.
+(pdftex.def)             Requested size: 178.86702pt x 210.19312pt.
+<images/CIFAR10All1024Eigenimages.png, id=150, 291.0875pt x 258.9675pt>
+File: images/CIFAR10All1024Eigenimages.png Graphic file (type png)
+<use images/CIFAR10All1024Eigenimages.png>
+Package pdftex.def Info: images/CIFAR10All1024Eigenimages.png  used on input li
+ne 175.
+(pdftex.def)             Requested size: 178.86702pt x 159.13167pt.
+<images/CIFAR10All15000Eigenimages.png, id=151, 291.0875pt x 258.9675pt>
+File: images/CIFAR10All15000Eigenimages.png Graphic file (type png)
+<use images/CIFAR10All15000Eigenimages.png>
+Package pdftex.def Info: images/CIFAR10All15000Eigenimages.png  used on input l
+ine 181.
+(pdftex.def)             Requested size: 178.86702pt x 159.13167pt.
+ [5 <./images/CIFAR10All1024RecoveredNormalized.png> <./images/CIFAR10All1024Re
+coveredNormalized84.png> <./images/CIFAR10All1024Eigenimages.png> <./images/CIF
+AR10All15000Eigenimages.png>]
+<images/CIFAR10C05000Eigenimages.png, id=168, 292.09125pt x 258.9675pt>
+File: images/CIFAR10C05000Eigenimages.png Graphic file (type png)
+<use images/CIFAR10C05000Eigenimages.png>
+Package pdftex.def Info: images/CIFAR10C05000Eigenimages.png  used on input lin
+e 196.
+(pdftex.def)             Requested size: 178.86702pt x 158.58636pt.
+<images/CIFAR10C35000Eigenimages.png, id=169, 291.0875pt x 258.9675pt>
+File: images/CIFAR10C35000Eigenimages.png Graphic file (type png)
+<use images/CIFAR10C35000Eigenimages.png>
+Package pdftex.def Info: images/CIFAR10C35000Eigenimages.png  used on input lin
+e 202.
+(pdftex.def)             Requested size: 178.86702pt x 159.13167pt.
+ [6 <./images/CIFAR10C05000Eigenimages.png> <./images/CIFAR10C35000Eigenimages.
+png>] (./imgPCA.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 272.
+
+[7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 272.
  (./imgPCA.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 221.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 221.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 272.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 272.
 Package rerunfilecheck Info: File `imgPCA.out' has not changed.
 (rerunfilecheck)             Checksum: D055B2B094C8E36C3F424A2D8DE43D03;1035.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 272.
  ) 
 Here is how much of TeX's memory you used:
- 6908 strings out of 492980
- 98362 string characters out of 6132509
- 193369 words of memory out of 5000000
- 10325 multiletter control sequences out of 15000+600000
+ 8040 strings out of 492980
+ 119643 string characters out of 6132509
+ 215299 words of memory out of 5000000
+ 11440 multiletter control sequences out of 15000+600000
  27499 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,10n,45p,1113b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,10n,45p,1113b,448s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
 live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texli
 ve/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
 /2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
-17/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/201
-7/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2017/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2017/te
-xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/201
-7/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2017/texmf-
-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-dist/fonts
-/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw
-/times/utmri8a.pfb>
-Output written on imgPCA.pdf (7 pages, 612785 bytes).
+17/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2017/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2017/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2017/texmf
+-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2017/t
+exmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2017/texmf-dis
+t/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/ty
+pe1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/ti
+mes/utmri8a.pfb>
+Output written on imgPCA.pdf (7 pages, 1044153 bytes).
 PDF statistics:
- 231 PDF objects out of 1000 (max. 8388607)
- 202 compressed objects within 3 object streams
- 45 named destinations out of 1000 (max. 500000)
- 139 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 263 PDF objects out of 1000 (max. 8388607)
+ 221 compressed objects within 3 object streams
+ 48 named destinations out of 1000 (max. 500000)
+ 164 words of extra memory for PDF output out of 10000 (max. 10000000)
 
