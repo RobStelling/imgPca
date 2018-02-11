@@ -29,15 +29,10 @@ function readTextFile(event) {
 
   reader.onload = ready;
   d3.select("#st1").style("display", "inline").text("Reading file...");
-  reader.readAsText(file);
-
   d3.select(".inputButtons").style("display", "none");
   d3.select("label").style("display", "none");
-  d3.selectAll(".hidden").style("display", "inline");
-  d3.selectAll(".hidden").classed("hidden", false);
-  d3.select(".inputButtons").classed("hidden", true);
 
-  d3.selectAll(".movedown").transition().duration(1000).style("top", "820px");
+  reader.readAsText(file);
 }
 /*
  * Callback for the file reader
@@ -113,6 +108,11 @@ function doPca() {
 
   // Draws the S(eigenvalue) curve
   draw(domainX, domainY, sDiagonal);
+
+  d3.selectAll(".hidden").style("display", "inline");
+  d3.selectAll(".hidden").classed("hidden", false);
+  d3.select(".inputButtons").classed("hidden", true);
+  d3.selectAll(".movedown").transition().duration(1000).style("top", "820px");
 }
 /*
  * Converts text to matrix
