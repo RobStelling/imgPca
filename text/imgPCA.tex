@@ -145,7 +145,8 @@ If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater t
 \caption{ImgPCA screenshot with a signature $eigenvalues \times \#of components$ curve.}
 \end{figure}
 Note that the Kaiser's Rule cut occurs exactly where the graph crosses $0$ ($\log_{10} eigenvalue = 0$) and that our "\emph{One Tenth Kaiser's Rule}" occurs when $\log_{10} eigenvalue = -1$.
-\section{Examples}
+\section{ImgPCA Examples}
+
 For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}), rotated the images $90$ degrees to produce the input files for our usage.\par
 
 \begin{figure}[h]
@@ -166,7 +167,7 @@ For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizh
 \label{fig:sampleCifar10}
 \end{figure}
 
-For the first example we will exam $1024$ images with $1024$ ($32\times 32$) pixels from all CIFAR-10 classes, in the order they appear on the original file. Figure \ref{fig:sampleCifar10} displays the same set of images, recovered with $302$ and $84$ components. The $302$ components represent $98.786\%$ of variance, with the smallest component score being $0.1011$, following our "\emph{One Tenth Kaiser's Rule}". There are a few artifacts on the recovered images but the results seems to be visually satisfactory.\par
+In the first example we will exam $1024$ images with $1024$ ($32\times 32$) pixels from all CIFAR-10 classes, in the order they appear on the original file. Figure \ref{fig:sampleCifar10} displays the same set of images, recovered with $302$ and $84$ components. The $302$ components represent $98.786\%$ of variance, with the smallest component score being $0.1011$, following our "\emph{One Tenth Kaiser's Rule}". There are a few artifacts on the recovered images but the results seems to be visually satisfactory.\par
 
 \begin{figure}[h]
 \centering
@@ -186,7 +187,23 @@ For the first example we will exam $1024$ images with $1024$ ($32\times 32$) pix
 \label{fig:eigenImagesAll}
 \end{figure}
 
-If we increase the number of images on the data set, from $1024$ to $15000$ images then we notice a few changes on ImgPCA graphics display, the most notable visual difference is the definition and ordering of the eigenimages.\par
+If we increase the number of images on the data set, from $1024$ to $15000$ images then we notice a few changes on ImgPCA statistics display, the most notable visual difference is the definition and ordering of the eigenimages. Table \ref{tab:ImgPCAcomputations} shows the stats when we apply the \emph{One tenth Kaiser's rule} to the two datasets. It is important to notice that all images on the first set are included on the second.
+
+\begin{table}[h]
+\caption{Measures for CIFAR-10, all classes, at \emph{One tenth Kaiser's rule}}
+\label{tab:ImgPCAcomputations}
+\begin{center}
+\begin{tabular}{lrr}
+\multicolumn{1}{l}{\bf MEASURE}  &\multicolumn{1}{r}{\bf 1024 IMAGES}&\multicolumn{1}{r}{\bf 15000 IMAGES}
+\\ \hline \\
+Features included       &$302$ & $341$\\
+Accumulated variance             &$98.787$\% & $98.329$\%\\
+Last eigenvalue included&$0.1011$&$0.1007$\\
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Eigenimages}
 Figure \ref{fig:eigenImagesAll} shows the first $72$ eigenimages generated from data sets of size $1024$ (Figure \ref{fig:eigenImagesAll1024}) and $15000$ (Figure \ref{fig:eigenImagesAll15000}) images of all CIFAR-10 classes. The eigenimages reveal some characteristics of the images on the dataset: centrality of subject, dark central subject on a clear image, clear central subject on a dark image, left to right symmetry, bottom to top symmetry among others. It is not surprising that the ordering of the eigenimages changes when we increase or decrease the number of images of our test sample but the improvement of eigenimage definition and sharpness when the size of the data set increases is striking.
 
 \begin{figure}[h]
@@ -212,54 +229,6 @@ This effect, applied to faces, or eigenfaces, was observed and developed by \cit
 
 \section{Materials and Methods}\label{materials}
 The code for the implementation and supporting documents can be found at \citet{Stelling:aa}.
-
-\section{Citations, figures, tables, references}
-\label{others}
-
-These instructions apply to everyone, regardless of the formatter being used.
-
-\subsection{Citations within the text}
-
-
-Citations within the text should be based on the \texttt{natbib} package
-and include the authors' last names and year (with the ``et~al.'' construct
-for more than two authors). When the authors or the publication are
-included in the sentence, the citation should not be in parenthesis (as
-in ``See \citet{Goodfellow:2016aa} for more information.''). Otherwise, the citation
-should be in parenthesis (as in ``Deep learning shows promise to make progress towards AI~\citep{Goodfellow:2016aa}.'').
-
-The corresponding references are to be listed in alphabetical order of
-authors, in the \textsc{References} section. As to the format of the
-references themselves, any style is acceptable as long as it is used
-consistently.
-
-
-\subsection{Tables}
-
-All tables must be centered, neat, clean and legible. Do not use hand-drawn
-tables. The table number and title always appear before the table. See
-Table~\ref{sample-table}.
-
-Place one line space before the table title, one line space after the table
-title, and one line space after the table. The table title must be lower case
-(except for first word and proper nouns); tables are numbered consecutively.
-
-\begin{table}[h]
-\caption{Sample table title}
-\label{sample-table}
-\begin{center}
-\begin{tabular}{ll}
-\multicolumn{1}{c}{\bf PART}  &\multicolumn{1}{c}{\bf DESCRIPTION}
-\\ \hline \\
-Dendrite         &Input terminal \\
-Axon             &Output terminal \\
-Soma             &Cell body (contains cell nucleus) \\
-\end{tabular}
-\end{center}
-\end{table}
-
-
-
 
 \subsubsection*{Acknowledgments}
 I'd wish to thank the whole of the MAI718/2017-3 class for their invaluable input during preliminary presentations of the current work. Your ideas, discussions and critiques where instrumental in improving the foundations of this work. 

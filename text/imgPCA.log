@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.1.31)  11 FEB 2018 13:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.1.31)  12 FEB 2018 16:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -404,72 +404,75 @@ File: omsptm.fd
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 88.
  [2] [3]
-<images/imgPca.png, id=130, 967.615pt x 848.16875pt>
+<images/imgPca.png, id=122, 967.615pt x 848.16875pt>
 File: images/imgPca.png Graphic file (type png)
 <use images/imgPca.png>
 Package pdftex.def Info: images/imgPca.png  used on input line 143.
 (pdftex.def)             Requested size: 397.48499pt x 348.42442pt.
 
 [4 <./images/imgPca.png>]
-<images/CIFAR10All1024RecoveredNormalized.png, id=143, 257.96375pt x 307.1475pt
+<images/CIFAR10All1024RecoveredNormalized.png, id=135, 257.96375pt x 307.1475pt
 >
 File: images/CIFAR10All1024RecoveredNormalized.png Graphic file (type png)
 <use images/CIFAR10All1024RecoveredNormalized.png>
 Package pdftex.def Info: images/CIFAR10All1024RecoveredNormalized.png  used on 
-input line 155.
+input line 156.
 (pdftex.def)             Requested size: 178.86702pt x 212.97713pt.
-<images/CIFAR10All1024RecoveredNormalized84.png, id=144, 257.96375pt x 303.1325
+<images/CIFAR10All1024RecoveredNormalized84.png, id=136, 257.96375pt x 303.1325
 pt>
 File: images/CIFAR10All1024RecoveredNormalized84.png Graphic file (type png)
 <use images/CIFAR10All1024RecoveredNormalized84.png>
 Package pdftex.def Info: images/CIFAR10All1024RecoveredNormalized84.png  used o
-n input line 161.
+n input line 162.
 (pdftex.def)             Requested size: 178.86702pt x 210.19312pt.
-<images/CIFAR10All1024Eigenimages.png, id=150, 291.0875pt x 258.9675pt>
+<images/CIFAR10All1024Eigenimages.png, id=142, 291.0875pt x 258.9675pt>
 File: images/CIFAR10All1024Eigenimages.png Graphic file (type png)
 <use images/CIFAR10All1024Eigenimages.png>
 Package pdftex.def Info: images/CIFAR10All1024Eigenimages.png  used on input li
-ne 175.
+ne 176.
 (pdftex.def)             Requested size: 178.86702pt x 159.13167pt.
-<images/CIFAR10All15000Eigenimages.png, id=151, 291.0875pt x 258.9675pt>
+<images/CIFAR10All15000Eigenimages.png, id=143, 291.0875pt x 258.9675pt>
 File: images/CIFAR10All15000Eigenimages.png Graphic file (type png)
 <use images/CIFAR10All15000Eigenimages.png>
 Package pdftex.def Info: images/CIFAR10All15000Eigenimages.png  used on input l
-ine 181.
+ine 182.
 (pdftex.def)             Requested size: 178.86702pt x 159.13167pt.
  [5 <./images/CIFAR10All1024RecoveredNormalized.png> <./images/CIFAR10All1024Re
 coveredNormalized84.png> <./images/CIFAR10All1024Eigenimages.png> <./images/CIF
 AR10All15000Eigenimages.png>]
-<images/CIFAR10C05000Eigenimages.png, id=168, 292.09125pt x 258.9675pt>
+<images/CIFAR10C05000Eigenimages.png, id=160, 292.09125pt x 258.9675pt>
 File: images/CIFAR10C05000Eigenimages.png Graphic file (type png)
 <use images/CIFAR10C05000Eigenimages.png>
 Package pdftex.def Info: images/CIFAR10C05000Eigenimages.png  used on input lin
-e 196.
+e 213.
 (pdftex.def)             Requested size: 178.86702pt x 158.58636pt.
-<images/CIFAR10C35000Eigenimages.png, id=169, 291.0875pt x 258.9675pt>
+<images/CIFAR10C35000Eigenimages.png, id=161, 291.0875pt x 258.9675pt>
 File: images/CIFAR10C35000Eigenimages.png Graphic file (type png)
 <use images/CIFAR10C35000Eigenimages.png>
 Package pdftex.def Info: images/CIFAR10C35000Eigenimages.png  used on input lin
-e 202.
+e 219.
 (pdftex.def)             Requested size: 178.86702pt x 159.13167pt.
- [6 <./images/CIFAR10C05000Eigenimages.png> <./images/CIFAR10C35000Eigenimages.
-png>] (./imgPCA.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 272.
 
-[7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 272.
+Underfull \vbox (badness 3118) has occurred while \output is active []
+
+ [6 <./images/CIFAR10C05000Eigenimages.png> <./images/CIFAR10C35000Eigenimages.
+png>]
+(./imgPCA.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 241.
+ [7]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 241.
  (./imgPCA.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 272.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 272.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 241.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 241.
 Package rerunfilecheck Info: File `imgPCA.out' has not changed.
-(rerunfilecheck)             Checksum: D055B2B094C8E36C3F424A2D8DE43D03;1035.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 272.
+(rerunfilecheck)             Checksum: 90DCED68ACE0B47DACB857D0561777CA;898.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 241.
  ) 
 Here is how much of TeX's memory you used:
- 8040 strings out of 492980
- 119643 string characters out of 6132509
- 215299 words of memory out of 5000000
- 11440 multiletter control sequences out of 15000+600000
+ 8035 strings out of 492980
+ 119595 string characters out of 6132509
+ 215285 words of memory out of 5000000
+ 11437 multiletter control sequences out of 15000+600000
  27499 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,10n,45p,1113b,448s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -488,10 +491,10 @@ exmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2017/texmf-dis
 t/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/ty
 pe1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/ti
 mes/utmri8a.pfb>
-Output written on imgPCA.pdf (7 pages, 1044153 bytes).
+Output written on imgPCA.pdf (7 pages, 1044100 bytes).
 PDF statistics:
- 263 PDF objects out of 1000 (max. 8388607)
- 221 compressed objects within 3 object streams
- 48 named destinations out of 1000 (max. 500000)
- 164 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 250 PDF objects out of 1000 (max. 8388607)
+ 208 compressed objects within 3 object streams
+ 46 named destinations out of 1000 (max. 500000)
+ 148 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -9,8 +9,6 @@
 \BOOKMARK [2][-]{subsection.3.1}{Reducing dimensions}{section.3}% 9
 \BOOKMARK [2][-]{subsection.3.2}{Restoring data}{section.3}% 10
 \BOOKMARK [1][-]{section.4}{How to select the number of components to retain}{}% 11
-\BOOKMARK [1][-]{section.5}{Examples}{}% 12
-\BOOKMARK [1][-]{section.6}{Materials and Methods}{}% 13
-\BOOKMARK [1][-]{section.7}{Citations, figures, tables, references}{}% 14
-\BOOKMARK [2][-]{subsection.7.1}{Citations within the text}{section.7}% 15
-\BOOKMARK [2][-]{subsection.7.2}{Tables}{section.7}% 16
+\BOOKMARK [1][-]{section.5}{ImgPCA Examples}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Eigenimages}{section.5}% 13
+\BOOKMARK [1][-]{section.6}{Materials and Methods}{}% 14
