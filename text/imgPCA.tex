@@ -227,6 +227,16 @@ Figure \ref{fig:eigenImagesAll} shows the first $72$ eigenimages generated from 
 This CIFAR-10 subset includes images from all $10$ categories (numbered from $0$ to $9$) and has as much variance as possible given the chosen subject of the data set. On Figure \ref{fig:eigenImagesC0C3} we can see the eigenimages generated from 5000 images of CIFAR-10 class 0 (\ref{fig:eigenImagesC0}) and CIFAR-10 class 3 (\ref{fig:eigenImagesC3}).\par Not only the eigenimages are different but one can almost see vestigial planes on \ref{fig:eigenImagesC0} and vestigial cats on \ref{fig:eigenImagesC3}.
 This effect, applied to faces, or eigenfaces, was observed and developed by \citet{sirovich1987low}.
 
+\subsection{ImgPCA plot}
+Instead of plotting an \textit{eigenvalues $\times$  \# of components} graph, as in the regular Cattell's scree plot, we propose plotting \textit{$\log_{10}$ (eigenvalues) $\times$ \# of components}. Similar to the scree plot, we can derive some understanding about the data based on how fast the curve decays but we also have a quick visual and mathematical way of finding the Kaiser's Rule, where $\log_{10}$ \emph{(eigenvalues)} $= 0$. Additionally, every one tenth of eigenvalue decrease can also be easily found. For example, to apply our \emph{One tenth Kaiser's rule} we only need to check the number of components where $\log_{10}$ \emph{(eigenvalues)} $= -1$.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{imgPcaKaiserRule.png}
+\end{center}
+\caption{ImgPCA plot with Kaiser's Rule and \emph{One tenth Kaiser's rule} indicated.}
+\end{figure}
+
 \section{Materials and Methods}\label{materials}
 The code for the implementation and supporting documents can be found at \citet{Stelling:aa}.
 
