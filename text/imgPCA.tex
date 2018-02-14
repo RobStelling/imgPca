@@ -145,9 +145,9 @@ If we were to use a rule similar to Kaiser's Rule\footnote{Eigenvalues greater t
 \caption{ImgPCA screenshot with a signature $eigenvalues \times \#of components$ curve.}
 \end{figure}
 Note that the Kaiser's Rule cut occurs exactly where the graph crosses $0$ ($\log_{10} eigenvalue = 0$) and that our "\emph{One Tenth Kaiser's Rule}" occurs when $\log_{10} eigenvalue = -1$.
-\section{ImgPCA Examples}
+\section{ImgPCA}
 
-For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}), rotated the images $90$ degrees to produce the input files for our usage.\par
+For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizhevsky2009learning}, chapter 3) images modified to fit our purposes. CIFAR-10 is a collection of $32\times 32$ color images that are available in python, Matlab and binary versions. We converted CIFAR-10 images to grayscale (see \nameref{materials}) and rotated the images $90$ degrees to produce the input files for our usage.\par
 
 \begin{figure}[h]
 \centering
@@ -167,7 +167,7 @@ For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizh
 \label{fig:sampleCifar10}
 \end{figure}
 
-In the first example we will exam $1024$ images with $1024$ ($32\times 32$) pixels from all CIFAR-10 classes, in the order they appear on the original file. Figure \ref{fig:sampleCifar10} displays the same set of images, recovered with $302$ and $84$ components. The $302$ components represent $98.786\%$ of variance, with the smallest component score being $0.1011$, following our "\emph{One Tenth Kaiser's Rule}". There are a few artifacts on the recovered images but the results seems to be visually satisfactory.\par
+Figure \ref{fig:sampleCifar10} shows recovered images from a data set of $1024$ images with $1024$ ($32\times 32$) pixels of all CIFAR-10 classes, in the order they appear on the original file. Figure \ref{fig:cifarall302} shows the images recovered with $302$ components and figure \ref{fig:cifarall84} shows the images recovered $84$ components. The $302$ components  represent $98.786\%$ of variance, with the smallest component score being $0.1011$, following our "\emph{One Tenth Kaiser's Rule}". There are a few artifacts on the recovered images but the results seems to be visually satisfactory. The 84 components example on Figure \ref{fig:cifarall84} follows Kaiser's Rule of keeping eigenvectors with $eigenvalues > 1.0$. It is clear that cutting at this point, for our particular application, produces unsatisfactory approximations when dimensions are restored.\par
 
 \begin{figure}[h]
 \centering
@@ -187,7 +187,7 @@ In the first example we will exam $1024$ images with $1024$ ($32\times 32$) pixe
 \label{fig:eigenImagesAll}
 \end{figure}
 
-If we increase the number of images on the data set, from $1024$ to $15000$ images then we notice a few changes on ImgPCA statistics display, the most notable visual difference is the definition and ordering of the eigenimages. Table \ref{tab:ImgPCAcomputations} shows the stats when we apply the \emph{One tenth Kaiser's rule} to the two datasets. It is important to notice that all images on the first set are included on the second.
+Table \ref{tab:ImgPCAcomputations} shows the stats when we apply the \emph{One tenth Kaiser's rule} to two datasets of different sizes. It is important to notice that all images of the first data set are included on the second. If we increase the number of images on the data set, from $1024$ to $15000$ images then we notice a few changes on ImgPCA statistics display, the most notable visual difference is the definition and ordering of the eigenimages.
 
 \begin{table}[h]
 \caption{Measures for CIFAR-10, all classes, at \emph{One tenth Kaiser's rule}}
@@ -204,7 +204,7 @@ Last eigenvalue included&$0.1011$&$0.1007$\\
 \end{table}
 
 \subsection{Eigenimages}
-Figure \ref{fig:eigenImagesAll} shows the first $72$ eigenimages generated from data sets of size $1024$ (Figure \ref{fig:eigenImagesAll1024}) and $15000$ (Figure \ref{fig:eigenImagesAll15000}) images of all CIFAR-10 classes. The eigenimages reveal some characteristics of the images on the dataset: centrality of subject, dark central subject on a clear image, clear central subject on a dark image, left to right symmetry, bottom to top symmetry among others. It is not surprising that the ordering of the eigenimages changes when we increase or decrease the number of images of our test sample but the improvement of eigenimage definition and sharpness when the size of the data set increases is striking.
+Figure \ref{fig:eigenImagesAll} shows the first $72$ eigenimages generated from data sets of size $1024$ (Figure \ref{fig:eigenImagesAll1024}) and $15000$ (Figure \ref{fig:eigenImagesAll15000}) images of all CIFAR-10 classes. The eigenimages reveal some characteristics of the images on the data set: centrality of subject, dark central subject on a clear image, clear central subject on a dark image, left to right symmetry, bottom to top symmetry among others. It is not surprising that the ordering of the eigenimages changes when we increase or decrease the number of images of our test sample but the improvement of eigenimage definition, contrast and sharpness when the size of the data set increases is striking.
 
 \begin{figure}[h]
 \centering
@@ -224,17 +224,18 @@ Figure \ref{fig:eigenImagesAll} shows the first $72$ eigenimages generated from 
 \label{fig:eigenImagesC0C3}
 \end{figure}
 
-This CIFAR-10 subset includes images from all $10$ categories (numbered from $0$ to $9$) and has as much variance as possible given the chosen subject of the data set. On Figure \ref{fig:eigenImagesC0C3} we can see the eigenimages generated from 5000 images of CIFAR-10 class 0 (\ref{fig:eigenImagesC0}) and CIFAR-10 class 3 (\ref{fig:eigenImagesC3}).\par Not only the eigenimages are different but one can almost see vestigial planes on \ref{fig:eigenImagesC0} and vestigial cats on \ref{fig:eigenImagesC3}.
-This effect, applied to faces, or eigenfaces, was observed and developed by \citet{sirovich1987low}.
+The CIFAR-10 subset used to produce the displays in Figure \ref{fig:eigenImagesAll} includes images from all $10$ categories (numbered from $0$ to $9$) and has as much variance as possible given the chosen subject of the data set.\par In Figure \ref{fig:eigenImagesC0C3} we can see the eigenimages generated from 5000 images of CIFAR-10 class 0 (\ref{fig:eigenImagesC0}) and CIFAR-10 class 3 (\ref{fig:eigenImagesC3}). Not only the eigenimages are different but one can almost see vestigial planes on \ref{fig:eigenImagesC0} and vestigial cats on \ref{fig:eigenImagesC3}, the subject of their corresponding CIFAR-10 classes.
+This effect, applied to faces, or eigenfaces, was observed and used by \citet{sirovich1987low}.
 
 \subsection{ImgPCA plot}
-Instead of plotting an \textit{eigenvalues $\times$  \# of components} graph, as in the regular Cattell's scree plot, we propose plotting \textit{$\log_{10}$ (eigenvalues) $\times$ \# of components}. Similar to the scree plot, we can derive some understanding about the data based on how fast the curve decays but we also have a quick visual and mathematical way of finding the Kaiser's Rule, where $\log_{10}$ \emph{(eigenvalues)} $= 0$. Additionally, every one tenth of eigenvalue decrease can also be easily found. For example, to apply our \emph{One tenth Kaiser's rule} we only need to check the number of components where $\log_{10}$ \emph{(eigenvalues)} $= -1$.
+Instead of plotting an \textit{eigenvalues $\times$  \# of components} graph, as in the regular Cattell's scree plot, we propose plotting \textit{$\log_{10}$ (eigenvalues) $\times$ \# of components}. Similar to the scree plot, we can derive some understanding about the data based on how fast the $\log_{10}$ curve decays but we also have a quick visual and mathematical way of finding the Kaiser's Rule, that occurs when $\log_{10}$ \emph{(eigenvalues)} $= 0$. Additionally, every one tenth of eigenvalue decrease can also be easily found, as they correspond to the points $0, -1, -2$ etc. For example, to apply our \emph{One tenth Kaiser's rule} we only need to check what are the number of components that correspond to $\log_{10}$ \emph{(eigenvalues)} $= -1$, as shown in Figure \ref{fig:ImgPCAKaiserAndOTK}.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{imgPcaKaiserRule.png}
 \end{center}
 \caption{ImgPCA plot with Kaiser's Rule and \emph{One tenth Kaiser's rule} indicated.}
+\label{fig:ImgPCAKaiserAndOTK}
 \end{figure}
 
 \section{Materials and Methods}\label{materials}
