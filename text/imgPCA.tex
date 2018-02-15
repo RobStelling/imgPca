@@ -172,7 +172,7 @@ For the next few examples we are going to use a subset of CIFAR-10 (\citet{krizh
 \label{fig:sampleCifar10}
 \end{figure}
 
-Figure \ref{fig:sampleCifar10} shows recovered images from a data set of $1024$ images with $1024$ ($32\times 32$) pixels of all CIFAR-10 classes, in the order they appear on the original file. Figure \ref{fig:cifarall302} shows the images recovered with $302$ components and figure \ref{fig:cifarall84} shows the images recovered $84$ components. The $302$ components  represent $98.786\%$ of variance, with the smallest component score being $0.1011$, following our "\emph{One Tenth Kaiser's Rule}". There are a few artifacts on the recovered images but the results seems to be visually satisfactory. The 84 components example on Figure \ref{fig:cifarall84} follows Kaiser's Rule of keeping eigenvectors with $eigenvalues > 1.0$. It is clear that cutting at this point, for our particular application, produces unsatisfactory approximations when dimensions are restored.\par
+Figure \ref{fig:sampleCifar10} shows recovered images from a data set of $1024$ images with $1024$ ($32\times 32$) pixels of all CIFAR-10 classes, in the order they appear on the original file. Figure \ref{fig:cifarall302} shows the images recovered with $302$ components and figure \ref{fig:cifarall84} shows the images recovered $84$ components. The $302$ components  represent $98.789\%$ of variance, with the smallest component score being $0.1009$, following our "\emph{One Tenth Kaiser's Rule}". There are a few artifacts in some of the recovered images but the overall result is visually satisfactory. The 84 components example on Figure \ref{fig:cifarall84} follows Kaiser's Rule of keeping eigenvectors with $eigenvalues > 1.0$. It is clear that cutting at this point, for our particular application, produces blurred images when dimensions are restored.\par
 
 \begin{figure}[h]
 \centering
@@ -202,8 +202,8 @@ Table \ref{tab:ImgPCAcomputations} shows the stats when we apply the \emph{One t
 \multicolumn{1}{l}{\bf MEASURE}  &\multicolumn{1}{r}{\bf 1024 IMAGES}&\multicolumn{1}{r}{\bf 15000 IMAGES}
 \\ \hline \\
 Features included       &$302$ & $341$\\
-Accumulated variance             &$98.787$\% & $98.329$\%\\
-Last eigenvalue included&$0.1011$&$0.1007$\\
+Accumulated variance             &$98.789$\% & $98.330$\%\\
+Last eigenvalue included&$0.1009$&$0.1008$\\
 \end{tabular}
 \end{center}
 \end{table}
