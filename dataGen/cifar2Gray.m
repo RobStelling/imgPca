@@ -21,9 +21,11 @@ function ndata = cifar2Gray(nLines, classNumber)
         i = size(classData, 1);
         j++;
     endwhile
-    % Converts CIFAR data to grayscale using weights for each channel (0.3, 0.59, 0.11)
-	gs_data=classData(1:nLines,1:1024)*0.3+classData(1:nLines,1025:2048)*0.59+classData(1:nLines,2049:3072)*0.11;
-	% Rotates images -90 degrees
+    % Converts CIFAR data to grayscale correcting for luma coefficients
+    % using Rec. 709 (0.2126, 0.7152, 0.0722)
+    % See https://en.wikipedia.org/wiki/Rec._709
+	gs_data=classData(1:nLines,1:1024)*0.2126+classData(1:nLines,1025:2048)*0.7152+classData(1:nLines,2049:3072)*0.0722;
+	% Rotates images 90 degrees clockwise
 	for k = 1:nLines
 	  ndata(k,:) = reshape(rot90(reshape(gs_data(k,:), 32, 32), -1), 1, []);
 	endfor
