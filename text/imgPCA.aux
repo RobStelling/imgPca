@@ -28,15 +28,16 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Brief History of PCA}{1}{subsection.2.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Intuition}{2}{subsection.2.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Singular Value Decomposition}{2}{subsection.2.4}}
-\newlabel{eq1}{{1}{2}{Singular Value Decomposition}{equation.2.1}{}}
+\newlabel{eq:SVD}{{1}{2}{Singular Value Decomposition}{equation.2.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Principal Component Analysis}{2}{subsection.2.5}}
-\newlabel{eq2}{{2}{2}{Principal Component Analysis}{equation.2.2}{}}
+\newlabel{eq:SigmaLongSVD}{{2}{2}{Principal Component Analysis}{equation.2.2}{}}
 \citation{zwick1986comparison}
 \citation{zwick1986comparison}
 \@writefile{toc}{\contentsline {section}{\numberline {3}PCA for image compression}{3}{section.3}}
-\newlabel{eq3}{{3}{3}{PCA for image compression}{equation.3.3}{}}
+\newlabel{eq:sigma}{{3}{3}{PCA for image compression}{equation.3.3}{}}
+\newlabel{eq:sigmaSVD}{{4}{3}{PCA for image compression}{equation.3.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Reducing dimensions}{3}{subsection.3.1}}
-\newlabel{eq4}{{4}{3}{Reducing dimensions}{equation.3.4}{}}
+\newlabel{eq:ReducingDimensions}{{5}{3}{Reducing dimensions}{equation.3.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Restoring data}{3}{subsection.3.2}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}How to select the number of components to retain}{3}{section.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces ImgPCA screenshot with a typical \emph  {$log_{10}$ eigenvalues $\times $ \#of components} curve.\relax }}{4}{figure.caption.1}}
@@ -66,20 +67,34 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Eigenimages generated from $5000$ images of two different classes.\relax }}{6}{figure.caption.5}}
 \newlabel{fig:eigenImagesC0C3}{{4}{6}{Eigenimages generated from $5000$ images of two different classes.\relax }{figure.caption.5}{}}
 \citation{Stelling:aa}
-\bibdata{imgPCA}
-\bibcite{craw1992face}{{1}{1992}{{Craw \& Cameron}}{{Craw and Cameron}}}
-\bibcite{Goodfellow:2016aa}{{2}{2016}{{Goodfellow et~al.}}{{Goodfellow, Bengio, and Courville}}}
-\bibcite{hotelling1933analysis}{{3}{1933}{{Hotelling}}{{}}}
-\bibcite{Stelling:aa}{{4}{}{{ImgPCA-GitHub}}{{}}}
-\bibcite{jolliffe1986principal}{{5}{1986}{{Jolliffe}}{{}}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}ImgPCA plot}{7}{subsection.5.2}}
+\citation{krizhevsky2009learning}
+\citation{Stelling:aa}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces ImgPCA plot with Kaiser's Rule and \emph  {One tenth Kaiser's rule} indicated.\relax }}{7}{figure.caption.6}}
 \newlabel{fig:ImgPCAKaiserAndOTK}{{5}{7}{ImgPCA plot with Kaiser's Rule and \emph {One tenth Kaiser's rule} indicated.\relax }{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Materials and Methods}{7}{section.6}}
-\newlabel{materials}{{6}{7}{Materials and Methods}{section.6}{}}
-\bibcite{krizhevsky2009learning}{{6}{2009}{{Krizhevsky \& Hinton}}{{Krizhevsky and Hinton}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}ImgPCA plot}{7}{subsection.5.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces ImgPCA plot of a data set with $512$ images of $1024$ pixels.\relax }}{7}{figure.caption.7}}
+\newlabel{fig:ImgPCA512}{{6}{7}{ImgPCA plot of a data set with $512$ images of $1024$ pixels.\relax }{figure.caption.7}{}}
+\citation{ITU-R:2015aa}
+\citation{Loisel:2012aa}
+\citation{Eaton:2018aa}
+\citation{Sapuan:2017aa}
+\bibdata{imgPCA}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Materials and Methods}{8}{section.6}}
+\newlabel{materials}{{6}{8}{Materials and Methods}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}CIFAR-10 conversion}{8}{subsection.6.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}SVD decomposition}{8}{subsection.6.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Covariance matrix}{8}{subsection.6.3}}
+\bibcite{craw1992face}{{1}{1992}{{Craw \& Cameron}}{{Craw and Cameron}}}
+\bibcite{Eaton:2018aa}{{2}{2018}{{Eaton}}{{}}}
+\bibcite{hotelling1933analysis}{{3}{1933}{{Hotelling}}{{}}}
+\bibcite{jolliffe1986principal}{{4}{1986}{{Jolliffe}}{{}}}
+\bibcite{krizhevsky2009learning}{{5}{2009}{{Krizhevsky \& Hinton}}{{Krizhevsky and Hinton}}}
+\bibcite{Loisel:2012aa}{{6}{2012}{{Loisel}}{{}}}
 \bibcite{pearson1901principal}{{7}{1901}{{Pearson}}{{}}}
 \bibcite{preisendorfer1988principal}{{8}{1988}{{Preisendorfer \& Mobley}}{{Preisendorfer and Mobley}}}
-\bibcite{sirovich1987low}{{9}{1987}{{Sirovich \& Kirby}}{{Sirovich and Kirby}}}
-\bibcite{zwick1986comparison}{{10}{1986}{{Zwick \& Velicer}}{{Zwick and Velicer}}}
+\bibcite{Sapuan:2017aa}{{9}{2017}{{Sapuan \& Plummer}}{{Sapuan and Plummer}}}
+\bibcite{sirovich1987low}{{10}{1987}{{Sirovich \& Kirby}}{{Sirovich and Kirby}}}
+\bibcite{Stelling:aa}{{11}{2018}{{Stelling}}{{}}}
+\bibcite{ITU-R:2015aa}{{12}{2015}{{Union}}{{}}}
+\bibcite{zwick1986comparison}{{13}{1986}{{Zwick \& Velicer}}{{Zwick and Velicer}}}
 \bibstyle{iclr2018_conference}

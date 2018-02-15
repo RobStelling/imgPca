@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{13}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -10,11 +10,10 @@ Ian Craw and Peter Cameron.
 \newblock Face recognition by computer.
 \newblock In \emph{BMVC92}, pp.\  498--507. Springer, 1992.
 
-\bibitem[Goodfellow et~al.(2016)Goodfellow, Bengio, and
-  Courville]{Goodfellow:2016aa}
-Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
-\newblock \emph{Deep learning}, volume~1.
-\newblock MIT press Cambridge, 2016.
+\bibitem[Eaton(2018)]{Eaton:2018aa}
+John~W. Eaton.
+\newblock Gnu octave, 2018.
+\newblock URL \url{https://www.gnu.org/software/octave/}.
 
 \bibitem[Hotelling(1933)]{hotelling1933analysis}
 Harold Hotelling.
@@ -22,10 +21,6 @@ Harold Hotelling.
   components.
 \newblock \emph{Journal of educational psychology}, 24\penalty0 (6):\penalty0
   417, 1933.
-
-\bibitem[ImgPCA-GitHub()]{Stelling:aa}
-ImgPCA-GitHub.
-\newblock https://github.com/robstelling/imgpca.
 
 \bibitem[Jolliffe(1986)]{jolliffe1986principal}
 Ian~T Jolliffe.
@@ -39,6 +34,11 @@ Alex Krizhevsky and Geoffrey Hinton.
 \newblock Learning multiple layers of features from tiny images.
 \newblock 2009.
 
+\bibitem[Loisel(2012)]{Loisel:2012aa}
+S{\'e}bastien Loisel.
+\newblock Numeric javascript, 2012.
+\newblock URL \url{http://www.numericjs.com/}.
+
 \bibitem[Pearson(1901)]{pearson1901principal}
 Karl Pearson.
 \newblock Principal components analysis.
@@ -51,10 +51,24 @@ Rudolph~W. Preisendorfer and Curtis~D. Mobley.
 \newblock Principal component analysis in meteorology and oceanography.
 \newblock \emph{Elsevier Sci. Publ.}, 17:\penalty0 425, 1988.
 
+\bibitem[Sapuan \& Plummer(2017)Sapuan and Plummer]{Sapuan:2017aa}
+Fazli Sapuan and Robert Plummer.
+\newblock Gpu accelerated javascript, December 2017.
+\newblock URL \url{http://gpu.rocks/}.
+
 \bibitem[Sirovich \& Kirby(1987)Sirovich and Kirby]{sirovich1987low}
 Lawrence Sirovich and Michael Kirby.
 \newblock Low-dimensional procedure for the characterization of human faces.
 \newblock \emph{Josa a}, 4\penalty0 (3):\penalty0 519--524, 1987.
+
+\bibitem[Stelling(2018)]{Stelling:aa}
+Roberto Stelling, 2018.
+\newblock URL \url{https://github.com/RobStelling/imgPca}.
+
+\bibitem[Union(2015)]{ITU-R:2015aa}
+International~Telecommunication Union.
+\newblock Reccomendation itu-r bt.709-6, 06 2015.
+\newblock URL \url{http://www.itu.int/rec/R-REC-BT.709-6-201506-I/en}.
 
 \bibitem[Zwick \& Velicer(1986)Zwick and Velicer]{zwick1986comparison}
 William~R Zwick and Wayne~F Velicer.

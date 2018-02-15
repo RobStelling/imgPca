@@ -58,7 +58,7 @@ Principal component analysis was first described by \citet{pearson1901principal}
 PCA can be thought of as the problem of fitting an $n$-dimensional ellipsoid to the $m$-dimensional data, where $n<=m$ and each axis of the ellipsoid represents a principal component. The larger the axis of a component, the larger the variance for that component. So, the objective of PCA is to build a transformation of $m$-dimensional space to $n$-dimensional space while preserving most of the the $m$-dimensional space variance. To find that transformation and the components, we compute the singular value decomposition of the data. The singular value decomposition will provide a computationally efficient method of finding the principal components and the scaled versions of the principal component scores.
 \subsection{Singular Value Decomposition}
 Given an arbitrary $D_{m\times n}$ matrix, then $D$ can be written as
-\begin{equation} \label{eq1}
+\begin{equation} \label{eq:SVD}
 D_{m\times n}=U_{m\times r}S_{r\times r}V_{r\times n}^T
 \end{equation}
 where
@@ -79,8 +79,8 @@ $S$ is a diagonal matrix such as:
 Where $s_{1}$ to $s_{r}$ are the principal components scores and $s_{1} >= s_{2} >= ... >= s_{r-1} >= s_{r}$.\par
 $U$ is the eigenvector matrix, with eigenvectors ordered by the component scores, their eigenvalues.
 \subsection{Principal Component Analysis}
-To apply PCA we will use equation (\ref{eq1}) from the singular value decomposition and apply it to the covariance matrix $\Sigma$ of a data set. If the data set $D$ has dimensions ${m\times n}$ then the covariance matrix $\Sigma$ will be a symmetrical square matrix of dimensions $n\times n$. So
-\begin{equation}\label{eq2}
+To apply PCA we will use equation (\ref{eq:SVD}) from the singular value decomposition and apply it to the covariance matrix $\Sigma$ of a data set. If the data set $D$ has dimensions ${m\times n}$ then the covariance matrix $\Sigma$ will be a symmetrical square matrix of dimensions $n\times n$. So
+\begin{equation}\label{eq:SigmaLongSVD}
 \Sigma_{n\times n} = U_{n\times n}S_{n\times n}V_{n\times n}^T
 \end{equation}
 Where
@@ -97,8 +97,13 @@ $P$ is a transformation of $D$ that retains all the information of the original 
 A computer image is usually thought of as a two dimensional matrix, with $m$ lines and $n$ columns representing the horizontal and vertical pixels of the image. A simpler, albeit equally meaningful, representation is a single vector with $m\times n$ cells for the whole image. The content of each cell, in either representation, depends on the selected image mode. For example: RGB, RGB grayscale, CMYK, etc. For the purposes of the following argument and the solution implementation, we assume that each cell is an integer between 0 and 255, representing the grayscale RGB value of the corresponding pixel. We will also assume that our data set has $m$ samples of $n$ pixels; if $h$ is the number of horizontal pixels and $v$ is the number of vertical pixels, then $n=h\times v$.\par
 Lets assume that $D$ is a data set with $m$ images where each image has $n$ pixels. Computationally the method can work even if $m<n$ but it is recommended that $m >= n$, as that will result in better compression gains and finer eigenvector tuning.\par
 Given that $D_{m\times n}$ is a data set with $m$ data points $\in \mathbb{R}^n$ where $m >= n$. Then we define ${D}_{m\times n}^*$ as the normalized data set, \[D^* = \frac{D-\overline{D}}{s}\] 
-where $\overline{D}$ is the mean of $D$ and $s$ is the sample standard deviation of D. Let $\Sigma_{n\times n}$ be the covariance matrix of $D^{*}_{m\times n}$ \[\Sigma = \frac{1}{m}D^{*T}D^*\] Then, according to (\ref{eq1}) and (\ref{eq2}), the singular value decomposition of $\Sigma$ is: 
-\begin{equation}\label{eq3}
+where $\overline{D}$ is the mean of $D$ and $s$ is the sample standard deviation of D. Let $\Sigma_{n\times n}$ be the covariance matrix of $D^{*}_{m\times n}$
+\begin{equation}\label{eq:sigma}
+ \Sigma = \frac{1}{m}D^{*T}D^*
+\end{equation}
+
+ Then, according to (\ref{eq:SVD}) and (\ref{eq:SigmaLongSVD}), the singular value decomposition of $\Sigma$ is: 
+\begin{equation}\label{eq:sigmaSVD}
 \Sigma = US V^T
 \end{equation}
 where:
@@ -109,13 +114,13 @@ where:
 \end{itemize}
 
 \subsection{Reducing dimensions}
-Given the original data set, $D_{m\times n}$ and $U_{n\times n}$ obtained from $\Sigma$ as per (\ref{eq3}), then we can build a new reduced data set $P_{m\times k}$ with the first $k<n$ eigenvectors. This new data set is computed as:
-\begin{equation}\label{eq4}
+Given the original data set, $D_{m\times n}$ and $U_{n\times n}$ obtained from $\Sigma$ as per (\ref{eq:sigmaSVD}), then we can build a new reduced data set $P_{m\times k}$ with the first $k<n$ eigenvectors. This new data set is computed as:
+\begin{equation}\label{eq:ReducingDimensions}
 P_{m\times k} = D_{m\times n} U_{n\times k}
 \end{equation}
 where $U_{n\times k}$, or $U_k$, is the eigenvector matrix truncated to the first $k$ eigenvectors. The information contained on the truncated $(n-k)$ columns is lost in this transformation.
 \subsection{Restoring data}
-The transformation in (\ref{eq4}) is lossy, meaning that the information on the truncated $n-k$ columns is utterly lost during the transformation. Although it is possible to restore $P$ back to $D$ dimensions, the result will not be exactly $D$ but rather an approximation of $D$. The whole rationale of using PCA for image compression is that the last $n-k$ eigenvectors will hold as little variance as possible and the recovered images will be an acceptable approximation of the original images.
+The transformation in (\ref{eq:ReducingDimensions}) is lossy, meaning that the information on the truncated $n-k$ columns is utterly lost during the transformation. Although it is possible to restore $P$ back to $D$ dimensions, the result will not be exactly $D$ but rather an approximation of $D$. The whole rationale of using PCA for image compression is that the last $n-k$ eigenvectors will hold as little variance as possible and the recovered images will be an acceptable approximation of the original images.
 To transform $P$ back into $D$ space we compute \[P_{m\times k}U_{k\times n}^T = D_{m\times n}U_{n\times k}U_{k\times n}^T \approx D_{m\times n}\]
 \section{How to select the number of components to retain}
 The problem of selecting how many components to retain is not new, \citet{zwick1986comparison}, present the results of a Monte Carlo evaluation of five methods that have been proposed for determining how many factors or components to retain: Horn's parallel analysis, Velicer's minimum average partial, Cattell's scree test, Bartlett's chi-square test, and Kaiser's eigenvalue greater than $1.0$ rule. 
@@ -228,7 +233,6 @@ The CIFAR-10 subset used to produce the displays in Figure \ref{fig:eigenImagesA
 This effect, applied to faces, or eigenfaces, was observed and used by \citet{sirovich1987low}.
 
 \subsection{ImgPCA plot}
-Instead of plotting an \textit{eigenvalues $\times$  \# of components} graph, as in the regular Cattell's scree plot, we propose plotting \textit{$\log_{10}$ (eigenvalues) $\times$ \# of components}. Similar to the scree plot, we can derive some understanding about the data based on how fast the $\log_{10}$ curve decays but we also have a quick visual and mathematical way of finding the Kaiser's Rule, that occurs when $\log_{10}$ \emph{(eigenvalues)} $= 0$. Additionally, every one tenth of eigenvalue decrease can also be easily found, as they correspond to the points $0, -1, -2$ etc. For example, to apply our \emph{One tenth Kaiser's rule} we only need to check what are the number of components that correspond to $\log_{10}$ \emph{(eigenvalues)} $= -1$, as shown in Figure \ref{fig:ImgPCAKaiserAndOTK}.
 
 \begin{figure}[h]
 \begin{center}
@@ -238,14 +242,53 @@ Instead of plotting an \textit{eigenvalues $\times$  \# of components} graph, as
 \label{fig:ImgPCAKaiserAndOTK}
 \end{figure}
 
+Instead of plotting an \textit{eigenvalues $\times$  \# of components} graph, as in the regular Cattell's scree plot, we propose plotting \textit{$\log_{10}$ (eigenvalues) $\times$ \# of components}. Similar to the scree plot, we can derive some understanding about the data based on how fast the $\log_{10}$ curve decays but we also have a quick visual and mathematical way of finding the Kaiser's Rule, that occurs when $\log_{10}$ \emph{(eigenvalues)} $= 0$. Additionally, every one tenth of eigenvalue decrease can also be easily found, as they correspond to the points $0, -1, -2$ etc. For example, to apply our \emph{One tenth Kaiser's rule} we only need to check what are the number of components that correspond to $\log_{10}$ \emph{(eigenvalues)} $= -1$, as shown in Figure \ref{fig:ImgPCAKaiserAndOTK}.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{CIFAR10All512Plot.png}
+\end{center}
+\caption{ImgPCA plot of a data set with $512$ images of $1024$ pixels.}
+\label{fig:ImgPCA512}
+\end{figure}
+
+Another feature of the \emph{$log_{10}$ eigenvalues $\times$ \#of components} curve is that it is very easy to spot the point where data is missing from a data set. Figure \ref{fig:ImgPCA512} shows a plot of data set of $512$ CIFAR-10 images. We see a big fall at $512$ components, where the remaining components are not as significant as the first half. Compare Figure \ref{fig:ImgPCA512} with the typical curve of Figure \ref{fig:ImgPCAKaiserAndOTK}.
+
 \section{Materials and Methods}\label{materials}
-The code for the implementation and supporting documents can be found at \citet{Stelling:aa}.
+\subsection{CIFAR-10 conversion}
+All the data used on the text examples is available at \citet{Stelling:aa}, at the \texttt{/localData} folder. Images were taken from CIFAR-10 \citep{krizhevsky2009learning} but were converted to grayscale at rotated  for our usage. The conversion can be found at the \texttt{cifar2Gray.m} Octave routine in the \texttt{/dataGen} folder of the \citet{Stelling:aa} repository.\par
 
+The core of the changes on CIFAR-10 images is the conversion to grayscale with luminance signal coefficients following ITU-R Recommendation BT.709 \citep{ITU-R:2015aa}, as shown in the following Octave code excerpt:
+\begin{verbatim}
+    gs_data=classData(1:nLines,1:1024)*0.2126 ...
+          + classData(1:nLines,1025:2048)*0.7152 ...
+          + classData(1:nLines,2049:3072)*0.0722;
+\end{verbatim}
+and the resulting image is finally rotated 90 degrees clockwise, as per the following Octave code.
+\begin{verbatim}
+        ndata(k,:) = ...
+            reshape(rot90( ...
+                reshape(gs_data(k,:), 32, 32), -1), 1, []);
+\end{verbatim}
+The resulting data sets are used as input on ImgPCA web application.
+\subsection{SVD decomposition}
+We used Numeric \citep{Loisel:2012aa} Javascript library to compute the SVD decomposition. Numeric is a stable numerical analysis library for Javascript. Computation results where in agreement with parallel computations performed in GNU Octave \citep{Eaton:2018aa}. One area for improvement in ImgPCA would be the usage of a GPU-enabled library for the SVD decomposition, instead of Numeric.
+\subsection{Covariance matrix}
+To accelerate the computation of the covariance matrix we used the GPU accelerated javascript library gpu.js \citep{Sapuan:2017aa}. To use gpu.js you need to create a kernel that will execute your code, as shown in the following JavaScript excerpt. The parameter for coVM a is the normalized data set matrix ($m\times n$). This kernel computes the covariance matrix, as defined by equation \ref{eq:sigma}.
+\begin{verbatim}
+const coVM = getData.gpu.createKernel(function(a) {
+  var sum = 0;
+  for (var i = 0; i < this.constants.size; i++) {
+    sum += a[i][this.thread.x] * a[i][this.thread.y];
+  }
+  return sum/this.constants.size;
+}
+\end{verbatim}
 \subsubsection*{Acknowledgments}
-I'd wish to thank the whole of the MAI718/2017-3 class for their invaluable input during preliminary presentations of the current work. Your ideas, discussions and critiques where instrumental in improving the foundations of this work. 
+I'd wish to thank the whole of the MAI718/2017-3 class for their invaluable input during preliminary presentations of the current work. Special thanks go to our professor, Adriana Vivacqua, her ideas, the discussions she promoted and critiques to the preliminary versions where instrumental in improving the foundations of this work. 
 
-I'd specially like to thank PPGI/UFRJ for letting me use their computer laboratory for the duration of the term. Without that access I wouldn't have the means to work on this project with the intensity it required.
-
+I'd specially like to thank PPGI/UFRJ for letting me use their computer laboratory for the duration of the 2017 term. Without that access I wouldn't have the means to work on this project with the intensity it required.
+\pagebreak
 \bibliography{imgPCA}
 \bibliographystyle{iclr2018_conference}
 

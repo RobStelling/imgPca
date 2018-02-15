@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.1.31)  14 FEB 2018 14:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.1.31)  15 FEB 2018 13:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -404,38 +404,38 @@ File: omsptm.fd
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 88.
  [2] [3]
-<images/imgPca.png, id=126, 967.615pt x 848.16875pt>
+<images/imgPca.png, id=139, 967.615pt x 848.16875pt>
 File: images/imgPca.png Graphic file (type png)
 <use images/imgPca.png>
-Package pdftex.def Info: images/imgPca.png  used on input line 143.
+Package pdftex.def Info: images/imgPca.png  used on input line 148.
 (pdftex.def)             Requested size: 397.48499pt x 348.42442pt.
 
 [4 <./images/imgPca.png>]
-<images/CIFAR10All1024RecoveredNormalized.png, id=139, 257.96375pt x 307.1475pt
+<images/CIFAR10All1024RecoveredNormalized.png, id=152, 257.96375pt x 307.1475pt
 >
 File: images/CIFAR10All1024RecoveredNormalized.png Graphic file (type png)
 <use images/CIFAR10All1024RecoveredNormalized.png>
 Package pdftex.def Info: images/CIFAR10All1024RecoveredNormalized.png  used on 
-input line 156.
+input line 161.
 (pdftex.def)             Requested size: 178.86702pt x 212.97713pt.
-<images/CIFAR10All1024RecoveredNormalized84.png, id=140, 257.96375pt x 303.1325
+<images/CIFAR10All1024RecoveredNormalized84.png, id=153, 257.96375pt x 303.1325
 pt>
 File: images/CIFAR10All1024RecoveredNormalized84.png Graphic file (type png)
 <use images/CIFAR10All1024RecoveredNormalized84.png>
 Package pdftex.def Info: images/CIFAR10All1024RecoveredNormalized84.png  used o
-n input line 162.
+n input line 167.
 (pdftex.def)             Requested size: 178.86702pt x 210.19312pt.
-<images/CIFAR10All1024Eigenimages.png, id=149, 291.0875pt x 258.9675pt>
+<images/CIFAR10All1024Eigenimages.png, id=162, 291.0875pt x 258.9675pt>
 File: images/CIFAR10All1024Eigenimages.png Graphic file (type png)
 <use images/CIFAR10All1024Eigenimages.png>
 Package pdftex.def Info: images/CIFAR10All1024Eigenimages.png  used on input li
-ne 176.
+ne 181.
 (pdftex.def)             Requested size: 178.86702pt x 159.13167pt.
-<images/CIFAR10All15000Eigenimages.png, id=150, 291.0875pt x 258.9675pt>
+<images/CIFAR10All15000Eigenimages.png, id=163, 291.0875pt x 258.9675pt>
 File: images/CIFAR10All15000Eigenimages.png Graphic file (type png)
 <use images/CIFAR10All15000Eigenimages.png>
 Package pdftex.def Info: images/CIFAR10All15000Eigenimages.png  used on input l
-ine 182.
+ine 187.
 (pdftex.def)             Requested size: 178.86702pt x 159.13167pt.
 
 
@@ -443,46 +443,56 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [5 <./images/CIFAR10All1024RecoveredNormalized.png> <./images/CIFAR10All1024Rec
 overedNormalized84.png>]
-<images/CIFAR10C05000Eigenimages.png, id=166, 292.09125pt x 258.9675pt>
+<images/CIFAR10C05000Eigenimages.png, id=179, 292.09125pt x 258.9675pt>
 File: images/CIFAR10C05000Eigenimages.png Graphic file (type png)
 <use images/CIFAR10C05000Eigenimages.png>
 Package pdftex.def Info: images/CIFAR10C05000Eigenimages.png  used on input lin
-e 213.
+e 218.
 (pdftex.def)             Requested size: 178.86702pt x 158.58636pt.
-<images/CIFAR10C35000Eigenimages.png, id=167, 291.0875pt x 258.9675pt>
+<images/CIFAR10C35000Eigenimages.png, id=180, 291.0875pt x 258.9675pt>
 File: images/CIFAR10C35000Eigenimages.png Graphic file (type png)
 <use images/CIFAR10C35000Eigenimages.png>
 Package pdftex.def Info: images/CIFAR10C35000Eigenimages.png  used on input lin
-e 219.
+e 224.
 (pdftex.def)             Requested size: 178.86702pt x 159.13167pt.
+<images/imgPcaKaiserRule.png, id=189, 974.64125pt x 491.8375pt>
+File: images/imgPcaKaiserRule.png Graphic file (type png)
+<use images/imgPcaKaiserRule.png>
+Package pdftex.def Info: images/imgPcaKaiserRule.png  used on input line 239.
+(pdftex.def)             Requested size: 397.48499pt x 200.58148pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6 <./images/CIFAR10All1024Eigenimages.png> <./images/CIFAR10All15000Eigenimag
 es.png> <./images/CIFAR10C05000Eigenimages.png> <./images/CIFAR10C35000Eigenima
 ges.png>]
-<images/imgPcaKaiserRule.png, id=188, 974.64125pt x 491.8375pt>
-File: images/imgPcaKaiserRule.png Graphic file (type png)
-<use images/imgPcaKaiserRule.png>
-Package pdftex.def Info: images/imgPcaKaiserRule.png  used on input line 235.
-(pdftex.def)             Requested size: 397.48499pt x 200.58148pt.
+<images/CIFAR10All512Plot.png, id=202, 969.6225pt x 487.8225pt>
+File: images/CIFAR10All512Plot.png Graphic file (type png)
+<use images/CIFAR10All512Plot.png>
+Package pdftex.def Info: images/CIFAR10All512Plot.png  used on input line 249.
+(pdftex.def)             Requested size: 397.48499pt x 199.97874pt.
 
-(./imgPCA.bbl [7 <./images/imgPcaKaiserRule.png>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 252.
- [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 252.
+[7 <./images/imgPcaKaiserRule.png> <./images/CIFAR10All512Plot.png>]
+(./imgPCA.bbl [8])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
+ [9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
  (./imgPCA.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 252.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 252.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
 Package rerunfilecheck Info: File `imgPCA.out' has not changed.
-(rerunfilecheck)             Checksum: 78F4DBA3FF3B059570E18B3E37BBCB2E;950.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 252.
+(rerunfilecheck)             Checksum: 6C3DC2F9F882341D90C7E4387226BFD0;1153.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 295.
  ) 
 Here is how much of TeX's memory you used:
- 8045 strings out of 492980
- 119818 string characters out of 6132509
- 215388 words of memory out of 5000000
- 11443 multiletter control sequences out of 15000+600000
+ 8074 strings out of 492980
+ 120387 string characters out of 6132509
+ 215590 words of memory out of 5000000
+ 11462 multiletter control sequences out of 15000+600000
  27499 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,10n,45p,1113b,448s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -501,10 +511,10 @@ exmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2017/texmf-dis
 t/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/ty
 pe1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/ti
 mes/utmri8a.pfb>
-Output written on imgPCA.pdf (8 pages, 1136512 bytes).
+Output written on imgPCA.pdf (9 pages, 1212836 bytes).
 PDF statistics:
- 266 PDF objects out of 1000 (max. 8388607)
- 221 compressed objects within 3 object streams
- 49 named destinations out of 1000 (max. 500000)
- 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 314 PDF objects out of 1000 (max. 8388607)
+ 266 compressed objects within 3 object streams
+ 58 named destinations out of 1000 (max. 500000)
+ 190 words of extra memory for PDF output out of 10000 (max. 10000000)
 

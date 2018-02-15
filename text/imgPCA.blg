@@ -3,49 +3,56 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: imgPCA.aux
 The style file: iclr2018_conference.bst
 Database file #1: imgPCA.bib
+Warning--entry type for "Sapuan:2017aa" isn't style-file defined
+--line 11 of file imgPCA.bib
+Warning--entry type for "Eaton:2018aa" isn't style-file defined
+--line 23 of file imgPCA.bib
+Warning--entry type for "Loisel:2012aa" isn't style-file defined
+--line 33 of file imgPCA.bib
+Warning--entry type for "ITU-R:2015aa" isn't style-file defined
+--line 43 of file imgPCA.bib
 Warning--entry type for "Stelling:aa" isn't style-file defined
---line 57 of file imgPCA.bib
-Warning--empty year in Stelling:aa
+--line 99 of file imgPCA.bib
 Warning--empty journal in krizhevsky2009learning
-You've used 10 entries,
+You've used 13 entries,
             2773 wiz_defined-function locations,
-            656 strings with 6208 characters,
-and the built_in function-call counts, 4153 in all, are:
-= -- 376
-> -- 175
-< -- 12
-+ -- 61
-- -- 51
-* -- 290
-:= -- 624
-add.period$ -- 31
-call.type$ -- 10
-change.case$ -- 46
-chr.to.int$ -- 10
-cite$ -- 22
-duplicate$ -- 221
-empty$ -- 385
-format.name$ -- 71
-if$ -- 894
+            675 strings with 6515 characters,
+and the built_in function-call counts, 4995 in all, are:
+= -- 456
+> -- 196
+< -- 15
++ -- 70
+- -- 57
+* -- 328
+:= -- 747
+add.period$ -- 40
+call.type$ -- 13
+change.case$ -- 57
+chr.to.int$ -- 13
+cite$ -- 27
+duplicate$ -- 260
+empty$ -- 480
+format.name$ -- 82
+if$ -- 1080
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 10
-newline$ -- 57
-num.names$ -- 40
-pop$ -- 98
+missing$ -- 8
+newline$ -- 72
+num.names$ -- 52
+pop$ -- 130
 preamble$ -- 1
-purify$ -- 37
+purify$ -- 45
 quote$ -- 0
-skip$ -- 171
+skip$ -- 215
 stack$ -- 0
-substring$ -- 145
-swap$ -- 28
-text.length$ -- 3
+substring$ -- 151
+swap$ -- 32
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 105
-warning$ -- 2
-while$ -- 42
+type$ -- 143
+warning$ -- 1
+while$ -- 51
 width$ -- 0
-write$ -- 133
-(There were 3 warnings)
+write$ -- 169
+(There were 6 warnings)
