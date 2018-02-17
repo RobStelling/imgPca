@@ -256,19 +256,18 @@ Another feature of the \emph{$log_{10}$ eigenvalues $\times$ \#of components} cu
 
 \section{Materials and Methods}\label{materials}
 \subsection{CIFAR-10 conversion}
-All the data used on the text examples is available at \citet{Stelling:aa}, at the \texttt{/localData} folder. Images were taken from CIFAR-10 \citep{krizhevsky2009learning} but were converted to grayscale at rotated  for our usage. The conversion can be found at the \texttt{cifar2Gray.m} Octave routine in the \texttt{/dataGen} folder of the \citet{Stelling:aa} repository.\par
+All the data used in the text examples is available on Github at \citet{Stelling:aa}, in the \texttt{/localData} folder. Images were taken from CIFAR-10 \citep{krizhevsky2009learning} but were converted to grayscale and rotated for our usage. The conversion routine can be found at the \texttt{cifar2Gray.m} Octave file in the \texttt{/dataGen} folder of \citet{Stelling:aa} Github repository.\par
 
-The core of the changes on CIFAR-10 images is the conversion to grayscale with luminance signal coefficients following ITU-R Recommendation BT.709 \citep{ITU-R:2015aa}, as shown in the following Octave code excerpt:
+CIFAR-10 images were converted to grayscake with luminance signal coefficients following ITU-R Recommendation BT.709 \citep{ITU-R:2015aa}, as shown in the following Octave code excerpt:
 \begin{verbatim}
-    gs_data=classData(1:nLines,1:1024)*0.2126 ...
-          + classData(1:nLines,1025:2048)*0.7152 ...
-          + classData(1:nLines,2049:3072)*0.0722;
+gs_data=classData(1:nLines,1:1024)*0.2126 ...
+      + classData(1:nLines,1025:2048)*0.7152 ...
+      + classData(1:nLines,2049:3072)*0.0722;
 \end{verbatim}
-and the resulting image is finally rotated 90 degrees clockwise, as per the following Octave code.
+and the resulting images were rotated 90 degrees clockwise, as per the following Octave code.
 \begin{verbatim}
-        ndata(k,:) = ...
-            reshape(rot90( ...
-                reshape(gs_data(k,:), 32, 32), -1), 1, []);
+ndata(k,:) = ...
+    reshape(rot90(reshape(gs_data(k,:), 32, 32), -1), 1, []);
 \end{verbatim}
 The resulting data sets are used as input on ImgPCA web application.
 \subsection{SVD decomposition}
