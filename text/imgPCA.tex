@@ -258,7 +258,7 @@ Another feature of the \emph{$log_{10}$ eigenvalues $\times$ \#of components} cu
 \subsection{CIFAR-10 conversion}
 All the data used in the text examples is available on Github at \citet{Stelling:aa}, in the \texttt{/localData} folder. Images were taken from CIFAR-10 \citep{krizhevsky2009learning} but were converted to grayscale and rotated for our usage. The conversion routine can be found at the \texttt{cifar2Gray.m} Octave file in the \texttt{/dataGen} folder of \citet{Stelling:aa} Github repository.\par
 
-CIFAR-10 images were converted to grayscake with luminance signal coefficients following ITU-R Recommendation BT.709 \citep{ITU-R:2015aa}, as shown in the following Octave code excerpt:
+CIFAR-10 images were converted to grayscale with luminance signal coefficients following ITU-R Recommendation BT.709 \citep{ITU-R:2015aa}, as shown in the following Octave code excerpt:
 \begin{verbatim}
 gs_data=classData(1:nLines,1:1024)*0.2126 ...
       + classData(1:nLines,1025:2048)*0.7152 ...
