@@ -81,6 +81,7 @@ function drawNormalized() {
  * Uses numeric Library to transpose U matrix
  */
 function doPca() {
+  var featureVal = 0, found = false;
   d3.select("#st4").style("display", "inline").html("<center>Main eigenimages</center>");
 
   getData.svd = calcSvd(getData.contents);
@@ -97,6 +98,10 @@ function doPca() {
   }
 
   for(let i = 0, cumulative = 0; i<sDiagonal.length; i++) {
+    if (!found && sDiagonal[i].log < -1) {
+      featureVal = i;
+      found = true;
+    }
     sDiagonal[i].percentage = sDiagonal[i].pca / sum;
     cumulative += sDiagonal[i].percentage;
     sDiagonal[i].cumulative = cumulative;
@@ -106,6 +111,11 @@ function doPca() {
   const domainX = [-1, sDiagonal.length+1],
         domainY = [sDiagonal[sDiagonal.length-1].log, sDiagonal[0].log];
 
+  // Adjusts slider values
+  var slider = d3.select(".slider")._groups[0][0];
+  slider.min = 1
+  slider.max = sDiagonal.length
+  slider.value = featureVal;
   // Draws the S(eigenvalue) curve
   draw(domainX, domainY, sDiagonal);
 

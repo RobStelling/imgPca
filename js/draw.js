@@ -164,18 +164,12 @@ function draw(domainX, domainY, data) {
     }
 
     function change() {
-        var percentageValue = +d3.select(".slider")._groups[0][0].value;
-        d3.select(".percentageValue").text(percentageValue.toLocaleString("en", {minimumFractionDigits: 3, maximumFractionDigits: 3})+"%");
+        var fcount = +d3.select(".slider")._groups[0][0].value;
+        var percentageValue = data[fcount-1].cumulative*100;
 
-        var fcount = data.length;
-        for(let i = 0; i < data.length; i++) {
-            if (data[i].cumulative >= percentageValue/100) {
-                fcount = i;
-                break;
-            }
-        }
+        d3.select(".percentageValue").text(percentageValue.toLocaleString("en", {minimumFractionDigits: 3, maximumFractionDigits: 3})+"%");
         d3.select(".featureCount").text(fcount);
-        d3.select(".featureSigma").text(data[fcount-1].pca.toLocaleString("en", {minimumFractionDigits: 4, maximumFractionDigits: 4}))        
+        d3.select(".featureSigma").text(data[fcount-1].pca.toLocaleString("en", {minimumFractionDigits: 4, maximumFractionDigits: 7}))        
     }
 
     function save() {
