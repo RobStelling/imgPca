@@ -65,7 +65,7 @@ rect {
   font-size: 0.8em;
 }
 
-.percentage {
+.slider {
   position: absolute;
   top: 50px;
   left: 170px;

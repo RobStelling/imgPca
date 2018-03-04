@@ -138,7 +138,7 @@ function draw(domainX, domainY, data) {
     d3.select(".restoreButton")
         .on("click", restore);
 
-    d3.select(".percentage")
+    d3.select(".slider")
         .on("input", change)
         .on("change", viewImage);
 
@@ -164,7 +164,7 @@ function draw(domainX, domainY, data) {
     }
 
     function change() {
-        var percentageValue = +d3.select(".percentage")._groups[0][0].value;
+        var percentageValue = +d3.select(".slider")._groups[0][0].value;
         d3.select(".percentageValue").text(percentageValue.toLocaleString("en", {minimumFractionDigits: 3, maximumFractionDigits: 3})+"%");
 
         var fcount = data.length;
